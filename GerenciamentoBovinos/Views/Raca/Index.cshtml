@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GerenciamentoBovinos.Models.Raca>
+
+@{
+    ViewBag.Title = "Lista de Raças";
+}
+
+<h2 class="text-center">Lista de Raças</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-secondary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.Raw("Ações")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

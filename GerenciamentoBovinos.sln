@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamentoBovinos", "GerenciamentoBovinos\GerenciamentoBovinos.csproj", "{294BC6CC-3544-4A0B-BE34-2DD99C8625AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{294BC6CC-3544-4A0B-BE34-2DD99C8625AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{294BC6CC-3544-4A0B-BE34-2DD99C8625AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{294BC6CC-3544-4A0B-BE34-2DD99C8625AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{294BC6CC-3544-4A0B-BE34-2DD99C8625AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1649FE8-C0FE-452C-9225-F9E4286C8631}
+	EndGlobalSection
+EndGlobal
