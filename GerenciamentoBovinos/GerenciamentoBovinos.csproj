@@ -180,7 +180,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Raca.cs" />
-    <Compile Include="Models\RacaContext.cs" />
+    <Compile Include="Models\GerenciamentoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
