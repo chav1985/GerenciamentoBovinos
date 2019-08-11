@@ -1,18 +1,21 @@
 ﻿@model IEnumerable<GerenciamentoBovinos.Models.Bovino>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Bovinos";
 }
 
-<h2>Index</h2>
+<h2 class="text-center">Lista de Bovinos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-secondary" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Raca.Nome)
+            @Html.DisplayNameFor(model => model.Brinco)
+        </th>
+        <th>
+            @Html.Raw("Raça")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Peso)
@@ -27,37 +30,37 @@
             @Html.DisplayNameFor(model => model.VlrUnitario)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.Raw("Ações")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Raca.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Peso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lote)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DtNascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VlrUnitario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Brinco }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Brinco }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Brinco })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brinco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raca.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Peso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VlrUnitario)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Brinco }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Brinco })
+            </td>
+        </tr>
+    }
 
 </table>

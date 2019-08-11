@@ -11,7 +11,6 @@ namespace GerenciamentoBovinos.Models
         public long Brinco { get; set; }
 
         [ForeignKey("Raca")]
-        [Display(Name = "Raça")]
         public long RacaId { get; set; }
         public Raca Raca { get; set; }
 
