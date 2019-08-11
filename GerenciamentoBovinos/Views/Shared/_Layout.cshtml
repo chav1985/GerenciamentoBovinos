@@ -16,6 +16,7 @@
             @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <div class="navbar-collapse collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Cadastro de Bovino", "Index", "Bovino", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Cadastro de Raça", "Index", "Raca", null, new { @class = "nav-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
