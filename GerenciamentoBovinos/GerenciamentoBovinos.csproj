@@ -173,7 +173,9 @@
     <Compile Include="Controllers\BovinoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
+    <Compile Include="Controllers\TipoProdutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,8 +183,10 @@
     <Compile Include="Models\Bovino.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Raca.cs" />
     <Compile Include="Models\GerenciamentoContext.cs" />
+    <Compile Include="Models\TipoProduto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -286,6 +290,16 @@
     <Content Include="Views\Bovino\Delete.cshtml" />
     <Content Include="Views\Bovino\Edit.cshtml" />
     <Content Include="Views\Bovino\Index.cshtml" />
+    <Content Include="Views\TipoProduto\Create.cshtml" />
+    <Content Include="Views\TipoProduto\Delete.cshtml" />
+    <Content Include="Views\TipoProduto\Details.cshtml" />
+    <Content Include="Views\TipoProduto\Edit.cshtml" />
+    <Content Include="Views\TipoProduto\Index.cshtml" />
+    <Content Include="Views\Produto\Create.cshtml" />
+    <Content Include="Views\Produto\Delete.cshtml" />
+    <Content Include="Views\Produto\Details.cshtml" />
+    <Content Include="Views\Produto\Edit.cshtml" />
+    <Content Include="Views\Produto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
