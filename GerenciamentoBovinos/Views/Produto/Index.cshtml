@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<GerenciamentoBovinos.Models.Produto>
 
 @{
-    ViewBag.Title = "Cadastro de Produto";
+    ViewBag.Title = "Lista de Produtos";
 }
 
-    <h2 class="text-center">Cadastro de Produto</h2>
+<h2 class="text-center">Lista de Produtos</h2>
 
 <p>
-    @Html.ActionLink("Cadastrar", "Create", null, new {@class="btn btn-secondary"})
+    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-secondary" })
 </p>
 <table class="table">
     <tr>
@@ -29,28 +29,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoProduto.Tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeProduto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Valor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Validade)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoProduto.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Validade)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

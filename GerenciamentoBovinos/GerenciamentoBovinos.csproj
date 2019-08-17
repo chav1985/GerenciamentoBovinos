@@ -292,12 +292,10 @@
     <Content Include="Views\Bovino\Index.cshtml" />
     <Content Include="Views\TipoProduto\Create.cshtml" />
     <Content Include="Views\TipoProduto\Delete.cshtml" />
-    <Content Include="Views\TipoProduto\Details.cshtml" />
     <Content Include="Views\TipoProduto\Edit.cshtml" />
     <Content Include="Views\TipoProduto\Index.cshtml" />
     <Content Include="Views\Produto\Create.cshtml" />
     <Content Include="Views\Produto\Delete.cshtml" />
-    <Content Include="Views\Produto\Details.cshtml" />
     <Content Include="Views\Produto\Edit.cshtml" />
     <Content Include="Views\Produto\Index.cshtml" />
   </ItemGroup>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<GerenciamentoBovinos.Models.TipoProduto>
 
 @{
-    ViewBag.Title = "Lista - Tipo de Produtos";
+    ViewBag.Title = "Lista de Tipo de Produtos";
 }
 
-    <h2 class="text-center">Lista - Tipo de Produtos</h2>
+<h2 class="text-center">Lista de Tipo de Produtos</h2>
 
 <p>
-    @Html.ActionLink("Cadastrar", "Create", null,new {@class="btn btn-secondary" })
+    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-secondary" })
 </p>
 <table class="table">
     <tr>
@@ -20,19 +20,20 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

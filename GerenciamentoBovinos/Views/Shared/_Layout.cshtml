@@ -13,18 +13,48 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Cadastro de Bovino", "Index", "Bovino", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Cadastro de Raça", "Index", "Raca", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Cadastro de Produto", "Index", "Produto", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Cadastro de Tipo Produto", "Index", "TipoProduto", null, new { @class = "nav-link" })</li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cadastros
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../Bovino/Index">Bovinos</a>
+                            <a class="dropdown-item" href="../Raca/Index">Raças</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../Produto/Index">Produtos</a>
+                            <a class="dropdown-item" href="../TipoProduto/Index">Tipo de Produto</a>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <div class="form-inline my-2 my-lg-0">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
     </nav>
+    @*<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item">@Html.ActionLink("Cadastro de Bovino", "Index", "Bovino", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Cadastro de Raça", "Index", "Raca", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Cadastro de Produto", "Index", "Produto", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Cadastro de Tipo Produto", "Index", "TipoProduto", null, new { @class = "nav-link" })</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </nav>*@
 
     <div class="container body-content mt-5">
         @RenderBody()
