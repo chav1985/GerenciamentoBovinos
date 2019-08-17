@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<GerenciamentoBovinos.Models.TipoProduto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista - Tipo de Produtos";
 }
 
-<h2>Index</h2>
+    <h2 class="text-center">Lista - Tipo de Produtos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Cadastrar", "Create", null,new {@class="btn btn-secondary" })
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,8 @@
             @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
