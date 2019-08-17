@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Gerenciamento de Bovinos</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fontawesome")
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
@@ -38,23 +39,6 @@
             </div>
         </div>
     </nav>
-    @*<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item">@Html.ActionLink("Cadastro de Bovino", "Index", "Bovino", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("Cadastro de Raça", "Index", "Raca", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("Cadastro de Produto", "Index", "Produto", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("Cadastro de Tipo Produto", "Index", "TipoProduto", null, new { @class = "nav-link" })</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-        </nav>*@
 
     <div class="container body-content mt-5">
         @RenderBody()

@@ -26,7 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Validade)
         </th>
-        <th></th>
+        <th>
+            @Html.Raw("Ações")
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -48,8 +50,12 @@
                 @Html.DisplayFor(modelItem => item.Validade)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+                <a href="@Url.Action("Edit", "Produto", new { id = item.Id})">
+                    <i class="fa fa-pencil-square-o fa-2x"></i>
+                </a>
+                <a href="@Url.Action("Delete", "Produto", new { id = item.Id})" class="ml-2" style="color: red">
+                    <i class="fa fa-trash-o fa-2x"></i>
+                </a>
             </td>
         </tr>
     }
