@@ -92,27 +92,15 @@ namespace GerenciamentoBovinos.Controllers
         // GET: TipoProdutoes/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
+            TipoProduto tipo = db.TipoProdutos.Find(id);
+            if (tipo != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.TipoProdutos.Remove(tipo);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            TipoProduto tipoProduto = db.TipoProdutos.Find(id);
-            if (tipoProduto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tipoProduto);
-        }
 
-        // POST: TipoProdutoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            TipoProduto tipoProduto = db.TipoProdutos.Find(id);
-            db.TipoProdutos.Remove(tipoProduto);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return new HttpNotFoundResult();
         }
 
         protected override void Dispose(bool disposing)
