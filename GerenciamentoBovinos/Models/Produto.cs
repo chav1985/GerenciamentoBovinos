@@ -18,6 +18,7 @@ namespace GerenciamentoBovinos.Models
         public long TipoProdutoId { get; set; }
         public TipoProduto TipoProduto { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }

@@ -15,6 +15,7 @@ namespace GerenciamentoBovinos.Models
 
         [MaxLength(50, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
+        [DataType(DataType.MultilineText)]
         public string Descricao { get; set; }
     }
 }
