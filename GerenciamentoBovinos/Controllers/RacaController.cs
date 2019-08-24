@@ -73,27 +73,15 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Raca/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Raca raca = db.Racas.Find(id);
-            if (raca == null)
+            if (raca != null)
             {
-                return HttpNotFound();
+                db.Racas.Remove(raca);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return View(raca);
-        }
 
-        // POST: Raca/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Raca raca = db.Racas.Find(id);
-            db.Racas.Remove(raca);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return new HttpNotFoundResult();
         }
 
         protected override void Dispose(bool disposing)

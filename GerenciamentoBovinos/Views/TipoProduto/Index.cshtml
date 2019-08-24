@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Tipo)
         </th>
         <th>
@@ -26,6 +29,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Tipo)
             </td>
             <td>
@@ -35,7 +41,7 @@
                 <a href="@Url.Action("Edit", "TipoProduto", new { id = item.Id})">
                     <i class="fa fa-pencil-square-o fa-2x"></i>
                 </a>
-                <a href="@Url.Action("Delete", "TipoProduto", new { id = item.Id})" class="ml-2" style="color: red">
+                <a id="deleteItem" class="deleteItem ml-2" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "TipoProduto", new { id = @item.Id })">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>
             </td>
@@ -43,3 +49,38 @@
     }
 
 </table>
+
+@Scripts.Render("~/bundles/jquery")
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Excluir Bovino</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir o Tipo de Produto?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-primary">Não</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-danger">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var path_to_delete;
+
+    $(".deleteItem").click(function (e) {
+        path_to_delete = $(this).data('path');
+    });
+
+    $('#btnContinueDelete').click(function () {
+        window.location = path_to_delete;
+    });
+</script>
