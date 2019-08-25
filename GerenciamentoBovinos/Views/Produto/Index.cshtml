@@ -53,7 +53,7 @@
                 <a href="@Url.Action("Edit", "Produto", new { id = item.Id})">
                     <i class="fa fa-pencil-square-o fa-2x"></i>
                 </a>
-                <a id="deleteItem" class="deleteItem ml-2" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "Produto", new { id = @item.Id })">
+                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "Produto", new { id = @item.Id })">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>
             </td>
