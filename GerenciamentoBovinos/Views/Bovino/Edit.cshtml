@@ -38,7 +38,6 @@
             <div class="col-md-3">
                 @Html.LabelFor(model => model.DtNascimento, htmlAttributes: new { @class = "control-label col-md-12" })
                 @Html.TextBoxFor(Model => Model.DtNascimento, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
-
                 @Html.ValidationMessageFor(model => model.DtNascimento, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,4 +67,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
 }
