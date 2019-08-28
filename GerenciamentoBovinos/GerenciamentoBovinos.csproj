@@ -186,6 +186,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bovino.cs" />
+    <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Produto.cs" />
@@ -300,7 +301,6 @@
     <Content Include="Views\Raca\Edit.cshtml" />
     <Content Include="Views\Raca\Index.cshtml" />
     <Content Include="Views\Bovino\Create.cshtml" />
-    <Content Include="Views\Bovino\Delete.cshtml" />
     <Content Include="Views\Bovino\Edit.cshtml" />
     <Content Include="Views\Bovino\Index.cshtml" />
     <Content Include="Views\TipoProduto\Create.cshtml" />

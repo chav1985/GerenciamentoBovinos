@@ -29,7 +29,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Brinco,RacaId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
+        public ActionResult Create([Bind(Include = "Id,Brinco,RacaId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Brinco,RacaId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
+        public ActionResult Edit([Bind(Include = "Id,Brinco,RacaId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
         {
             if (ModelState.IsValid)
             {

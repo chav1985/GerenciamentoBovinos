@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Brinco)
         </th>
         <th>
@@ -38,6 +41,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Brinco)
             </td>
             <td>
@@ -56,10 +62,10 @@
                 @Html.DisplayFor(modelItem => item.VlrUnitario)
             </td>
             <td>
-                <a href="@Url.Action("Edit", "Bovino", new { id = item.Brinco})">
+                <a href="@Url.Action("Edit", "Bovino", new { id = item.Id})">
                     <i class="fa fa-pencil-square-o fa-2x"></i>
                 </a>
-                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "Bovino", new { id = @item.Brinco })">
+                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "Bovino", new { id = @item.Id })">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>
             </td>

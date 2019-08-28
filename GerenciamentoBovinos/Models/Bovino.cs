@@ -7,6 +7,8 @@ namespace GerenciamentoBovinos.Models
     public class Bovino
     {
         [Key]
+        public long Id { get; set; }
+
         [Required(ErrorMessage = "Campo obrigatório.")]
         public long Brinco { get; set; }
 
