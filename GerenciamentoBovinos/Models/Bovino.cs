@@ -31,7 +31,7 @@ namespace GerenciamentoBovinos.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Vlr Unitário")]
         public decimal VlrUnitario { get; set; }
-        [DataType(DataType.MultilineText)]
+
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
