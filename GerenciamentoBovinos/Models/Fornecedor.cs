@@ -28,5 +28,8 @@ namespace GerenciamentoBovinos.Models
 
         [MaxLength(30, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
         public string CPFCNPJ { get; set; }
+
+        [MaxLength(30, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
+        public string inscricaoestadual { get; set; }
     }
 }

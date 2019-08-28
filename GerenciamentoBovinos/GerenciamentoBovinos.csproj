@@ -193,6 +193,7 @@
     <Compile Include="Models\Raca.cs" />
     <Compile Include="Models\GerenciamentoContext.cs" />
     <Compile Include="Models\TipoProduto.cs" />
+    <Compile Include="Models\Veterinario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
