@@ -180,13 +180,14 @@
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\TipoProdutoController.cs" />
+    <Compile Include="Controllers\VeterinarioController.cs" />
     <Compile Include="DecimalModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bovino.cs" />
-    <Compile Include="Models\Fornecedor.cs" />
+    <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Produto.cs" />
@@ -312,6 +313,11 @@
     <Content Include="Views\Produto\Delete.cshtml" />
     <Content Include="Views\Produto\Edit.cshtml" />
     <Content Include="Views\Produto\Index.cshtml" />
+    <Content Include="Views\Veterinario\Create.cshtml" />
+    <Content Include="Views\Veterinario\Delete.cshtml" />
+    <Content Include="Views\Veterinario\Details.cshtml" />
+    <Content Include="Views\Veterinario\Edit.cshtml" />
+    <Content Include="Views\Veterinario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
