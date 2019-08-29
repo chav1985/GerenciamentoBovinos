@@ -20,21 +20,6 @@ namespace GerenciamentoBovinos.Controllers
             return View(db.Fornecedores.ToList());
         }
 
-        // GET: Fornecedor/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Fornecedor fornecedor = db.Fornecedores.Find(id);
-            if (fornecedor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(fornecedor);
-        }
-
         // GET: Fornecedor/Create
         public ActionResult Create()
         {
