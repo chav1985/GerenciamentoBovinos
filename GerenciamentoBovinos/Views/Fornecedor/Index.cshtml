@@ -1,21 +1,21 @@
 ﻿@model IEnumerable<GerenciamentoBovinos.Models.Fornecedor>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Fornecedores";
 }
 
-<h2>Index</h2>
+<h2 class="text-center">Lista de Fornecedores</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-secondary" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.InscricaoEstadual)
+            @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.CPFCNPJ)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -27,37 +27,77 @@
             @Html.DisplayNameFor(model => model.Endereco)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CPFCNPJ)
+            @Html.DisplayNameFor(model => model.InscricaoEstadual)
         </th>
-        <th></th>
+        <th>
+   
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.InscricaoEstadual)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Endereco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CPFCNPJ)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPFCNPJ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InscricaoEstadual)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Fornecedor", new { id = item.Id})">
+                    <i class="fa fa-pencil-square-o fa-2x"></i>
+                </a>
+                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "Fornecedor", new { id = @item.Id })">
+                    <i class="fa fa-trash-o fa-2x"></i>
+                </a>
+            </td>
+        </tr>
+    }
 
 </table>
+@Scripts.Render("~/bundles/jquery")
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Excluir Fornecedor</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir o Fornecedor?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-primary">Não</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-danger">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var path_to_delete;
+
+    $(".deleteItem").click(function (e) {
+        path_to_delete = $(this).data('path');
+    });
+
+    $('#btnContinueDelete').click(function () {
+        window.location = path_to_delete;
+    });
+</script>
