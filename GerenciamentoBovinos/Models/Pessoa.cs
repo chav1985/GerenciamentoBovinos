@@ -20,6 +20,7 @@ namespace GerenciamentoBovinos.Models
         public string Endereco { get; set; }
 
         [MaxLength(30, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
+        [Display(Name ="CPF/CNPJ")]
         public string CPFCNPJ { get; set; }
     }
 }
