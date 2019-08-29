@@ -26,6 +26,8 @@ namespace GerenciamentoBovinos.Models
 
         public virtual DbSet<Veterinario> Veterinarios { get; set; }
 
-        public virtual DbSet<Fornecedor> Fornecedors { get; set; }
+        public virtual DbSet<Fornecedor> Fornecedores { get; set; }
+
+        public virtual DbSet<Cliente> Clientes { get; set; }
     }
 }

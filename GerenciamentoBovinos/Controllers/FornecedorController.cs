@@ -17,7 +17,7 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Fornecedor
         public ActionResult Index()
         {
-            return View(db.Fornecedors.ToList());
+            return View(db.Fornecedores.ToList());
         }
 
         // GET: Fornecedor/Details/5
@@ -27,7 +27,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
+            Fornecedor fornecedor = db.Fornecedores.Find(id);
             if (fornecedor == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace GerenciamentoBovinos.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Fornecedors.Add(fornecedor);
+                db.Fornecedores.Add(fornecedor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
+            Fornecedor fornecedor = db.Fornecedores.Find(id);
             if (fornecedor == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
+            Fornecedor fornecedor = db.Fornecedores.Find(id);
             if (fornecedor == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace GerenciamentoBovinos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
-            db.Fornecedors.Remove(fornecedor);
+            Fornecedor fornecedor = db.Fornecedores.Find(id);
+            db.Fornecedores.Remove(fornecedor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
