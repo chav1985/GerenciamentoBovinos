@@ -20,8 +20,8 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44355</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BovinoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ComissionadoController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\FreteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -190,6 +191,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bovino.cs" />
+    <Compile Include="Models\Comissionado.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Fretes.cs" />
@@ -328,6 +330,9 @@
     <Content Include="Views\Frete\Create.cshtml" />
     <Content Include="Views\Frete\Edit.cshtml" />
     <Content Include="Views\Frete\Index.cshtml" />
+    <Content Include="Views\Comissionado\Create.cshtml" />
+    <Content Include="Views\Comissionado\Edit.cshtml" />
+    <Content Include="Views\Comissionado\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
