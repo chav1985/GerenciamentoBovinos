@@ -20,21 +20,6 @@ namespace GerenciamentoBovinos.Controllers
             return View(db.Veterinarios.ToList());
         }
 
-        // GET: Veterinario/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Veterinario veterinario = db.Veterinarios.Find(id);
-            if (veterinario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(veterinario);
-        }
-
         // GET: Veterinario/Create
         public ActionResult Create()
         {
@@ -89,19 +74,18 @@ namespace GerenciamentoBovinos.Controllers
             return View(veterinario);
         }
 
-        // GET: Veterinario/Delete/5
+        // GET: Bovino/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Veterinario veterinario = db.Veterinarios.Find(id);
-            if (veterinario == null)
+            if (veterinario != null)
             {
-                return HttpNotFound();
+                db.Veterinarios.Remove(veterinario);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return View(veterinario);
+
+            return new HttpNotFoundResult();
         }
 
         // POST: Veterinario/Delete/5
