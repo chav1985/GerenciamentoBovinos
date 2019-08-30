@@ -177,6 +177,7 @@
     <Compile Include="Controllers\BovinoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
+    <Compile Include="Controllers\FreteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Models\Bovino.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Fretes.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -332,6 +334,9 @@
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Frete\Create.cshtml" />
+    <Content Include="Views\Frete\Edit.cshtml" />
+    <Content Include="Views\Frete\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
