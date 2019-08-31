@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GerenciamentoBovinos.Models
@@ -18,14 +19,14 @@ namespace GerenciamentoBovinos.Models
         public long TipoProdutoId { get; set; }
         public TipoProduto TipoProduto { get; set; }
 
-        [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
-        [Display(Name = "Descrição")]
-        public string Descricao { get; set; }
-
         [Required(ErrorMessage = "Campo obrigatório")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        public string Validade { get; set; }
+        public DateTime Validade { get; set; }
+
+        [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
+        [Display(Name = "Descrição")]
+        public string Descricao { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace GerenciamentoBovinos.Models
         [MaxLength(50, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
         public string Tipo { get; set; }
 
-        [MaxLength(50, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
+        [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
     }

@@ -17,36 +17,36 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group row">
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.NomeProduto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.NomeProduto, htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.EditorFor(model => model.NomeProduto, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NomeProduto, "", new { @class = "text-danger" })
             </div>
 
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.TipoProdutoId, "Tipo de Produto", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.TipoProdutoId, "Tipo de Produto", htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.DropDownList("TipoProdutoId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TipoProdutoId, "", new { @class = "text-danger" })
             </div>
 
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
             </div>
 
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.Validade, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Validade, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Validade, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.Validade, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.Validade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextAreaFor(model => model.Descricao, new { @class = "col-md-12 form-control", rows = "4" })
+                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -61,4 +61,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validations_pt-br")
 }
