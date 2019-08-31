@@ -1,0 +1,110 @@
+﻿@model IEnumerable<GerenciamentoBovinos.Models.Motorista>
+
+@{
+    ViewBag.Title = "Lista de Motoristas";
+}
+
+<h2 class="text-center">Lista de Motorista</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-secondary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPFCNPJ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CNH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPFCNPJ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Motorista", new { id = item.Id})">
+                    <i class="fa fa-pencil-square-o fa-2x"></i>
+                </a>
+                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "Motorista", new { id = @item.Id })">
+                    <i class="fa fa-trash-o fa-2x"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Scripts.Render("~/bundles/jquery")
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Excluir Motorista</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir o Motorista?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-primary">Não</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-danger">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var path_to_delete;
+
+    $(".deleteItem").click(function (e) {
+        path_to_delete = $(this).data('path');
+    });
+
+    $('#btnContinueDelete').click(function () {
+        window.location = path_to_delete;
+    });
+</script>

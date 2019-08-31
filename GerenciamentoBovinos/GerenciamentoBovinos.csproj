@@ -181,6 +181,7 @@
     <Compile Include="Controllers\FreteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MotoristaController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\TipoProdutoController.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Fretes.cs" />
+    <Compile Include="Models\Motorista.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -333,6 +335,11 @@
     <Content Include="Views\Comissionado\Create.cshtml" />
     <Content Include="Views\Comissionado\Edit.cshtml" />
     <Content Include="Views\Comissionado\Index.cshtml" />
+    <Content Include="Views\Motorista\Create.cshtml" />
+    <Content Include="Views\Motorista\Delete.cshtml" />
+    <Content Include="Views\Motorista\Details.cshtml" />
+    <Content Include="Views\Motorista\Edit.cshtml" />
+    <Content Include="Views\Motorista\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
