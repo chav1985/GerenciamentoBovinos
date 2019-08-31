@@ -19,27 +19,52 @@
                     <li class="nav-item active">
                         @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </li>
+                    @*<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cadastros
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="../Bovino/Index">Bovinos</a>
+                                <a class="dropdown-item" href="../Raca/Index">Raças</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../Produto/Index">Produtos</a>
+                                <a class="dropdown-item" href="../TipoProduto/Index">Tipo de Produto</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../Veterinario/Index">Veterinários</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../Fornecedor/Index">Fornecedores</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../Cliente/Index">Clientes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../Frete/Index">Fretes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../Comissionado/Index">Comissionados</a>
+                            </div>
+                        </li>*@
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Cadastros
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../Bovino/Index">Bovinos</a>
-                            <a class="dropdown-item" href="../Raca/Index">Raças</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../Produto/Index">Produtos</a>
-                            <a class="dropdown-item" href="../TipoProduto/Index">Tipo de Produto</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../Veterinario/Index">Veterinários</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../Fornecedor/Index">Fornecedores</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../Cliente/Index">Clientes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../Frete/Index">Fretes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../Comissionado/Index">Comissionados</a>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../Bovino/Index">Bovinos</a></li>
+                            <li><a class="dropdown-item" href="../Raca/Index">Raças</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../Produto/Index">Produtos</a></li>
+                            <li><a class="dropdown-item" href="../TipoProduto/Index">Tipo de Produto</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../Fornecedor/Index">Fornecedores</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../Cliente/Index">Clientes</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#">Terceirizados</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="../Frete/Index">Fretes</a></li>
+                                    <li><a class="dropdown-item" href="../Comissionado/Index">Comissionados</a></li>
+                                    <li><a class="dropdown-item" href="../Veterinario/Index">Veterinários</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0">
@@ -60,5 +85,23 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            }
+
+            var $subMenu = $(this).next('.dropdown-menu');
+            $subMenu.toggleClass('show');
+
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-submenu .show').removeClass('show');
+            });
+
+            return false;
+        });
+    </script>
+
 </body>
 </html>
