@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.DateChegada)
         </th>
         <th>
+            @Html.Raw("Motorista")
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Preco)
         </th>
         <th>
@@ -40,6 +43,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateChegada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Motorista.Nome)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Preco)

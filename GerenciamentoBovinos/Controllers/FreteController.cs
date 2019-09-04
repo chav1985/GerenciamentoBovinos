@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using GerenciamentoBovinos.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GerenciamentoBovinos.Models;
 
 namespace GerenciamentoBovinos.Controllers
 {
@@ -17,7 +13,10 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Frete
         public ActionResult Index()
         {
-            return View(db.Fretes.ToList());
+            var frete = db.Fretes.Include(b => b.Motorista);
+            return View(frete.ToList());
+
+            //return View(db.Fretes.ToList());
         }
 
      
@@ -25,6 +24,7 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Frete/Create
         public ActionResult Create()
         {
+            ViewBag.MotoristaId = new SelectList(db.Motoristas, "Id", "Nome");
             return View();
         }
 
@@ -33,7 +33,7 @@ namespace GerenciamentoBovinos.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DateInicio,DateChegada,Preco,Descricao,PesoSaida,PesoChegada")] Fretes fretes)
+        public ActionResult Create([Bind(Include = "Id,DateInicio,DateChegada,MotoristaId,Preco,Descricao,PesoSaida,PesoChegada")] Fretes fretes)
         {
             if (ModelState.IsValid)
             {
@@ -42,6 +42,7 @@ namespace GerenciamentoBovinos.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.MotoristaId = new SelectList(db.Motoristas, "Id", "Nome", fretes.MotoristaId);
             return View(fretes);
         }
 
@@ -57,6 +58,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MotoristaId = new SelectList(db.Motoristas, "Id", "Nome", fretes.MotoristaId);
             return View(fretes);
         }
 
@@ -65,7 +67,7 @@ namespace GerenciamentoBovinos.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DateInicio,DateChegada,Preco,Descricao,PesoSaida,PesoChegada")] Fretes fretes)
+        public ActionResult Edit([Bind(Include = "Id,DateInicio,DateChegada,MotoristaId,Preco,Descricao,PesoSaida,PesoChegada")] Fretes fretes)
         {
             if (ModelState.IsValid)
             {
@@ -73,6 +75,7 @@ namespace GerenciamentoBovinos.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.MotoristaId = new SelectList(db.Motoristas, "Id", "Nome", fretes.MotoristaId);
             return View(fretes);
         }
 

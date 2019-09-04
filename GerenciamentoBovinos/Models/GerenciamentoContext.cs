@@ -5,7 +5,7 @@ namespace GerenciamentoBovinos.Models
 {
     public class GerenciamentoContext : DbContext
     {
-        public GerenciamentoContext() : base("name=DbTeste12")
+        public GerenciamentoContext() : base("name=DbTeste13")
         {
 
         }
