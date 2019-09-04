@@ -15,11 +15,11 @@ namespace GerenciamentoBovinos.Models
         public Motorista Motorista { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Date de Inicio")]
+        [Display(Name = "Data de Inicio")]
         public DateTime DateInicio { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Date de Chegada")]
+        [Display(Name = "Data de Chegada")]
         public DateTime DateChegada { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
