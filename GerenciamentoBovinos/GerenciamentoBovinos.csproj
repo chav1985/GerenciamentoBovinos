@@ -193,6 +193,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bovino.cs" />
     <Compile Include="Models\Comissionado.cs" />
+    <Compile Include="Models\Confinamento.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Fretes.cs" />

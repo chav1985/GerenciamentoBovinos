@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GerenciamentoBovinos.Models
 {
@@ -7,6 +8,11 @@ namespace GerenciamentoBovinos.Models
     {
         [Key]
         public long Id { get; set; }
+
+        [Required]
+        [ForeignKey("Motorista")]
+        public long MotoristaId { get; set; }
+        public Motorista Motorista { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Date de Inicio")]
@@ -18,7 +24,7 @@ namespace GerenciamentoBovinos.Models
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Preço")]
-        public decimal  Preco { get; set; }
+        public decimal Preco { get; set; }
 
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
@@ -31,6 +37,5 @@ namespace GerenciamentoBovinos.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Peso de Chegada")]
         public int PesoChegada { get; set; }
-
     }
 }
