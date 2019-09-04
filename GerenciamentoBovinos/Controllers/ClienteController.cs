@@ -20,21 +20,6 @@ namespace GerenciamentoBovinos.Controllers
             return View(db.Clientes.ToList());
         }
 
-        // GET: Cliente/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = db.Clientes.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
-        }
-
         // GET: Cliente/Create
         public ActionResult Create()
         {
@@ -92,27 +77,15 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Cliente/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Cliente cliente = db.Clientes.Find(id);
-            if (cliente == null)
+            if (cliente != null)
             {
-                return HttpNotFound();
+                db.Clientes.Remove(cliente);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return View(cliente);
-        }
 
-        // POST: Cliente/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Cliente cliente = db.Clientes.Find(id);
-            db.Clientes.Remove(cliente);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return new HttpNotFoundResult();
         }
 
         protected override void Dispose(bool disposing)
