@@ -9,16 +9,16 @@ namespace GerenciamentoBovinos.Models
         public long Id { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Date de Inicio")]
+        [Display(Name = "Data de Inicio")]
         public DateTime DateInicio { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Date de Chegada")]
+        [Display(Name = "Data de Chegada")]
         public DateTime DateChegada { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Preço")]
-        public decimal  Preco { get; set; }
+        public decimal Preco { get; set; }
 
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
