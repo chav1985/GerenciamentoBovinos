@@ -20,8 +20,8 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Consulta/Create
         public ActionResult Create()
         {
-            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote");
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "CRMV");
+            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Brinco");
+            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "Nome");
             return View();
         }
 
@@ -39,8 +39,8 @@ namespace GerenciamentoBovinos.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote", consulta.BovinoId);
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "CRMV", consulta.VeterinarioId);
+            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Brinco", consulta.BovinoId);
+            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "Nome", consulta.VeterinarioId);
             return View(consulta);
         }
 
@@ -56,8 +56,8 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote", consulta.BovinoId);
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "CRMV", consulta.VeterinarioId);
+            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Brinco", consulta.BovinoId);
+            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "Nome", consulta.VeterinarioId);
             return View(consulta);
         }
 
@@ -74,24 +74,23 @@ namespace GerenciamentoBovinos.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote", consulta.BovinoId);
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "CRMV", consulta.VeterinarioId);
+            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Brinco", consulta.BovinoId);
+            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "Nome", consulta.VeterinarioId);
             return View(consulta);
         }
 
         // GET: Consulta/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Consulta consulta = db.Consultas.Find(id);
-            if (consulta == null)
+            if (consulta != null)
             {
-                return HttpNotFound();
+                db.Consultas.Remove(consulta);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return View(consulta);
+
+            return new HttpNotFoundResult();
         }
 
         protected override void Dispose(bool disposing)
