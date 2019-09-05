@@ -179,6 +179,7 @@
     <Compile Include="Controllers\BovinoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ComissionadoController.cs" />
+    <Compile Include="Controllers\ConsultaController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\FreteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -344,6 +345,9 @@
     <Content Include="Views\Motorista\Details.cshtml" />
     <Content Include="Views\Motorista\Edit.cshtml" />
     <Content Include="Views\Motorista\Index.cshtml" />
+    <Content Include="Views\Consulta\Create.cshtml" />
+    <Content Include="Views\Consulta\Edit.cshtml" />
+    <Content Include="Views\Consulta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
