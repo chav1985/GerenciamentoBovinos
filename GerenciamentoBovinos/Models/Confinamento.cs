@@ -24,7 +24,7 @@ namespace GerenciamentoBovinos.Models
         [Display(Name = "Data Final")]
         public DateTime DtFinal { get; set; }
 
-        [Display(Name = "Custo diário")]
-        public decimal CustoDiario { get; set; }
+        [Display(Name = "Custo total")]
+        public decimal CustoTotal { get; set; }
     }
 }
