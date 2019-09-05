@@ -5,7 +5,7 @@ namespace GerenciamentoBovinos.Models
 {
     public class GerenciamentoContext : DbContext
     {
-        public GerenciamentoContext() : base("name=DbTeste13")
+        public GerenciamentoContext() : base("name=DbTeste14")
         {
 
         }
@@ -34,6 +34,8 @@ namespace GerenciamentoBovinos.Models
 
         public virtual DbSet<Comissionado> Comissionados { get; set; }
 
-        public virtual DbSet<Motorista> Motoristas  { get; set; }
+        public virtual DbSet<Motorista> Motoristas { get; set; }
+
+        public virtual DbSet<Consulta> Consultas { get; set; }
     }
 }
