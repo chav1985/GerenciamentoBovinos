@@ -15,9 +15,6 @@
             @Html.DisplayNameFor(model => model.Tipo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
             @Html.Raw("Ações")
         </th>
     </tr>
@@ -27,9 +24,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
                 <a href="@Url.Action("Edit", "TipoProduto", new { id = item.Id})">

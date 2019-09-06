@@ -26,7 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th></th>
+        <th>
+            @Html.Raw("Ações")
+        </th>
     </tr>
 
     @foreach (var item in Model)
