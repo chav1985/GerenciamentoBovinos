@@ -19,6 +19,7 @@ namespace GerenciamentoBovinos.Controllers
         // GET: CompraProduto/Create
         public ActionResult Create()
         {
+            ViewBag.LsProduto = new SelectList(db.Produtos, "Id", "NomeProduto");
             return View();
         }
 
