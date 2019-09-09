@@ -17,7 +17,7 @@ namespace GerenciamentoBovinos.Models
         [Display(Name = "Produtos")]
         public List<Produto> LsProduto { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório.")]
         [Display(Name = "Data Inicial")]
         public DateTime DtInicial { get; set; }
 

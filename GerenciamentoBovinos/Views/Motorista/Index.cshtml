@@ -31,9 +31,8 @@
             @Html.DisplayNameFor(model => model.Endereco)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.Raw("Ações")
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -57,9 +56,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
                 <a href="@Url.Action("Edit", "Motorista", new { id = item.Id})">
