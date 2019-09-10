@@ -11,6 +11,7 @@ namespace GerenciamentoBovinos.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         public string CNH { get; set; }
 
+        [Required(ErrorMessage = "Campo obrigatório")]
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         public string Descricao { get; set; }
 
