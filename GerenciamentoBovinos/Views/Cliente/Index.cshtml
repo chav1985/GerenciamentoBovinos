@@ -29,7 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CPFCNPJ)
         </th>
-        <th></th>
+        <th>
+            @Html.Raw("Ações")
+        </th>
     </tr>
 
     @foreach (var item in Model)
