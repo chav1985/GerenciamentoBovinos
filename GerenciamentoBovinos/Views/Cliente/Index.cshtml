@@ -12,22 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.InscricaoEstadual)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.CPFCNPJ)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Telefone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Endereco)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CPFCNPJ)
         </th>
         <th>
             @Html.Raw("Ações")
@@ -41,19 +32,10 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CPFCNPJ)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InscricaoEstadual)
+                @Html.DisplayFor(modelItem => item.Telefone)
             </td>
             <td>
                 <a href="@Url.Action("Edit", "Cliente", new { id = item.Id})">

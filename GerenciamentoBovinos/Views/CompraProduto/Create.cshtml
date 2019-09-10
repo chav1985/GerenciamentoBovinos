@@ -1,0 +1,53 @@
+﻿@model GerenciamentoBovinos.Models.CompraProdutos
+
+@{
+    ViewBag.Title = "Cadastrar Compra de Produtos";
+}
+
+<h2 class="text-center">Cadastrar Compra de Produtos</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.DtCompra, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(model => model.DtCompra, new { type = "date", @class = "form-control", id = "dtCompra" })
+                @Html.ValidationMessageFor(model => model.DtCompra, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.PrazoEntrega, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(model => model.PrazoEntrega, new { type = "date", @class = "form-control", id = "pzEntrega" })
+                @Html.ValidationMessageFor(model => model.PrazoEntrega, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.LsProdutos, "Lista de Produtos", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.DropDownList("LsProduto", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LsProdutos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    document.getElementById("dtCompra").valueAsDate = new Date();
+    document.getElementById("pzEntrega").valueAsDate = new Date();
+</script>

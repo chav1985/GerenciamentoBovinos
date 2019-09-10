@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using GerenciamentoBovinos.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GerenciamentoBovinos.Models;
 
 namespace GerenciamentoBovinos.Controllers
 {
@@ -86,17 +82,6 @@ namespace GerenciamentoBovinos.Controllers
             }
 
             return new HttpNotFoundResult();
-        }
-
-        // POST: Veterinario/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Veterinario veterinario = db.Veterinarios.Find(id);
-            db.Veterinarios.Remove(veterinario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

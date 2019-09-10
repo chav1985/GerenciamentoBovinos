@@ -12,16 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TipoProduto.Tipo)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.NomeProduto)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Valor)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Validade)
+            @Html.DisplayNameFor(model => model.Qtd)
         </th>
         <th>
             @Html.Raw("Ações")
@@ -32,16 +29,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoProduto.Tipo)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.NomeProduto)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Valor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Validade)
+                @Html.DisplayFor(modelItem => item.Qtd)
             </td>
             <td>
                 <a href="@Url.Action("Edit", "Produto", new { id = item.Id})">

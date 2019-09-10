@@ -19,8 +19,6 @@ namespace GerenciamentoBovinos.Controllers
             //return View(db.Fretes.ToList());
         }
 
-     
-
         // GET: Frete/Create
         public ActionResult Create()
         {
