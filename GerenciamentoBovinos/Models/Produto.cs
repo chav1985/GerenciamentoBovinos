@@ -19,6 +19,10 @@ namespace GerenciamentoBovinos.Models
         public long TipoProdutoId { get; set; }
         public TipoProduto TipoProduto { get; set; }
 
+        [ForeignKey("Fornecedor")]
+        public long FornecedorId { get; set; }
+        public Fornecedor Fornecedor { get; set; }
+
         [Required(ErrorMessage = "Campo obrigatório")]
         public decimal Valor { get; set; }
 
@@ -28,5 +32,9 @@ namespace GerenciamentoBovinos.Models
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Quantidade")]
+        public int Qtd { get; set; }
     }
 }

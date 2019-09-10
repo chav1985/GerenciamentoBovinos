@@ -21,6 +21,7 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Create()
         {
             ViewBag.TipoProdutoId = new SelectList(db.TipoProdutos, "Id", "Tipo");
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
 
@@ -29,7 +30,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NomeProduto,TipoProdutoId,Descricao,Valor,Validade")] Produto produto)
+        public ActionResult Create([Bind(Include = "Id,NomeProduto,TipoProdutoId,FornecedorId,Descricao,Valor,Validade,Qtd")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -39,6 +40,7 @@ namespace GerenciamentoBovinos.Controllers
             }
 
             ViewBag.TipoProdutoId = new SelectList(db.TipoProdutos, "Id", "Tipo", produto.TipoProdutoId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 
@@ -55,6 +57,7 @@ namespace GerenciamentoBovinos.Controllers
                 return HttpNotFound();
             }
             ViewBag.TipoProdutoId = new SelectList(db.TipoProdutos, "Id", "Tipo", produto.TipoProdutoId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 
@@ -63,7 +66,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NomeProduto,TipoProdutoId,Descricao,Valor,Validade")] Produto produto)
+        public ActionResult Edit([Bind(Include = "Id,NomeProduto,TipoProdutoId,FornecedorId,Descricao,Valor,Validade,Qtd")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +75,7 @@ namespace GerenciamentoBovinos.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TipoProdutoId = new SelectList(db.TipoProdutos, "Id", "Tipo", produto.TipoProdutoId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 

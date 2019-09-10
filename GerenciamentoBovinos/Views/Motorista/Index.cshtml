@@ -22,13 +22,7 @@
             @Html.DisplayNameFor(model => model.CNH)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Telefone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Endereco)
         </th>
         <th>
             @Html.Raw("Ações")
@@ -49,13 +43,7 @@
                 @Html.DisplayFor(modelItem => item.CNH)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
             </td>
             <td>
                 <a href="@Url.Action("Edit", "Motorista", new { id = item.Id})">
