@@ -10,12 +10,10 @@ namespace GerenciamentoBovinos.Models
         public long Id { get; set; }
 
         [ForeignKey("Bovino")]
-        [Required(ErrorMessage = "Campo obrigatório")]
         public long BovinoId { get; set; }
         public Bovino Bovino { get; set; }
 
         [ForeignKey("Veterinario")]
-        [Required(ErrorMessage = "Campo obrigatório")]
         public long VeterinarioId { get; set; }
         public Veterinario Veterinario { get; set; }
 

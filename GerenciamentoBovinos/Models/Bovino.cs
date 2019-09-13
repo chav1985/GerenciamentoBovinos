@@ -16,6 +16,10 @@ namespace GerenciamentoBovinos.Models
         public long RacaId { get; set; }
         public Raca Raca { get; set; }
 
+        [ForeignKey("Fornecedor")]
+        public long FornecedorId { get; set; }
+        public Fornecedor Fornecedor { get; set; }
+
         [Required(ErrorMessage = "Campo obrigatório")]
         public decimal Peso { get; set; }
 

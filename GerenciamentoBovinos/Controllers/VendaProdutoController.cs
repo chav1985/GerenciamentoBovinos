@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using GerenciamentoBovinos.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GerenciamentoBovinos.Models;
 
 namespace GerenciamentoBovinos.Controllers
 {
@@ -20,24 +16,25 @@ namespace GerenciamentoBovinos.Controllers
             return View(db.VendaProdutos.ToList());
         }
 
-        // GET: VendaProduto/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VendaProduto vendaProduto = db.VendaProdutos.Find(id);
-            if (vendaProduto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vendaProduto);
-        }
+        //// GET: VendaProduto/Details/5
+        //public ActionResult Details(long? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    VendaProduto vendaProduto = db.VendaProdutos.Find(id);
+        //    if (vendaProduto == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(vendaProduto);
+        //}
 
         // GET: VendaProduto/Create
         public ActionResult Create()
         {
+            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
             return View();
         }
 

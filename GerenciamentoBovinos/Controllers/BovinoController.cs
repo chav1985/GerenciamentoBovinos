@@ -21,6 +21,7 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Create()
         {
             ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome");
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
 
@@ -29,7 +30,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Brinco,RacaId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
+        public ActionResult Create([Bind(Include = "Id,Brinco,RacaId,FornecedorId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
         {
             if (ModelState.IsValid)
             {
@@ -39,6 +40,7 @@ namespace GerenciamentoBovinos.Controllers
             }
 
             ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome", bovino.RacaId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
             return View(bovino);
         }
 
@@ -55,6 +57,7 @@ namespace GerenciamentoBovinos.Controllers
                 return HttpNotFound();
             }
             ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome", bovino.RacaId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
             return View(bovino);
         }
 
@@ -63,7 +66,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Brinco,RacaId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
+        public ActionResult Edit([Bind(Include = "Id,Brinco,RacaId,FornecedorId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +75,7 @@ namespace GerenciamentoBovinos.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome", bovino.RacaId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
             return View(bovino);
         }
 

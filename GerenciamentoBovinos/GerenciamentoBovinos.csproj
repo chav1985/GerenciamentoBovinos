@@ -178,13 +178,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BovinoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\ComissionadoController.cs" />
     <Compile Include="Controllers\ConsultaController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
-    <Compile Include="Controllers\FreteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MotoristaController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\TipoProdutoController.cs" />
@@ -196,14 +193,11 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bovino.cs" />
-    <Compile Include="Models\Comissionado.cs" />
     <Compile Include="Models\VendaProduto.cs" />
     <Compile Include="Models\Confinamento.cs" />
     <Compile Include="Models\Consulta.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Fretes.cs" />
-    <Compile Include="Models\Motorista.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -336,15 +330,6 @@
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Frete\Create.cshtml" />
-    <Content Include="Views\Frete\Edit.cshtml" />
-    <Content Include="Views\Frete\Index.cshtml" />
-    <Content Include="Views\Comissionado\Create.cshtml" />
-    <Content Include="Views\Comissionado\Edit.cshtml" />
-    <Content Include="Views\Comissionado\Index.cshtml" />
-    <Content Include="Views\Motorista\Create.cshtml" />
-    <Content Include="Views\Motorista\Edit.cshtml" />
-    <Content Include="Views\Motorista\Index.cshtml" />
     <Content Include="Views\Consulta\Create.cshtml" />
     <Content Include="Views\Consulta\Edit.cshtml" />
     <Content Include="Views\Consulta\Index.cshtml" />
