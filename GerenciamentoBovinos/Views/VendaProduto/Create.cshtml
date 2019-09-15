@@ -34,6 +34,16 @@
                 @Html.Label("Produtos", htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.DropDownList("ProdutoId", null, htmlAttributes: new { @class = "form-control" })
             </div>
+
+            <div class="col-md-2">
+                @Html.Label("Disponivel", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("ProdutoQtd", null, htmlAttributes: new { @class = "form-control", @readonly = true })
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("Qtd", null, htmlAttributes: new { @type = "number", @class = "form-control" })
+            </div>
         </div>
 
         @*@Html.EditorFor(model => model.QtdProdutos, new { @class = "form-control", @name = "cpfcnpj", @onkeypress = "mascaraMutuario(this,cpfCnpj)", @onblur = "clearTimeout()", @maxlength = "18" });*@
@@ -55,9 +65,18 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
+    $("#ProdutoId").change(function (event) {
+        var url = "QtdProdutos/" + $(this).val();
+        $.get(url, null, function (data) {
+            $("#ProdutoQtd").val(data);
+        });
+    });
+
     document.getElementById("dtCompra").valueAsDate = new Date();
     document.getElementById("pzEntrega").valueAsDate = new Date();
+
 
     function mascaraMutuario(o, f) {
         v_obj = o

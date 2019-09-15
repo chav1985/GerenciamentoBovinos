@@ -35,6 +35,11 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Create()
         {
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+
+            if (db.Produtos != null && db.Produtos.Count() != 0)
+            {
+                ViewBag.ProdutoQtd = db.Produtos.FirstOrDefault().Qtd;
+            }
             return View();
         }
 
@@ -86,31 +91,38 @@ namespace GerenciamentoBovinos.Controllers
             return View(vendaProduto);
         }
 
-        // GET: VendaProduto/Delete/5
-        public ActionResult Delete(long? id)
+        //GET
+        public int QtdProdutos(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VendaProduto vendaProduto = db.VendaProdutos.Find(id);
-            if (vendaProduto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vendaProduto);
+            var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
+            return (qtd);
         }
 
-        // POST: VendaProduto/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            VendaProduto vendaProduto = db.VendaProdutos.Find(id);
-            db.VendaProdutos.Remove(vendaProduto);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// GET: VendaProduto/Delete/5
+        //public ActionResult Delete(long? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    VendaProduto vendaProduto = db.VendaProdutos.Find(id);
+        //    if (vendaProduto == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(vendaProduto);
+        //}
+
+        //// POST: VendaProduto/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(long id)
+        //{
+        //    VendaProduto vendaProduto = db.VendaProdutos.Find(id);
+        //    db.VendaProdutos.Remove(vendaProduto);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
