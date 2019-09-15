@@ -1,10 +1,10 @@
 ﻿@model GerenciamentoBovinos.Models.VendaProduto
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Venda de Produtos";
 }
 
-<h2>Create</h2>
+<h2 class="text-center">Venda de Produtos</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>VendaProduto</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">
@@ -46,6 +45,35 @@
             </div>
         </div>
 
+        @*Teste com Table*@
+        <table class="table">
+            <h3 class="text-center mt-5">Lista de Compras</h3>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LsProdutos.FirstOrDefault().NomeProduto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LsProdutos.FirstOrDefault().Qtd)
+                </th>
+            </tr>
+
+            @{
+                @*foreach (var item in Model.LsProdutos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NomeProduto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qtd)
+                        </td>
+                    </tr>
+                }*@
+            }
+
+        </table>
+        @*Fim Teste*@
+
         @*@Html.EditorFor(model => model.QtdProdutos, new { @class = "form-control", @name = "cpfcnpj", @onkeypress = "mascaraMutuario(this,cpfCnpj)", @onblur = "clearTimeout()", @maxlength = "18" });*@
         @*<input type='text' class="form-control" name='cpfcnpj' onkeypress='mascaraMutuario(this,cpfCnpj)' onblur='clearTimeout()' maxlength="18">*@
 
@@ -77,49 +105,48 @@
     document.getElementById("dtCompra").valueAsDate = new Date();
     document.getElementById("pzEntrega").valueAsDate = new Date();
 
+        //function mascaraMutuario(o, f) {
+        //    v_obj = o
+        //    v_fun = f
+        //    setTimeout('execmascara()', 1)
+        //}
 
-    function mascaraMutuario(o, f) {
-        v_obj = o
-        v_fun = f
-        setTimeout('execmascara()', 1)
-    }
+        //function execmascara() {
+        //    v_obj.value = v_fun(v_obj.value)
+        //}
 
-    function execmascara() {
-        v_obj.value = v_fun(v_obj.value)
-    }
+        //function cpfCnpj(v) {
 
-    function cpfCnpj(v) {
+        //    //Remove tudo o que não é dígito
+        //    v = v.replace(/\D/g, "")
 
-        //Remove tudo o que não é dígito
-        v = v.replace(/\D/g, "")
+        //    if (v.length <= 11) { //CPF
 
-        if (v.length <= 11) { //CPF
+        //        //Coloca um ponto entre o terceiro e o quarto dígitos
+        //        v = v.replace(/(\d{3})(\d)/, "$1.$2")
 
-            //Coloca um ponto entre o terceiro e o quarto dígitos
-            v = v.replace(/(\d{3})(\d)/, "$1.$2")
+        //        //Coloca um ponto entre o terceiro e o quarto dígitos
+        //        //de novo (para o segundo bloco de números)
+        //        v = v.replace(/(\d{3})(\d)/, "$1.$2")
 
-            //Coloca um ponto entre o terceiro e o quarto dígitos
-            //de novo (para o segundo bloco de números)
-            v = v.replace(/(\d{3})(\d)/, "$1.$2")
+        //        //Coloca um hífen entre o terceiro e o quarto dígitos
+        //        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
 
-            //Coloca um hífen entre o terceiro e o quarto dígitos
-            v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+        //    } else { //CNPJ
 
-        } else { //CNPJ
+        //        //Coloca ponto entre o segundo e o terceiro dígitos
+        //        v = v.replace(/^(\d{2})(\d)/, "$1.$2")
 
-            //Coloca ponto entre o segundo e o terceiro dígitos
-            v = v.replace(/^(\d{2})(\d)/, "$1.$2")
+        //        //Coloca ponto entre o quinto e o sexto dígitos
+        //        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
 
-            //Coloca ponto entre o quinto e o sexto dígitos
-            v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+        //        //Coloca uma barra entre o oitavo e o nono dígitos
+        //        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2")
 
-            //Coloca uma barra entre o oitavo e o nono dígitos
-            v = v.replace(/\.(\d{3})(\d)/, ".$1/$2")
+        //        //Coloca um hífen depois do bloco de quatro dígitos
+        //        v = v.replace(/(\d{4})(\d)/, "$1-$2")
 
-            //Coloca um hífen depois do bloco de quatro dígitos
-            v = v.replace(/(\d{4})(\d)/, "$1-$2")
-
-        }
-        return v
-    }
+        //    }
+        //    return v
+        //}
 </script>
