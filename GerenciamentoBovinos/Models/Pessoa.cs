@@ -12,15 +12,21 @@ namespace GerenciamentoBovinos.Models
         [MaxLength(50, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
         [MaxLength(20, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
         public string Telefone { get; set; }
 
         [MaxLength(80, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
         public string Endereco { get; set; }
 
+        [MaxLength(80, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
+        public string Cidade { get; set; }
+
+        [MaxLength(40, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
+        public string Estado { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
         [MaxLength(30, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
-        [Display(Name ="CPF/CNPJ")]
+        [Display(Name = "CPF/CNPJ")]
         public string CPFCNPJ { get; set; }
     }
 }

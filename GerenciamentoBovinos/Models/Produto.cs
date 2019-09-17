@@ -24,6 +24,7 @@ namespace GerenciamentoBovinos.Models
         public Fornecedor Fornecedor { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Valor Unitário")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
