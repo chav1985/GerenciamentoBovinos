@@ -48,7 +48,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DtCompra,PrazoEntrega")] VendaProduto vendaProduto)
+        public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda")] VendaProduto vendaProduto)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DtCompra,PrazoEntrega")] VendaProduto vendaProduto)
+        public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda")] VendaProduto vendaProduto)
         {
             if (ModelState.IsValid)
             {
@@ -91,27 +91,27 @@ namespace GerenciamentoBovinos.Controllers
             return View(vendaProduto);
         }
 
+        // GET: VendaProduto/Delete/5
+        public ActionResult Delete(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendaProduto vendaProduto = db.VendaProdutos.Find(id);
+            if (vendaProduto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vendaProduto);
+        }
+
         //GET
         public int QtdProdutos(int id)
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
             return (qtd);
         }
-
-        //// GET: VendaProduto/Delete/5
-        //public ActionResult Delete(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VendaProduto vendaProduto = db.VendaProdutos.Find(id);
-        //    if (vendaProduto == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vendaProduto);
-        //}
 
         //// POST: VendaProduto/Delete/5
         //[HttpPost, ActionName("Delete")]
