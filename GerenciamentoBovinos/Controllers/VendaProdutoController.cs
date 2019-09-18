@@ -48,7 +48,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DtCompra,PrazoEntrega")] VendaProduto vendaProduto)
+        public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda")] VendaProduto vendaProduto)
         {
             if (ModelState.IsValid)
             {
@@ -80,13 +80,28 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DtCompra,PrazoEntrega")] VendaProduto vendaProduto)
+        public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda")] VendaProduto vendaProduto)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(vendaProduto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            return View(vendaProduto);
+        }
+
+        // GET: VendaProduto/Delete/5
+        public ActionResult Delete(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendaProduto vendaProduto = db.VendaProdutos.Find(id);
+            if (vendaProduto == null)
+            {
+                return HttpNotFound();
             }
             return View(vendaProduto);
         }
@@ -98,20 +113,19 @@ namespace GerenciamentoBovinos.Controllers
             return (qtd);
         }
 
-        //// GET: VendaProduto/Delete/5
-        //public ActionResult Delete(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VendaProduto vendaProduto = db.VendaProdutos.Find(id);
-        //    if (vendaProduto == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vendaProduto);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdicionarItem(ItemsVendaProduto itemsVendaProduto)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ItemsVendaProdutos.Add(itemsVendaProduto);
+                db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+            return View(itemsVendaProduto);
+        }
 
         //// POST: VendaProduto/Delete/5
         //[HttpPost, ActionName("Delete")]

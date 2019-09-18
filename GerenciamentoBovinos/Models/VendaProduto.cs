@@ -10,14 +10,17 @@ namespace GerenciamentoBovinos.Models
         public long Id { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [Display(Name = "Data de Compra")]
-        public DateTime DtCompra { get; set; }
+        [Display(Name = "Data de Venda")]
+        public DateTime DtVenda { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         [Display(Name = "Prazo de Entrega")]
         public DateTime PrazoEntrega { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        public List<Produto> LsProdutos { get; set; }
+        [Display(Name = "Margem de Venda")]
+        public int MargemVenda { get; set; }
+
+        public virtual List<ItemsVendaProduto> Items { get; set; }
     }
 }
