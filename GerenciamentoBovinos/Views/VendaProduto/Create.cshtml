@@ -15,16 +15,22 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 @Html.LabelFor(model => model.DtVenda, htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.TextBoxFor(model => model.DtVenda, new { type = "date", @class = "form-control", id = "dtCompra" })
                 @Html.ValidationMessageFor(model => model.DtVenda, "", new { @class = "text-danger" })
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 @Html.LabelFor(model => model.PrazoEntrega, htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.TextBoxFor(model => model.PrazoEntrega, new { type = "date", @class = "form-control", id = "pzEntrega" })
                 @Html.ValidationMessageFor(model => model.PrazoEntrega, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.MargemVenda, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.EditorFor(model => model.MargemVenda, new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 100 } })
+                @Html.ValidationMessageFor(model => model.MargemVenda, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -41,19 +47,45 @@
 
             <div class="col-md-2">
                 @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label col-md-12" })
-                @Html.TextBox("Qtd", null, htmlAttributes: new { @type = "number", @class = "form-control" })
+                @Html.TextBox("Qtd", null, htmlAttributes: new { @type = "number", @class = "form-control", @min = 0 })
             </div>
 
-            <div class="col-md-3">
-                @Html.LabelFor(model => model.MargemVenda, htmlAttributes: new { @class = "control-label col-md-10" })
-                @Html.EditorFor(model => model.MargemVenda, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MargemVenda, "", new { @class = "text-danger" })
+            <div class="col-md-2">
+                <input type="button" value="Adicionar" class="btn btn-success" onclick="teste();" />
             </div>
+
+
         </div>
 
-        @*@Html.EditorFor(model => model.QtdProdutos, new { @class = "form-control", @name = "cpfcnpj", @onkeypress = "mascaraMutuario(this,cpfCnpj)", @onblur = "clearTimeout()", @maxlength = "18" });*@
-        @*<input type='text' class="form-control" name='cpfcnpj' onkeypress='mascaraMutuario(this,cpfCnpj)' onblur='clearTimeout()' maxlength="18">*@
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Produto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Qtd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().ValorUnitario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().ValorTotal)
+                </th>
+            </tr>
 
+            @*@foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qtd)
+                        </td>
+                    </tr>
+                }*@
+
+        </table>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -80,51 +112,20 @@
         });
     });
 
+    function teste() {
+
+        var qtd = $("#Qtd").val();
+        var disponivel = $("#ProdutoQtd").val();
+        var selecionado = $("#ProdutoId").val();
+
+        if (qtd <= disponivel) {
+            var url = "AdicionarItem/" + qtd +"/"+ selecionado;
+            $.post(url, null, function (data) {
+                //$("#ProdutoQtd").val(data);
+            });
+        }
+    };
+
     document.getElementById("dtCompra").valueAsDate = new Date();
     document.getElementById("pzEntrega").valueAsDate = new Date();
-
-        //function mascaraMutuario(o, f) {
-        //    v_obj = o
-        //    v_fun = f
-        //    setTimeout('execmascara()', 1)
-        //}
-
-        //function execmascara() {
-        //    v_obj.value = v_fun(v_obj.value)
-        //}
-
-        //function cpfCnpj(v) {
-
-        //    //Remove tudo o que não é dígito
-        //    v = v.replace(/\D/g, "")
-
-        //    if (v.length <= 11) { //CPF
-
-        //        //Coloca um ponto entre o terceiro e o quarto dígitos
-        //        v = v.replace(/(\d{3})(\d)/, "$1.$2")
-
-        //        //Coloca um ponto entre o terceiro e o quarto dígitos
-        //        //de novo (para o segundo bloco de números)
-        //        v = v.replace(/(\d{3})(\d)/, "$1.$2")
-
-        //        //Coloca um hífen entre o terceiro e o quarto dígitos
-        //        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
-
-        //    } else { //CNPJ
-
-        //        //Coloca ponto entre o segundo e o terceiro dígitos
-        //        v = v.replace(/^(\d{2})(\d)/, "$1.$2")
-
-        //        //Coloca ponto entre o quinto e o sexto dígitos
-        //        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
-
-        //        //Coloca uma barra entre o oitavo e o nono dígitos
-        //        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2")
-
-        //        //Coloca um hífen depois do bloco de quatro dígitos
-        //        v = v.replace(/(\d{4})(\d)/, "$1-$2")
-
-        //    }
-        //    return v
-        //}
 </script>

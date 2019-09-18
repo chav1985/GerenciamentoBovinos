@@ -113,6 +113,20 @@ namespace GerenciamentoBovinos.Controllers
             return (qtd);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdicionarItem(ItemsVendaProduto itemsVendaProduto)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ItemsVendaProdutos.Add(itemsVendaProduto);
+                db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+            return View(itemsVendaProduto);
+        }
+
         //// POST: VendaProduto/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
