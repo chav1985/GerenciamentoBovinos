@@ -8,9 +8,7 @@ namespace GerenciamentoBovinos.Models
         [Key]
         public long Id { get; set; }
 
-        [ForeignKey("VendaProduto")]
-        public long VendaId { get; set; }
-        public VendaProduto VendaProduto { get; set; }
+        public int VendaId { get; set; }
 
         [ForeignKey("Produto")]
         public long ProdutoId { get; set; }

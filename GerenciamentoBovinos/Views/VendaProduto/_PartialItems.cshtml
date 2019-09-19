@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GerenciamentoBovinos.Models.ItemsVendaProduto>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qtd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorUnitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qtd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorTotal)
+            </td>
+        </tr>
+    }
+</table>

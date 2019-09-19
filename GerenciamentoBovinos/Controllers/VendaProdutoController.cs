@@ -60,6 +60,30 @@ namespace GerenciamentoBovinos.Controllers
             return View(vendaProduto);
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult AddItem(int qtd, int selected, int margem)
+        {
+            Produto prod = db.Produtos.Find(selected);
+
+            ItemsVendaProduto obj = new ItemsVendaProduto();
+            obj.ProdutoId = selected;
+            obj.Qtd = qtd;
+            obj.ValorUnitario = prod.Valor * margem % 100 + prod.Valor;
+            obj.ValorTotal = obj.ValorUnitario * qtd;
+
+            if (ModelState.IsValid)
+            {
+                db.ItemsVendaProdutos.Add(obj);
+                db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+            //db.VendaProdutos.FirstOrDefault().Items.Add(obj); 
+
+            return PartialView("_PartialItems");
+        }
+
         // GET: VendaProduto/Edit/5
         public ActionResult Edit(long? id)
         {

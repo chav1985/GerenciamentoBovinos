@@ -53,39 +53,9 @@
             <div class="col-md-2">
                 <input type="button" value="Adicionar" class="btn btn-success" onclick="teste();" />
             </div>
-
-
         </div>
 
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Produto)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Qtd)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().ValorUnitario)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().ValorTotal)
-                </th>
-            </tr>
-
-            @*@foreach (var item in Model.Items)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Produto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Qtd)
-                        </td>
-                    </tr>
-                }*@
-
-        </table>
+        @*@Html.Partial("_PartialItems")*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -114,13 +84,15 @@
 
     function teste() {
 
-        var qtd = $("#Qtd").val();
-        var disponivel = $("#ProdutoQtd").val();
-        var selecionado = $("#ProdutoId").val();
+        var Qtd = $("#Qtd").val();
+        var Disponivel = $("#ProdutoQtd").val();
+        var Selecionado = $("#ProdutoId").val();
+        var Margem = $("#MargemVenda").val();
 
-        if (qtd <= disponivel) {
-            var url = "AdicionarItem/" + qtd +"/"+ selecionado;
-            $.post(url, null, function (data) {
+
+        if (Qtd <= Disponivel) {
+            var url = "AddItem";
+            $.get(url, {qtd : Qtd, selected : Selecionado, margem : Margem}, function (data) {
                 //$("#ProdutoQtd").val(data);
             });
         }

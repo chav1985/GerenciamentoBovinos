@@ -337,6 +337,7 @@
     <Content Include="Views\VendaProduto\Create.cshtml" />
     <Content Include="Views\VendaProduto\Edit.cshtml" />
     <Content Include="Views\VendaProduto\Index.cshtml" />
+    <Content Include="Views\VendaProduto\_PartialItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
