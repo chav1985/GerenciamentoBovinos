@@ -10,7 +10,7 @@ namespace GerenciamentoBovinos.Controllers
     public class VendaProdutoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        private List<ItemsVendaProduto> items = new List<ItemsVendaProduto> { new ItemsVendaProduto { Produto = new Produto { NomeProduto = "Produto Teste" }, Qtd = 30, ValorUnitario = 10, ValorTotal = 120 } };
+        private List<ItemsVendaProduto> items = new List<ItemsVendaProduto>();
 
         // GET: VendaProduto
         public ActionResult Index()
@@ -22,12 +22,12 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Create()
         {
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
-            ViewBag.Items = items;
 
             if (db.Produtos != null && db.Produtos.Count() != 0)
             {
                 ViewBag.ProdutoQtd = db.Produtos.FirstOrDefault().Qtd;
             }
+
             return View();
         }
 
@@ -79,21 +79,6 @@ namespace GerenciamentoBovinos.Controllers
             return View(vendaProduto);
         }
 
-        // GET: VendaProduto/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VendaProduto vendaProduto = db.VendaProdutos.Find(id);
-            if (vendaProduto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vendaProduto);
-        }
-
         //GET
         public int QtdProdutos(int id)
         {
@@ -113,22 +98,11 @@ namespace GerenciamentoBovinos.Controllers
             obj.ValorUnitario = prod.Valor * margem / 100 + prod.Valor;
             obj.ValorTotal = obj.ValorUnitario * qtd;
 
+            //Adiciona objeto na lista
             items.Add(obj);
-            ViewBag.Items = items;
 
-            //if (ModelState.IsValid)
-            //{
-            //    db.ItemsVendaProdutos.Add(obj);
-            //    db.SaveChanges();
-            //    //return RedirectToAction("Index");
-            //}
-
-            //db.VendaProdutos.FirstOrDefault().Items.Add(obj); 
-
-            //return RedirectToAction("Create");
-            //return View("_PartialItems");
-            //return items;
-            return Json(new { sucess = ViewBag.Items}, JsonRequestBehavior.AllowGet);
+            //retorna um objeto JSON
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

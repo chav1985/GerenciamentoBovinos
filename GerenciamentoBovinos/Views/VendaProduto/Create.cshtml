@@ -57,43 +57,17 @@
         </div>
 
         <div class="col-md-10 offset-1">
-            @*@Html.Partial("_PartialItems")*@
-            <table class="table">
-                <tr>
-                    <h3 class="text-center mt-5">Produtos Selecionados</h3>
-                </tr>
-                <tr>
-                    <th>
-                        @Html.DisplayName("Produto")
-                    </th>
-                    <th>
-                        @Html.DisplayName("Quantidade")
-                    </th>
-                    <th>
-                        @Html.DisplayName("Valor Unitário")
-                    </th>
-                    <th>
-                        @Html.DisplayName("Valor Total")
-                    </th>
-                </tr>
-
-                @foreach (var item in (List<GerenciamentoBovinos.Models.ItemsVendaProduto>)ViewBag.Items)
-                {
+            <table class="table table-bordered table-condensed table-hover table-striped">
+                <thead>
+                    <h3 class="text-center mt-5">Lista de Produtos</h3>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Produto.NomeProduto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Qtd)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ValorUnitario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ValorTotal)
-                        </td>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Valor Unitário</th>
+                        <th>Valor Total</th>
                     </tr>
-                }
+                </thead>
+                <tbody></tbody>
             </table>
         </div>
 
@@ -122,6 +96,25 @@
         });
     });
 
+    //function teste() {
+
+    //    var Qtd = $("#Qtd").val();
+    //    var Disponivel = $("#ProdutoQtd").val();
+    //    var Selecionado = $("#ProdutoId").val();
+    //    var Margem = $("#MargemVenda").val();
+
+
+    //    if (Qtd <= Disponivel) {
+    //        var url = "AddItem";
+    //        $.get(url, { qtd: Qtd, selected: Selecionado, margem: Margem }, function (data) {
+    //            var ret = data;
+    //            //alert(data.success);
+    //            //$("#_PartialItems").html(data);
+    //        });
+    //    }
+    //};
+
+
     function teste() {
 
         var Qtd = $("#Qtd").val();
@@ -129,13 +122,20 @@
         var Selecionado = $("#ProdutoId").val();
         var Margem = $("#MargemVenda").val();
 
-
-        if (Qtd <= Disponivel) {
-            var url = "AddItem";
-            $.get(url, { qtd: Qtd, selected: Selecionado, margem: Margem }, function (data) {
-                var ret = data;
-                alert(data.success);
-                //$("#_PartialItems").html(data);
+        if (Qtd != "" && Margem != "" && Qtd <= Disponivel) {
+            //Chama o método AddItem que vai retornar o JSON
+            $.getJSON("AddItem", { qtd: Qtd, selected: Selecionado, margem: Margem }, function (json) {
+                var tr;
+                var ret = json;
+                //Anexa cada linha na tabela HTML
+                //for (var i = 0; i < json.length; i++) {
+                tr = $('<tr/>');
+                tr.append("<td>" + json.Produto.NomeProduto + "</td>");
+                tr.append("<td>" + json.Qtd + "</td>");
+                tr.append("<td>" + json.ValorUnitario + "</td>");
+                tr.append("<td>" + json.ValorTotal + "</td>");
+                $('table').append(tr);
+                //}
             });
         }
     };
