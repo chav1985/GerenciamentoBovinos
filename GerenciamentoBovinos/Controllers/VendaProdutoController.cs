@@ -102,7 +102,7 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
-        public List<ItemsVendaProduto> AddItem(int qtd, int selected, int margem)
+        public JsonResult AddItem(int qtd, int selected, int margem)
         {
             Produto prod = db.Produtos.Find(selected);
 
@@ -128,7 +128,7 @@ namespace GerenciamentoBovinos.Controllers
             //return RedirectToAction("Create");
             //return View("_PartialItems");
             //return items;
-            return items;
+            return Json(new { sucess = ViewBag.Items}, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

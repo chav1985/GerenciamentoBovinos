@@ -134,6 +134,7 @@
             var url = "AddItem";
             $.get(url, { qtd: Qtd, selected: Selecionado, margem: Margem }, function (data) {
                 var ret = data;
+                alert(data.success);
                 //$("#_PartialItems").html(data);
             });
         }
