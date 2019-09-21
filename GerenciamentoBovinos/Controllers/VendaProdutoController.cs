@@ -48,34 +48,6 @@ namespace GerenciamentoBovinos.Controllers
             return View(vendaProduto);
         }
 
-        //GET
-        public ActionResult AddItem(int qtd, int selected, int margem)
-        {
-            Produto prod = db.Produtos.Find(selected);
-
-            ItemsVendaProduto obj = new ItemsVendaProduto();
-            obj.ProdutoId = selected;
-            obj.Produto = prod;
-            obj.Qtd = qtd;
-            obj.ValorUnitario = prod.Valor * margem / 100 + prod.Valor;
-            obj.ValorTotal = obj.ValorUnitario * qtd;
-
-            items.Add(obj);
-            ViewBag.Items = items;
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.ItemsVendaProdutos.Add(obj);
-            //    db.SaveChanges();
-            //    //return RedirectToAction("Index");
-            //}
-
-            //db.VendaProdutos.FirstOrDefault().Items.Add(obj); 
-
-            //return RedirectToAction("Create");
-            return PartialView("_PartialItems");
-        }
-
         // GET: VendaProduto/Edit/5
         public ActionResult Edit(long? id)
         {
@@ -127,6 +99,36 @@ namespace GerenciamentoBovinos.Controllers
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
             return (qtd);
+        }
+
+        //GET
+        public List<ItemsVendaProduto> AddItem(int qtd, int selected, int margem)
+        {
+            Produto prod = db.Produtos.Find(selected);
+
+            ItemsVendaProduto obj = new ItemsVendaProduto();
+            obj.ProdutoId = selected;
+            obj.Produto = prod;
+            obj.Qtd = qtd;
+            obj.ValorUnitario = prod.Valor * margem / 100 + prod.Valor;
+            obj.ValorTotal = obj.ValorUnitario * qtd;
+
+            items.Add(obj);
+            ViewBag.Items = items;
+
+            //if (ModelState.IsValid)
+            //{
+            //    db.ItemsVendaProdutos.Add(obj);
+            //    db.SaveChanges();
+            //    //return RedirectToAction("Index");
+            //}
+
+            //db.VendaProdutos.FirstOrDefault().Items.Add(obj); 
+
+            //return RedirectToAction("Create");
+            //return View("_PartialItems");
+            //return items;
+            return items;
         }
 
         protected override void Dispose(bool disposing)

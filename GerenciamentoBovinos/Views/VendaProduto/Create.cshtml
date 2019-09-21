@@ -57,7 +57,44 @@
         </div>
 
         <div class="col-md-10 offset-1">
-            @Html.Partial("_PartialItems")
+            @*@Html.Partial("_PartialItems")*@
+            <table class="table">
+                <tr>
+                    <h3 class="text-center mt-5">Produtos Selecionados</h3>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Produto")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Quantidade")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Valor Unitário")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Valor Total")
+                    </th>
+                </tr>
+
+                @foreach (var item in (List<GerenciamentoBovinos.Models.ItemsVendaProduto>)ViewBag.Items)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.NomeProduto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qtd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorUnitario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorTotal)
+                        </td>
+                    </tr>
+                }
+            </table>
         </div>
 
         <div class="form-group">
@@ -96,7 +133,8 @@
         if (Qtd <= Disponivel) {
             var url = "AddItem";
             $.get(url, { qtd: Qtd, selected: Selecionado, margem: Margem }, function (data) {
-                $("#_PartialItems").html(data);
+                var ret = data;
+                //$("#_PartialItems").html(data);
             });
         }
     };
