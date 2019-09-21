@@ -10,7 +10,7 @@ namespace GerenciamentoBovinos.Controllers
     public class VendaProdutoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        private List<ItemsVendaProduto> items = new List<ItemsVendaProduto>();
+        private List<ItemsVendaProduto> items = new List<ItemsVendaProduto> { new ItemsVendaProduto { Produto = new Produto { NomeProduto = "Produto Teste" }, Qtd = 30, ValorUnitario = 10, ValorTotal = 120 } };
 
         // GET: VendaProduto
         public ActionResult Index()
@@ -22,7 +22,7 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Create()
         {
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
-            ViewBag.Items = new List<ItemsVendaProduto>();
+            ViewBag.Items = items;
 
             if (db.Produtos != null && db.Produtos.Count() != 0)
             {
@@ -48,16 +48,16 @@ namespace GerenciamentoBovinos.Controllers
             return View(vendaProduto);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        //GET
         public ActionResult AddItem(int qtd, int selected, int margem)
         {
             Produto prod = db.Produtos.Find(selected);
 
             ItemsVendaProduto obj = new ItemsVendaProduto();
             obj.ProdutoId = selected;
+            obj.Produto = prod;
             obj.Qtd = qtd;
-            obj.ValorUnitario = prod.Valor * margem % 100 + prod.Valor;
+            obj.ValorUnitario = prod.Valor * margem / 100 + prod.Valor;
             obj.ValorTotal = obj.ValorUnitario * qtd;
 
             items.Add(obj);
@@ -72,6 +72,7 @@ namespace GerenciamentoBovinos.Controllers
 
             //db.VendaProdutos.FirstOrDefault().Items.Add(obj); 
 
+            //return RedirectToAction("Create");
             return PartialView("_PartialItems");
         }
 
