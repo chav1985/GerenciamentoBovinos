@@ -21,7 +21,7 @@ namespace GerenciamentoBovinos.Controllers
         // GET: VendaProduto/Create
         public ActionResult Create()
         {
-            Session["Teste"] = items;
+            Session["Items"] = items;
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
 
             if (db.Produtos != null && db.Produtos.Count() != 0)
@@ -39,11 +39,27 @@ namespace GerenciamentoBovinos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda")] VendaProduto vendaProduto)
         {
-            if (ModelState.IsValid)
+            items = (List<ItemsVendaProduto>)Session["Items"];
+
+            if (ModelState.IsValid && items.Count > 0)
             {
+                foreach (var item in items)
+                {
+                    item.Produto = null;
+                }
+
+                vendaProduto.Items = items;
+
                 db.VendaProdutos.Add(vendaProduto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+
+            if (db.Produtos != null && db.Produtos.Count() != 0)
+            {
+                ViewBag.ProdutoQtd = db.Produtos.FirstOrDefault().Qtd;
             }
 
             return View(vendaProduto);
@@ -84,7 +100,7 @@ namespace GerenciamentoBovinos.Controllers
         public int QtdProdutos(int id)
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
-            items = items = (List<ItemsVendaProduto>)Session["Teste"];
+            items = items = (List<ItemsVendaProduto>)Session["Items"];
             int qtdLista = 0;
 
             if (items.Count > 0)
@@ -111,7 +127,7 @@ namespace GerenciamentoBovinos.Controllers
             obj.ValorUnitario = prod.Valor * margem / 100 + prod.Valor;
             obj.ValorTotal = obj.ValorUnitario * qtd;
 
-            items = (List<ItemsVendaProduto>)Session["Teste"];
+            items = (List<ItemsVendaProduto>)Session["Items"];
             //Adiciona objeto na lista
             items.Add(obj);
 
