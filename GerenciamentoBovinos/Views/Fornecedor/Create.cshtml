@@ -36,7 +36,7 @@
 
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Telefone, new { @class = "form-control", @name = "telefone", onkeypress = "mascara(this, mtel)", onblur = "clearTimeout()", maxlength = "14" })
                 @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -63,8 +63,6 @@
         </div>
     </div>
 }
-<input type="text" id="phone" placeholder="(55) 55555-5555" />
-@Html.TextBoxFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control", id="phone", onkeypress="phone()", placeholder="(55) 5555-5555" } })
 
 
 @section Scripts {
@@ -120,9 +118,19 @@
     }
 </script>
 <script>
-    document.getElementById('phone').addEventListener('input', function (e) {
-        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,4})(\d{0,4})/);
-        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-    });
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mtel(v) {
+        v = v.replace(/\D/g, "");             //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+        v = v.replace(/(\d)(\d{4})$/, "$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+        return v;
+    }
 </script>
 
