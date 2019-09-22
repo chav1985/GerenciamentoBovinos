@@ -21,6 +21,7 @@ namespace GerenciamentoBovinos.Controllers
         // GET: VendaProduto/Create
         public ActionResult Create()
         {
+            Session["Teste"] = items;
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
 
             if (db.Produtos != null && db.Produtos.Count() != 0)
@@ -83,7 +84,19 @@ namespace GerenciamentoBovinos.Controllers
         public int QtdProdutos(int id)
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
-            return (qtd);
+            items = items = (List<ItemsVendaProduto>)Session["Teste"];
+            int qtdLista = 0;
+
+            if (items.Count > 0)
+            {
+                foreach (var item in items)
+                {
+                    if (item.ProdutoId == id)
+                        qtdLista += item.Qtd;
+                }
+            }
+
+            return (qtd - qtdLista);
         }
 
         //GET
@@ -98,6 +111,7 @@ namespace GerenciamentoBovinos.Controllers
             obj.ValorUnitario = prod.Valor * margem / 100 + prod.Valor;
             obj.ValorTotal = obj.ValorUnitario * qtd;
 
+            items = (List<ItemsVendaProduto>)Session["Teste"];
             //Adiciona objeto na lista
             items.Add(obj);
 

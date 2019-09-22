@@ -96,25 +96,6 @@
         });
     });
 
-    //function teste() {
-
-    //    var Qtd = $("#Qtd").val();
-    //    var Disponivel = $("#ProdutoQtd").val();
-    //    var Selecionado = $("#ProdutoId").val();
-    //    var Margem = $("#MargemVenda").val();
-
-
-    //    if (Qtd <= Disponivel) {
-    //        var url = "AddItem";
-    //        $.get(url, { qtd: Qtd, selected: Selecionado, margem: Margem }, function (data) {
-    //            var ret = data;
-    //            //alert(data.success);
-    //            //$("#_PartialItems").html(data);
-    //        });
-    //    }
-    //};
-
-
     function teste() {
 
         var Qtd = $("#Qtd").val();
@@ -122,20 +103,28 @@
         var Selecionado = $("#ProdutoId").val();
         var Margem = $("#MargemVenda").val();
 
+        if (Disponivel <= 0) {
+            alert('Sem Produtos no estoque.');
+        }
+
         if (Qtd != "" && Margem != "" && Qtd <= Disponivel) {
             //Chama o método AddItem que vai retornar o JSON
             $.getJSON("AddItem", { qtd: Qtd, selected: Selecionado, margem: Margem }, function (json) {
                 var tr;
                 var ret = json;
                 //Anexa cada linha na tabela HTML
-                //for (var i = 0; i < json.length; i++) {
                 tr = $('<tr/>');
                 tr.append("<td>" + json.Produto.NomeProduto + "</td>");
                 tr.append("<td>" + json.Qtd + "</td>");
                 tr.append("<td>" + json.ValorUnitario + "</td>");
                 tr.append("<td>" + json.ValorTotal + "</td>");
                 $('table').append(tr);
-                //}
+            });
+
+            $("#ProdutoId").val('1');
+            var url = "QtdProdutos/" + $("#ProdutoId").val();
+            $.get(url, null, function (data) {
+                $("#ProdutoQtd").val(data);
             });
         }
     };
