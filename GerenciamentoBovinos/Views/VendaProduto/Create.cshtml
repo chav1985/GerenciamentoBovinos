@@ -46,13 +46,18 @@
             </div>
 
             <div class="col-md-2">
+                @Html.Label("Valor de Custo", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("VlrCusto", null, htmlAttributes: new { @class = "form-control", @readonly = true })
+            </div>
+
+            <div class="col-md-2">
                 @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label col-md-12" })
                 @Html.TextBox("Qtd", null, htmlAttributes: new { @type = "number", @class = "form-control", @min = 0 })
             </div>
 
             <div class="col-md-2">
                 @Html.Label("Ação", htmlAttributes: new { @class = "control-label col-md-12" })
-                <input type="button" value="Adicionar Item" class="btn btn-success" onclick="teste();" />
+                <input type="button" value="Adicionar Item" class="btn btn-success" onclick="addItem();" />
             </div>
         </div>
 
@@ -92,22 +97,24 @@
     $("#ProdutoId").change(function (event) {
         var url = "QtdProdutos/" + $(this).val();
         $.get(url, null, function (data) {
-            $("#ProdutoQtd").val(data);
+            $("#ProdutoQtd").val(data[0]);
+            $("#VlrCusto").val(data[1]);
         });
     });
 
-    function teste() {
+    function addItem() {
 
-        var Qtd = $("#Qtd").val();
-        var Disponivel = $("#ProdutoQtd").val();
-        var Selecionado = $("#ProdutoId").val();
         var Margem = $("#MargemVenda").val();
+        var Selecionado = $("#ProdutoId").val();
+        var Disponivel = parseInt($("#ProdutoQtd").val());
+        var Qtd = parseInt($("#Qtd").val());
 
         if (Disponivel <= 0) {
             alert('Sem Produtos no estoque.');
+            return;
         }
 
-        if (Qtd != "" && Margem != "" && Qtd <= Disponivel) {
+        if (Qtd != "" && Margem != "" && Qtd > 0 && Qtd <= Disponivel) {
             //Chama o método AddItem que vai retornar o JSON
             $.getJSON("AddItem", { qtd: Qtd, selected: Selecionado, margem: Margem }, function (json) {
                 var tr;
@@ -124,10 +131,14 @@
             $("#ProdutoId").val('1');
             var url = "QtdProdutos/" + $("#ProdutoId").val();
             $.get(url, null, function (data) {
-                $("#ProdutoQtd").val(data);
+                $("#ProdutoQtd").val(data[0]);
+                $("#VlrCusto").val(data[1]);
             });
         }
     };
+
+    $("#Qtd").val(0);
+    $("#MargemVenda").val(30);
 
     document.getElementById("dtVenda").valueAsDate = new Date();
     document.getElementById("pzEntrega").valueAsDate = new Date();

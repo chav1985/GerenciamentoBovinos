@@ -27,6 +27,7 @@ namespace GerenciamentoBovinos.Controllers
             if (db.Produtos != null && db.Produtos.Count() != 0)
             {
                 ViewBag.ProdutoQtd = db.Produtos.FirstOrDefault().Qtd;
+                ViewBag.VlrCusto = db.Produtos.FirstOrDefault().Valor.ToString("C");
             }
 
             return View();
@@ -97,10 +98,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
-        public int QtdProdutos(int id)
+        public JsonResult QtdProdutos(int id)
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
-            items = items = (List<ItemsVendaProduto>)Session["Items"];
+            var precoProd = db.Produtos.FirstOrDefault(p => p.Id == id).Valor;
+            items = (List<ItemsVendaProduto>)Session["Items"];
             int qtdLista = 0;
 
             if (items.Count > 0)
@@ -112,7 +114,11 @@ namespace GerenciamentoBovinos.Controllers
                 }
             }
 
-            return (qtd - qtdLista);
+            string[] retorno = new string[2];
+            retorno[0] = (qtd - qtdLista).ToString();
+            retorno[1] = precoProd.ToString("C");
+
+            return Json(retorno, JsonRequestBehavior.AllowGet);
         }
 
         //GET
