@@ -37,7 +37,7 @@
         <div class="form-group row">
             <div class="col-md-3">
                 @Html.Label("Produtos", htmlAttributes: new { @class = "control-label col-md-10" })
-                @Html.DropDownList("ProdutoId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ProdutoId", null, htmlAttributes: new { @class = "form-control", @onchange = "qtdProd($(this).val())" })
             </div>
 
             <div class="col-md-2">
@@ -57,7 +57,7 @@
 
             <div class="col-md-2">
                 @Html.Label("Ação", htmlAttributes: new { @class = "control-label col-md-12" })
-                <input type="button" value="Adicionar Item" class="btn btn-success" onclick="addItem();" />
+                <input type="button" value="Adicionar Item" id="btnAddItem" class="btn btn-success" onclick="addItem();" />
             </div>
         </div>
 
@@ -94,13 +94,12 @@
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
-    $("#ProdutoId").change(function (event) {
-        var url = "QtdProdutos/" + $(this).val();
-        $.get(url, null, function (data) {
-            $("#ProdutoQtd").val(data[0]);
-            $("#VlrCusto").val(data[1]);
+    function qtdProd(selected) {
+        $.getJSON("QtdProdutos", { id: selected }, function (json) {
+            $("#ProdutoQtd").val(json[0]);
+            $("#VlrCusto").val(json[1]);
         });
-    });
+    }
 
     function addItem() {
 
@@ -115,6 +114,7 @@
         }
 
         if (Qtd != "" && Margem != "" && Qtd > 0 && Qtd <= Disponivel) {
+            $('#btnAddItem').prop('disabled', true);
             //Chama o método AddItem que vai retornar o JSON
             $.getJSON("AddItem", { qtd: Qtd, selected: Selecionado, margem: Margem }, function (json) {
                 var tr;
@@ -126,16 +126,19 @@
                 tr.append("<td>" + json.ValorUnitario + "</td>");
                 tr.append("<td>" + json.ValorTotal + "</td>");
                 $('table').append(tr);
+
+                //Atualizando os campos disponivel e valor do produto
+                $("#ProdutoId").val('1');
+                qtdProd('1');
             });
 
-            $("#ProdutoId").val('1');
-            var url = "QtdProdutos/" + $("#ProdutoId").val();
-            $.get(url, null, function (data) {
-                $("#ProdutoQtd").val(data[0]);
-                $("#VlrCusto").val(data[1]);
-            });
+            setTimeout(enableButton, 3000);
         }
     };
+
+    function enableButton() {
+        $('#btnAddItem').prop('disabled', false);
+    }
 
     $("#Qtd").val(0);
     $("#MargemVenda").val(30);
