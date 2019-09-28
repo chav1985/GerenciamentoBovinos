@@ -43,6 +43,7 @@
             <div class="col-md-2">
                 @Html.Label("Disponivel", htmlAttributes: new { @class = "control-label col-md-12" })
                 @Html.TextBox("ProdutoQtd", null, htmlAttributes: new { @class = "form-control", @readonly = true })
+                <label class="text-danger" id="validaQtd"></label>
             </div>
 
             <div class="col-md-2">
@@ -53,6 +54,7 @@
             <div class="col-md-2">
                 @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label col-md-12" })
                 @Html.TextBox("Qtd", null, htmlAttributes: new { @type = "number", @class = "form-control", @min = 0 })
+                <label class="text-danger" id="validaQtdVenda"></label>
             </div>
 
             <div class="col-md-2">
@@ -109,8 +111,13 @@
         var Qtd = parseInt($("#Qtd").val());
 
         if (Disponivel <= 0) {
-            alert('Sem Produtos no estoque.');
+            $("#validaQtd").text('Sem estoque.');
+            setTimeout(clearText, 2000);
             return;
+        }
+        else if (Disponivel < Qtd) {
+            $("#validaQtdVenda").text('Superior ao estoque.');
+             setTimeout(clearText, 2000);
         }
 
         if (Qtd != "" && Margem != "" && Qtd > 0 && Qtd <= Disponivel) {
@@ -138,6 +145,11 @@
 
     function enableButton() {
         $('#btnAddItem').prop('disabled', false);
+    }
+
+    function clearText() {
+        $('#validaQtd').text('');
+        $('#validaQtdVenda').text('');
     }
 
     $("#Qtd").val(0);
