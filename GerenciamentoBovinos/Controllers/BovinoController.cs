@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace GerenciamentoBovinos.Controllers
@@ -32,13 +33,14 @@ namespace GerenciamentoBovinos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Brinco,RacaId,FornecedorId,Peso,Lote,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && bovino.RacaId > 0 && bovino.FornecedorId > 0)
             {
                 db.Bovinos.Add(bovino);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            Thread.Sleep(2000);
             ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome", bovino.RacaId);
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
             return View(bovino);

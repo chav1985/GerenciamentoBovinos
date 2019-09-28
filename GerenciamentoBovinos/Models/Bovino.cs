@@ -12,13 +12,13 @@ namespace GerenciamentoBovinos.Models
         [Required(ErrorMessage = "Campo obrigatório.")]
         public long Brinco { get; set; }
 
+        public virtual Raca Raca { get; set; }
         [ForeignKey("Raca")]
         public long RacaId { get; set; }
-        public Raca Raca { get; set; }
 
+        public virtual Fornecedor Fornecedor { get; set; }
         [ForeignKey("Fornecedor")]
         public long FornecedorId { get; set; }
-        public Fornecedor Fornecedor { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         public decimal Peso { get; set; }
