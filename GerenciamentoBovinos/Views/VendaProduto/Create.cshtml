@@ -38,6 +38,7 @@
             <div class="col-md-3">
                 @Html.Label("Produtos", htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.DropDownList("ProdutoId", null, htmlAttributes: new { @class = "form-control", @onchange = "qtdProd($(this).val())" })
+                <label class="text-danger" id="validaProduto"></label>
             </div>
 
             <div class="col-md-2">
@@ -117,7 +118,15 @@
         }
         else if (Disponivel < Qtd) {
             $("#validaQtdVenda").text('Superior ao estoque.');
-             setTimeout(clearText, 2000);
+            setTimeout(clearText, 2000);
+        }
+        else if (Qtd == 0 && Disponivel > 0) {
+            $("#validaQtdVenda").text('Digite a qtd.');
+            setTimeout(clearText, 2000);
+        }
+        else if (Selecionado == null) {
+            $("#validaProduto").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
         }
 
         if (Qtd != "" && Margem != "" && Qtd > 0 && Qtd <= Disponivel) {
@@ -150,6 +159,7 @@
     function clearText() {
         $('#validaQtd').text('');
         $('#validaQtdVenda').text('');
+        $('#validaProduto').text('');
     }
 
     $("#Qtd").val(0);
