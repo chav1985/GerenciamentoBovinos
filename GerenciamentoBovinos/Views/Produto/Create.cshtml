@@ -24,13 +24,13 @@
             <div class="col-md-3">
                 @Html.LabelFor(model => model.TipoProdutoId, "Tipo de Produto", htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.DropDownList("TipoProdutoId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TipoProdutoId, "", new { @class = "text-danger" })
+                <label class="text-danger" id="validaTipo"></label>
             </div>
 
             <div class="col-md-3">
                 @Html.LabelFor(model => model.FornecedorId, "Fornecedor", htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.DropDownList("FornecedorId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FornecedorId, "", new { @class = "text-danger" })
+                <label class="text-danger" id="validaFornecedor"></label>
             </div>
 
             <div class="col-md-3">
@@ -65,7 +65,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
-                <input type="submit" value="Salvar" class="btn btn-success" />
+                <input type="submit" value="Salvar" class="btn btn-success" onclick="validaDropDown();" />
             </div>
         </div>
     </div>
@@ -78,4 +78,27 @@
 
 <script>
     document.getElementById("validade").valueAsDate = new Date();
+
+    function validaDropDown() {
+        var tipo = $("#TipoProdutoId").val();
+        var fornecedor = $("#FornecedorId").val();
+        if (tipo == null && fornecedor == null) {
+            $("#validaTipo").text('Campo obrigatório.');
+            $("#validaFornecedor").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (tipo == null) {
+            $("#validaTipo").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (fornecedor == null) {
+            $("#validaFornecedor").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+    }
+
+    function clearText() {
+        $('#validaTipo').text('');
+        $('#validaFornecedor').text('');
+    }
 </script>

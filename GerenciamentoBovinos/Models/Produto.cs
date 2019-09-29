@@ -15,13 +15,13 @@ namespace GerenciamentoBovinos.Models
         [Display(Name = "Produto")]
         public string NomeProduto { get; set; }
 
+        public virtual TipoProduto TipoProduto { get; set; }
         [ForeignKey("TipoProduto")]
         public long TipoProdutoId { get; set; }
-        public TipoProduto TipoProduto { get; set; }
 
+        public virtual Fornecedor Fornecedor { get; set; }
         [ForeignKey("Fornecedor")]
         public long FornecedorId { get; set; }
-        public Fornecedor Fornecedor { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Valor Unitário")]
