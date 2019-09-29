@@ -9,13 +9,13 @@ namespace GerenciamentoBovinos.Models
         [Key]
         public long Id { get; set; }
 
+        public virtual Bovino Bovino { get; set; }
         [ForeignKey("Bovino")]
         public long BovinoId { get; set; }
-        public Bovino Bovino { get; set; }
 
+        public virtual Veterinario Veterinario { get; set; }
         [ForeignKey("Veterinario")]
         public long VeterinarioId { get; set; }
-        public Veterinario Veterinario { get; set; }
 
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         [Display(Name = "Descrição")]
