@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GerenciamentoBovinos.Models
 {
@@ -20,6 +21,10 @@ namespace GerenciamentoBovinos.Models
         [Required(ErrorMessage = "Campo obrigatório.")]
         [Display(Name = "Margem de Venda")]
         public int MargemVenda { get; set; }
+
+        public virtual Cliente Cliente { get; set; }
+        [ForeignKey("Cliente")]
+        public long ClienteId { get; set; }
 
         public virtual List<ItemsVendaProduto> Items { get; set; }
     }

@@ -32,6 +32,12 @@
                 @Html.EditorFor(model => model.MargemVenda, new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 100 } })
                 @Html.ValidationMessageFor(model => model.MargemVenda, "", new { @class = "text-danger" })
             </div>
+
+            <div class="col-md-3">
+                @Html.Label("Cliente", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control" })
+                <label class="text-danger" id="validaCliente"></label>
+            </div>
         </div>
 
         <div class="form-group row">
@@ -60,7 +66,7 @@
 
             <div class="col-md-2">
                 @Html.Label("Ação", htmlAttributes: new { @class = "control-label col-md-12" })
-                <input type="button" value="Adicionar Item" id="btnAddItem" class="btn btn-success" onclick="addItem();" />
+                <input type="button" value="Adicionar Items" id="btnAddItem" class="btn btn-success" onclick="addItem();" />
             </div>
         </div>
 
@@ -81,7 +87,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" onclick="validaDropDown();" />
             </div>
         </div>
     </div>
@@ -97,6 +103,24 @@
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
+    function validaDropDown() {
+        var cliente = $("#ClienteId").val();
+        var produto = $("#ProdutoId").val();
+        if (cliente == null && produto == null) {
+            $("#validaCliente").text('Campo obrigatório.');
+            $("#validaProduto").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (cliente == null) {
+            $("#validaCliente").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (produto == null) {
+            $("#validaProduto").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+    }
+
     function qtdProd(selected) {
         $.getJSON("QtdProdutos", { id: selected }, function (json) {
             $("#ProdutoQtd").val(json[0]);
@@ -160,6 +184,7 @@
         $('#validaQtd').text('');
         $('#validaQtdVenda').text('');
         $('#validaProduto').text('');
+        $('#validaCliente').text('');
     }
 
     $("#Qtd").val(0);

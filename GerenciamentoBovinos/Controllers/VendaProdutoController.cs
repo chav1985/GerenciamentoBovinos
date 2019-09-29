@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace GerenciamentoBovinos.Controllers
@@ -23,6 +24,7 @@ namespace GerenciamentoBovinos.Controllers
         {
             Session["Items"] = items;
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
 
             if (db.Produtos != null && db.Produtos.Count() != 0)
             {
@@ -38,11 +40,11 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda")] VendaProduto vendaProduto)
+        public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda,ClienteId")] VendaProduto vendaProduto)
         {
             items = (List<ItemsVendaProduto>)Session["Items"];
 
-            if (ModelState.IsValid && items.Count > 0)
+            if (ModelState.IsValid && items.Count > 0 && vendaProduto.ClienteId > 0)
             {
                 foreach (var item in items)
                 {
@@ -56,11 +58,14 @@ namespace GerenciamentoBovinos.Controllers
                 return RedirectToAction("Index");
             }
 
+            Thread.Sleep(2000);
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", vendaProduto.ClienteId);
 
             if (db.Produtos != null && db.Produtos.Count() != 0)
             {
                 ViewBag.ProdutoQtd = db.Produtos.FirstOrDefault().Qtd;
+                ViewBag.VlrCusto = db.Produtos.FirstOrDefault().Valor.ToString("C");
             }
 
             return View(vendaProduto);
@@ -78,6 +83,8 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", vendaProduto.ClienteId);
             return View(vendaProduto);
         }
 
@@ -86,7 +93,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda")] VendaProduto vendaProduto)
+        public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda,ClienteId")] VendaProduto vendaProduto)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +101,8 @@ namespace GerenciamentoBovinos.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", vendaProduto.ClienteId);
             return View(vendaProduto);
         }
 
