@@ -15,6 +15,10 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Index()
         {
             var produtos = db.Produtos.Include(p => p.TipoProduto);
+            foreach (var item in produtos)
+            {
+                item.Validade.ToString().Replace("00:00:00", string.Empty);
+            }
             return View(produtos.ToList());
         }
 

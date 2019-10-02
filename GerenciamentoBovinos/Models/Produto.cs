@@ -28,6 +28,8 @@ namespace GerenciamentoBovinos.Models
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Validade { get; set; }
 
         [MaxLength(200, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]

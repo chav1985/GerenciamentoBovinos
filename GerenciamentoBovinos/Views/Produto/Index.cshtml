@@ -21,6 +21,9 @@
             @Html.DisplayNameFor(model => model.Qtd)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Validade)
+        </th>
+        <th>
             @Html.Raw("Ações")
         </th>
     </tr>
@@ -36,6 +39,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Qtd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Validade)
             </td>
             <td>
                 <a href="@Url.Action("Edit", "Produto", new { id = item.Id})">
