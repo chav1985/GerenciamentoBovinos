@@ -2,7 +2,7 @@
 
 namespace GerenciamentoBovinos.Models
 {
-    public class Pessoa
+    public class Pessoa : Endereco
     {
         [Required(ErrorMessage = "Campo obrigatório")]
         [MinLength(3, ErrorMessage = "O {0} deve ter no mínimo {1} caracteres.")]
@@ -15,14 +15,6 @@ namespace GerenciamentoBovinos.Models
         [MaxLength(20, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
         public string Telefone { get; set; }
 
-        [MaxLength(80, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
-        public string Endereco { get; set; }
-
-        [MaxLength(80, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
-        public string Cidade { get; set; }
-
-        [MaxLength(40, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
-        public string Estado { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [MaxLength(30, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]

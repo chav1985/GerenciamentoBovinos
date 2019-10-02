@@ -27,7 +27,7 @@ namespace GerenciamentoBovinos.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,InscricaoEstadual,Nome,Email,Telefone,Endereco,Cidade,Estado,CPFCNPJ")] Fornecedor fornecedor)
+        public ActionResult Create([Bind(Include = "Id,InscricaoEstadual,Nome,Email,Telefone,Rua,Numero,Estado,Cidade,Cep,Complemento,CPFCNPJ")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
