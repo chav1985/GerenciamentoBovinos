@@ -147,7 +147,7 @@ namespace GerenciamentoBovinos.Controllers
             items.Add(obj);
 
             //retorna um objeto JSON
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            return Json(items, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
