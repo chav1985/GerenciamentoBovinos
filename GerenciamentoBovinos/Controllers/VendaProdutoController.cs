@@ -131,8 +131,16 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
-        public JsonResult AddItem(int qtd, int selected, int margem)
+        public JsonResult AddItem(int qtd, int selected, int margem, int remove)
         {
+            items = (List<ItemsVendaProduto>)Session["Items"];
+
+            if (remove != -1 && items.Count > 0)
+            {
+                items.RemoveAt(remove);
+                return Json(items, JsonRequestBehavior.AllowGet);
+            }
+
             Produto prod = db.Produtos.Find(selected);
 
             ItemsVendaProduto obj = new ItemsVendaProduto();
@@ -142,7 +150,6 @@ namespace GerenciamentoBovinos.Controllers
             obj.ValorUnitario = prod.Valor * margem / 100 + prod.Valor;
             obj.ValorTotal = obj.ValorUnitario * qtd;
 
-            items = (List<ItemsVendaProduto>)Session["Items"];
             //Adiciona objeto na lista
             items.Add(obj);
 
