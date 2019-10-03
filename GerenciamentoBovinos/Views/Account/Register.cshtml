@@ -1,14 +1,14 @@
 ﻿@model GerenciamentoBovinos.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Cadastro de Usuario";
 }
 
-<h2>@ViewBag.Title.</h2>
+    <h2 class="text-center">Cadastrar Novo Usuário</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4>Cadastrar novo Usuario.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -31,7 +31,8 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+            <input type="submit" value="Salvar" class="btn btn-success" />
         </div>
     </div>
 }
