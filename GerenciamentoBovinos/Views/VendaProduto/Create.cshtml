@@ -71,7 +71,7 @@
         </div>
 
         <div class="col-md-10 offset-1">
-            <table class="table table-bordered table-condensed table-hover table-striped">
+            <table id="tbProd" class="table table-bordered table-condensed table-hover table-striped">
                 <thead>
                     <h3 class="text-center mt-5">Lista de Produtos</h3>
                     <tr>
@@ -155,20 +155,22 @@
 
         if (Qtd != "" && Margem != "" && Qtd > 0 && Qtd <= Disponivel) {
             $('#btnAddItem').prop('disabled', true);
+
+            $('#tbProd tr td').parents('tr').remove();
+
             //Chama o método AddItem que vai retornar o JSON
             $.getJSON("AddItem", { qtd: Qtd, selected: Selecionado, margem: Margem }, function (json) {
                 var tr;
-                var ret = json;
                 //Anexa cada linha na tabela HTML
-                tr = $('<tr/>');
-                tr.append("<td>" + json.Produto.NomeProduto + "</td>");
-                tr.append("<td>" + json.Qtd + "</td>");
-                tr.append("<td>" + json.ValorUnitario + "</td>");
-                tr.append("<td>" + json.ValorTotal + "</td>");
-
-                tr.append("<td><input type='button' value='Remover' id='btnAddItem' class='btn btn-danger' onclick='' /></td>")
-
-                $('table').append(tr);
+                for (var i = 0; i < json.length; i++) {
+                    tr = $('<tr/>');
+                    tr.append("<td>" + json[i].Produto.NomeProduto + "</td>");
+                    tr.append("<td>" + json[i].Qtd + "</td>");
+                    tr.append("<td>" + json[i].ValorUnitario + "</td>");
+                    tr.append("<td>" + json[i].ValorTotal + "</td>");
+                    tr.append("<td><input type='button' value='Remover' id='btnAddItem' class='btn btn-danger' /></td>")
+                    $('table').append(tr);
+                }
 
                 //Atualizando os campos disponivel e valor do produto
                 $("#ProdutoId").val('1');
