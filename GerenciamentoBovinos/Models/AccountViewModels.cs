@@ -33,7 +33,7 @@ namespace GerenciamentoBovinos.Models
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Salvar nesse Navegador?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -55,10 +55,10 @@ namespace GerenciamentoBovinos.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Lembrar usuario?")]
         public bool RememberMe { get; set; }
     }
 
@@ -72,12 +72,12 @@ namespace GerenciamentoBovinos.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmar Senha")]
+        [Compare("Password", ErrorMessage = "A senha e a confirmação não são identicas")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -91,12 +91,12 @@ namespace GerenciamentoBovinos.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Senha")]
+        [Compare("Password", ErrorMessage = "A senha e a confirmação não são identicas")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
