@@ -105,6 +105,7 @@
     function validaDropDown() {
         var cliente = $("#ClienteId").val();
         var produto = $("#ProdutoId").val();
+        var rowCount = $('#tbProd tr').length;
         if (cliente == null && produto == null) {
             $("#validaCliente").text('Campo obrigatório.');
             $("#validaProduto").text('Campo obrigatório.');
@@ -118,7 +119,7 @@
             $("#validaProduto").text('Campo obrigatório.');
             setTimeout(clearText, 2000);
         }
-        else {
+        else if (rowCount == 1) {
             $("#validaProdAdd").text('Adicione Produtos.');
             setTimeout(clearText, 2000);
         }
@@ -167,6 +168,7 @@
             //Chama o método AddItem que vai retornar o JSON
             $.getJSON("AddItem", { qtd: Qtd, selected: Selecionado, margem: Margem, remove: IdRemove }, function (json) {
                 var tr;
+                var totalPedido = 0;
                 //Anexa cada linha na tabela HTML
                 for (var i = 0; i < json.length; i++) {
                     tr = $('<tr/>');
@@ -174,9 +176,14 @@
                     tr.append("<td>" + json[i].Qtd + "</td>");
                     tr.append("<td>" + json[i].ValorUnitario + "</td>");
                     tr.append("<td>" + json[i].ValorTotal + "</td>");
+                    totalPedido += json[i].ValorTotal;
                     tr.append("<td><input type='button' value='Remover Item' id='btnAddItem' class='btn btn-danger' onclick='addItem(" + i + ")' /></td>")
                     $('table').append(tr);
                 }
+                tr = $('<tr/>');
+                tr.append("<td colspan='3'><b>Valor total do Pedido</b></td>");
+                tr.append("<td colspan='2'><b>" + totalPedido + "</b></td>");
+                $('table').append(tr);
 
                 //Atualizando os campos disponivel e valor do produto
                 $("#ProdutoId").val('1');
