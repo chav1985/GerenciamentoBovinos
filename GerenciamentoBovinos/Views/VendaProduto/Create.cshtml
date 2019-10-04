@@ -67,10 +67,11 @@
             <div class="col-md-2">
                 @Html.Label("Ação", htmlAttributes: new { @class = "control-label col-md-12" })
                 <input type="button" value="Adicionar Items" id="btnAddItem" class="btn btn-success" onclick="addItem();" />
+                <label class="text-danger" id="validaProdAdd"></label>
             </div>
         </div>
 
-        <div class="col-md-10 offset-1">
+        <div id="divTable" class="col-md-10 offset-1" style="display:none">
             <table id="tbProd" class="table table-bordered table-condensed table-hover table-striped">
                 <thead>
                     <h3 class="text-center mt-5">Lista de Produtos</h3>
@@ -79,6 +80,7 @@
                         <th>Quantidade</th>
                         <th>Valor Unitário</th>
                         <th>Valor Total</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -87,15 +89,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" onclick="validaDropDown();" />
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+                <input type="submit" value="Efetuar Pedido" class="btn btn-success" onclick="validaDropDown();" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -117,6 +116,10 @@
         }
         else if (produto == null) {
             $("#validaProduto").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else {
+            $("#validaProdAdd").text('Adicione Produtos.');
             setTimeout(clearText, 2000);
         }
     }
@@ -171,13 +174,15 @@
                     tr.append("<td>" + json[i].Qtd + "</td>");
                     tr.append("<td>" + json[i].ValorUnitario + "</td>");
                     tr.append("<td>" + json[i].ValorTotal + "</td>");
-                    tr.append("<td><input type='button' value='Remover' id='btnAddItem' class='btn btn-danger' onclick='addItem(" + i + ")' /></td>")
+                    tr.append("<td><input type='button' value='Remover Item' id='btnAddItem' class='btn btn-danger' onclick='addItem(" + i + ")' /></td>")
                     $('table').append(tr);
                 }
 
                 //Atualizando os campos disponivel e valor do produto
                 $("#ProdutoId").val('1');
                 qtdProd('1');
+
+                $("#divTable").css("display", "block");
             });
 
             setTimeout(enableButton, 3000);
@@ -193,6 +198,7 @@
         $('#validaQtdVenda').text('');
         $('#validaProduto').text('');
         $('#validaCliente').text('');
+        $('#validaProdAdd').text('');
     }
 
     $("#Qtd").val(0);
