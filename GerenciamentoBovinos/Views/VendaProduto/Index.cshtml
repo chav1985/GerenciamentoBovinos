@@ -20,7 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.PrazoEntrega)
         </th>
-        <th></th>
+        <th>
+            @Html.Raw("Ações")
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -36,7 +38,9 @@
                 @Html.DisplayFor(modelItem => item.PrazoEntrega)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                <a href="@Url.Action("Edit", "VendaProduto", new { id = item.Id})">
+                    <i class="fa fa-pencil-square-o fa-2x"></i>
+                </a>
             </td>
         </tr>
     }

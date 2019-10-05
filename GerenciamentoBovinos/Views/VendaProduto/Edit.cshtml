@@ -1,43 +1,75 @@
 ﻿@model GerenciamentoBovinos.Models.VendaProduto
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Pedido";
 }
 
-<h2>Edit</h2>
+<h2 class="text-center">Editar Pedido</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>VendaProduto</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DtVenda, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DtVenda, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.DtVenda, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.DtVenda, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.DtVenda, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PrazoEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PrazoEntrega, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.PrazoEntrega, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.PrazoEntrega, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.PrazoEntrega, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.Label("MargemVenda", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBox("MargemVenda", null, new { @class = "form-control", @type = "number", @min = "0", @max = "100" })
+                @*@Html.ValidationMessageFor(model => model.MargemVenda, "", new { @class = "text-danger" })*@
+            </div>
+
+            <div class="col-md-3">
+                @Html.Label("Cliente", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control" })
+                <label class="text-danger" id="validaCliente"></label>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MargemVenda, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MargemVenda, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MargemVenda, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.Label("Produtos", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.DropDownList("ProdutoId", null, htmlAttributes: new { @class = "form-control", @onchange = "qtdProd($(this).val())" })
+                <label class="text-danger" id="validaProduto"></label>
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Disponivel", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("ProdutoQtd", null, htmlAttributes: new { @class = "form-control", @readonly = true })
+                <label class="text-danger" id="validaQtd"></label>
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Valor de Custo", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("VlrCusto", null, htmlAttributes: new { @class = "form-control", @readonly = true })
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("Qtd", null, htmlAttributes: new { @type = "number", @class = "form-control", @min = 0 })
+                <label class="text-danger" id="validaQtdVenda"></label>
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Ação", htmlAttributes: new { @class = "control-label col-md-12" })
+                <input type="button" value="Adicionar Items" id="btnAddItem" class="btn btn-success" onclick="addItem();" />
+                <label class="text-danger" id="validaProdAdd"></label>
             </div>
         </div>
 

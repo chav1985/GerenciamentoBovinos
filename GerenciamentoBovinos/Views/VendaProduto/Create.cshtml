@@ -29,7 +29,7 @@
 
             <div class="col-md-3">
                 @Html.Label("MargemVenda", htmlAttributes: new { @class = "control-label col-md-10" })
-                @Html.Editor("MargemVenda", new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 100 } })
+                @Html.TextBox("MargemVenda", null, new { @class = "form-control", @type = "number", @min = 0, @max = 100 })
                 @*@Html.ValidationMessageFor(model => model.MargemVenda, "", new { @class = "text-danger" })*@
             </div>
 
