@@ -28,9 +28,9 @@
             </div>
 
             <div class="col-md-3">
-                @Html.Label("MargemVenda", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.Label("Margem Venda", htmlAttributes: new { @class = "control-label col-md-10" })
                 @Html.TextBox("MargemVenda", null, new { @class = "form-control", @type = "number", @min = 0, @max = 100 })
-                @*@Html.ValidationMessageFor(model => model.MargemVenda, "", new { @class = "text-danger" })*@
+                <label class="text-danger" id="validaMargem"></label>
             </div>
 
             <div class="col-md-3">
@@ -149,14 +149,27 @@
             else if (Disponivel < Qtd) {
                 $("#validaQtdVenda").text('Superior ao estoque.');
                 setTimeout(clearText, 2000);
+                return;
             }
             else if (Qtd == 0 && Disponivel > 0) {
                 $("#validaQtdVenda").text('Digite a qtd.');
                 setTimeout(clearText, 2000);
+                return;
             }
             else if (Selecionado == null) {
                 $("#validaProduto").text('Campo obrigatório.');
                 setTimeout(clearText, 2000);
+                return;
+            }
+            else if (Margem == "" || Margem < 0 || Margem > 100) {
+                if (Margem == "") {
+                    $("#validaMargem").text('Campo obrigatório.');
+                    setTimeout(clearText, 2000);
+                    return;
+                }
+                $("#validaMargem").text('Valor entre 0 e 100.');
+                setTimeout(clearText, 2000);
+                return;
             }
         }
 
@@ -206,6 +219,7 @@
         $('#validaProduto').text('');
         $('#validaCliente').text('');
         $('#validaProdAdd').text('');
+        $('#validaMargem').text('');
     }
 
     $("#Qtd").val(0);
