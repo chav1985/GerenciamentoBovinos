@@ -40,7 +40,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda,ClienteId")] VendaProduto vendaProduto)
+        public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,ClienteId")] VendaProduto vendaProduto)
         {
             items = (List<ItemsVendaProduto>)Session["Items"];
 
@@ -93,7 +93,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,MargemVenda,ClienteId")] VendaProduto vendaProduto)
+        public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,ClienteId")] VendaProduto vendaProduto)
         {
             if (ModelState.IsValid)
             {

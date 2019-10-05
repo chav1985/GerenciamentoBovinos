@@ -12,15 +12,15 @@ namespace GerenciamentoBovinos.Models
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         [Display(Name = "Data de Venda")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DtVenda { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         [Display(Name = "Prazo de Entrega")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime PrazoEntrega { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório.")]
-        [Display(Name = "Margem de Venda")]
-        public int MargemVenda { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         [ForeignKey("Cliente")]
