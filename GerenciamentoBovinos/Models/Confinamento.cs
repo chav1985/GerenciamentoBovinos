@@ -7,11 +7,6 @@ namespace GerenciamentoBovinos.Models
 {
     public class Confinamento
     {
-        public Confinamento()
-        {
-            DtEntrada = DateTime.Today;
-        }
-
         [Key]
         public long Id { get; set; }
 
@@ -19,9 +14,8 @@ namespace GerenciamentoBovinos.Models
         public long BovinoId { get; set; }
         public Bovino Bovino { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório.")]
         [Display(Name = "Data Entrada")]
-        public DateTime DtEntrada { get; set; }
+        public DateTime? DtEntrada { get; set; }
 
         [Display(Name = "Data Saída")]
         public DateTime? DtSaida { get; set; }

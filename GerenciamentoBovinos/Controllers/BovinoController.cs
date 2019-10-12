@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -38,6 +39,7 @@ namespace GerenciamentoBovinos.Controllers
                 Confinamento confinamento = new Confinamento();
                 confinamento.Bovino = bovino;
                 confinamento.BovinoId = bovino.Id;
+                confinamento.DtEntrada = DateTime.Now;
                 db.Confinamentos.Add(confinamento);
 
                 db.Bovinos.Add(bovino);
