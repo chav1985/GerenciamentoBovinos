@@ -1,0 +1,56 @@
+﻿@model GerenciamentoBovinos.Models.Confinamento
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Confinamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bovino.Lote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bovino.Lote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtEntrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtEntrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtSaida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtSaida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustoTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustoTotal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

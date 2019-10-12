@@ -35,6 +35,11 @@ namespace GerenciamentoBovinos.Controllers
         {
             if (ModelState.IsValid && bovino.RacaId > 0 && bovino.FornecedorId > 0)
             {
+                Confinamento confinamento = new Confinamento();
+                confinamento.Bovino = bovino;
+                confinamento.BovinoId = bovino.Id;
+                db.Confinamentos.Add(confinamento);
+
                 db.Bovinos.Add(bovino);
                 db.SaveChanges();
                 return RedirectToAction("Index");

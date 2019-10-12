@@ -7,6 +7,11 @@ namespace GerenciamentoBovinos.Models
 {
     public class Confinamento
     {
+        public Confinamento()
+        {
+            DtEntrada = DateTime.Today;
+        }
+
         [Key]
         public long Id { get; set; }
 
@@ -19,7 +24,7 @@ namespace GerenciamentoBovinos.Models
         public DateTime DtEntrada { get; set; }
 
         [Display(Name = "Data Saída")]
-        public DateTime DtSaida { get; set; }
+        public DateTime? DtSaida { get; set; }
 
         [Display(Name = "Custo total")]
         public decimal CustoTotal { get; set; }

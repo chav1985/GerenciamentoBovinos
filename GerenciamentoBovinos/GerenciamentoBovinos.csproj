@@ -178,6 +178,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BovinoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ConfinamentoController.cs" />
     <Compile Include="Controllers\ConsultaController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -338,6 +339,11 @@
     <Content Include="Views\Consulta\Index.cshtml" />
     <Content Include="Views\VendaProduto\Create.cshtml" />
     <Content Include="Views\VendaProduto\Index.cshtml" />
+    <Content Include="Views\Confinamento\Create.cshtml" />
+    <Content Include="Views\Confinamento\Delete.cshtml" />
+    <Content Include="Views\Confinamento\Details.cshtml" />
+    <Content Include="Views\Confinamento\Edit.cshtml" />
+    <Content Include="Views\Confinamento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
