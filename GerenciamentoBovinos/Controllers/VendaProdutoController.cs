@@ -46,16 +46,42 @@ namespace GerenciamentoBovinos.Controllers
 
             if (ModelState.IsValid && items.Count > 0 && vendaProduto.ClienteId > 0)
             {
+                bool retorno = true;
+                var listaProd = db.Produtos.ToList();
+
                 foreach (var item in items)
                 {
-                    item.Produto = null;
+                    foreach (var prod in listaProd)
+                    {
+                        if (item.ProdutoId == prod.Id)
+                        {
+                            if (item.Qtd > prod.Qtd)
+                            {
+                                retorno = false;
+                            }
+                            prod.Qtd -= item.Qtd;
+                        }
+                    }
                 }
 
-                vendaProduto.Items = items;
+                if (retorno)
+                {
+                    foreach (var item in items)
+                    {
+                        item.Produto = null;
+                    }
 
-                db.VendaProdutos.Add(vendaProduto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    vendaProduto.Items = items;
+
+                    //Persistindo os items de venda e dando baixa no estoque de produtos
+                    foreach (var item in listaProd)
+                    {
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                    db.VendaProdutos.Add(vendaProduto);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             Thread.Sleep(2000);
