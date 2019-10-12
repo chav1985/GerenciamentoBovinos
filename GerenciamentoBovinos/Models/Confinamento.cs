@@ -14,17 +14,18 @@ namespace GerenciamentoBovinos.Models
         public long BovinoId { get; set; }
         public Bovino Bovino { get; set; }
 
-        [Display(Name = "Produtos")]
-        public List<Produto> LsProduto { get; set; }
-
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [Display(Name = "Data Inicial")]
-        public DateTime DtInicial { get; set; }
+        [Display(Name = "Data Entrada")]
+        public DateTime DtEntrada { get; set; }
 
-        [Display(Name = "Data Final")]
-        public DateTime DtFinal { get; set; }
+        [Display(Name = "Data Saída")]
+        public DateTime DtSaida { get; set; }
 
         [Display(Name = "Custo total")]
         public decimal CustoTotal { get; set; }
+
+        public List<VendaProduto> LsVendaProdutos { get; set; }
+
+        public List<Consulta> LsConsultas { get; set; }
     }
 }
