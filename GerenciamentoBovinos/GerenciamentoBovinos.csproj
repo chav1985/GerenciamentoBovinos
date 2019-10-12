@@ -337,7 +337,6 @@
     <Content Include="Views\Consulta\Edit.cshtml" />
     <Content Include="Views\Consulta\Index.cshtml" />
     <Content Include="Views\VendaProduto\Create.cshtml" />
-    <Content Include="Views\VendaProduto\Edit.cshtml" />
     <Content Include="Views\VendaProduto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

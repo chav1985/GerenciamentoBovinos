@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Web.Mvc;
 
@@ -97,39 +96,33 @@ namespace GerenciamentoBovinos.Controllers
             return View(vendaProduto);
         }
 
-        // GET: VendaProduto/Edit/5
-        public ActionResult Edit(long? id)
+        // GET: VendaProduto/Delete/5
+        public ActionResult Delete(long? id)
         {
-            if (id == null)
+            VendaProduto venda = db.VendaProdutos.Find(id);
+            if (venda != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VendaProduto vendaProduto = db.VendaProdutos.Find(id);
-            if (vendaProduto == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
-            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", vendaProduto.ClienteId);
-            return View(vendaProduto);
-        }
+                var listaProd = db.Produtos.ToList();
 
-        // POST: VendaProduto/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,ClienteId")] VendaProduto vendaProduto)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(vendaProduto).State = EntityState.Modified;
+                //Retornando os produtos ao estoque
+                foreach (var item in venda.Items)
+                {
+                    foreach (var prod in listaProd)
+                    {
+                        if (item.ProdutoId == prod.Id)
+                        {
+                            prod.Qtd += item.Qtd;
+                        }
+                        db.Entry(prod).State = EntityState.Modified;
+                    }
+                }
+
+                db.VendaProdutos.Remove(venda);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
-            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", vendaProduto.ClienteId);
-            return View(vendaProduto);
+
+            return new HttpNotFoundResult();
         }
 
         //GET
