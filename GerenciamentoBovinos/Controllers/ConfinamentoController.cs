@@ -14,48 +14,60 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Index()
         {
             var confinamentos = db.Confinamentos.Include(c => c.Bovino);
+
+            foreach (var item in confinamentos)
+            {
+                item.CustoTotal += item.Bovino.VlrUnitario;
+            }
+
             return View(confinamentos.ToList());
         }
 
-        // GET: Confinamento/Details/5
-        public ActionResult Details(long? id)
+        // GET: Confinamento
+        public ActionResult VendaProduto()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Confinamento confinamento = db.Confinamentos.Find(id);
-            if (confinamento == null)
-            {
-                return HttpNotFound();
-            }
-            return View(confinamento);
+            return RedirectToAction("Create", "VendaProduto");
         }
 
-        // GET: Confinamento/Create
-        public ActionResult Create()
-        {
-            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote");
-            return View();
-        }
+        //// GET: Confinamento/Details/5
+        //public ActionResult Details(long? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Confinamento confinamento = db.Confinamentos.Find(id);
+        //    if (confinamento == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(confinamento);
+        //}
 
-        // POST: Confinamento/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BovinoId,DtEntrada,DtSaida,CustoTotal")] Confinamento confinamento)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Confinamentos.Add(confinamento);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// GET: Confinamento/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote");
+        //    return View();
+        //}
 
-            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote", confinamento.BovinoId);
-            return View(confinamento);
-        }
+        //// POST: Confinamento/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,BovinoId,DtEntrada,DtSaida,CustoTotal")] Confinamento confinamento)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Confinamentos.Add(confinamento);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote", confinamento.BovinoId);
+        //    return View(confinamento);
+        //}
 
         // GET: Confinamento/Edit/5
         public ActionResult Edit(long? id)
@@ -65,11 +77,14 @@ namespace GerenciamentoBovinos.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Confinamento confinamento = db.Confinamentos.Find(id);
+            Bovino bovino = db.Bovinos.Find(confinamento.BovinoId);
+            confinamento.Bovino = bovino;
+            confinamento.CustoTotal += bovino.VlrUnitario;
             if (confinamento == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote", confinamento.BovinoId);
+            //ViewBag.BovinoId = new SelectList(db.Bovinos, "Id", "Lote", confinamento.BovinoId);
             return View(confinamento);
         }
 
