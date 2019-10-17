@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<GerenciamentoBovinos.Models.Confinamento>
 
 @{
-    ViewBag.Title = "Confinamento";
+    ViewBag.Title = "Bovinos em Confinamento";
 }
 
-<h2 class="text-center">Confinamento</h2>
+<h2 class="text-center">Bovinos em Confinamento</h2>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
 <table class="table">
     <tr>
         <th>
@@ -23,7 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CustoTotal)
         </th>
-        <th></th>
+        <th>
+            @Html.Raw("Ações")
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -42,11 +41,9 @@
                 @Html.DisplayFor(modelItem => item.CustoTotal)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                @Html.ActionLink("Produtos", "ListaProd", new { bovinoId = item.BovinoId}) |
+                @Html.ActionLink("Atend. Vet.", "ListaAtendVet", new { bovinoId = item.BovinoId })
             </td>
         </tr>
     }
-
 </table>

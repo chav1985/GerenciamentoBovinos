@@ -24,11 +24,6 @@ namespace GerenciamentoBovinos.Models
         public decimal Peso { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [MinLength(3, ErrorMessage = "O {0} deve ter no mínimo {1} caracteres.")]
-        [MaxLength(50, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
-        public string Lote { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Data Nascimento")]
         public DateTime DtNascimento { get; set; }
 

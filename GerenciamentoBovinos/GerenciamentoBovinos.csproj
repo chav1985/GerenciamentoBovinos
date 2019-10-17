@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BaixaProduto.cs" />
     <Compile Include="Models\Bovino.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\ItemsVendaProduto.cs" />
@@ -344,6 +345,7 @@
     <Content Include="Views\Confinamento\Details.cshtml" />
     <Content Include="Views\Confinamento\Edit.cshtml" />
     <Content Include="Views\Confinamento\Index.cshtml" />
+    <Content Include="Views\Confinamento\ListaProd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
