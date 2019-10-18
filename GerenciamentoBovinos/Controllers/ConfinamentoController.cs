@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace GerenciamentoBovinos.Controllers
     public class ConfinamentoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
+        private List<ItemsVendaProduto> items = new List<ItemsVendaProduto>();
 
         // GET: Confinamento
         public ActionResult Index()
@@ -36,8 +38,68 @@ namespace GerenciamentoBovinos.Controllers
         //GET
         public ActionResult AddProd(long bovinoId)
         {
-            ViewBag.BovinoId = db.Bovinos.Find(bovinoId).Brinco;
+            Session["Items"] = items;
+            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+            ViewBag.Brinco = db.Bovinos.Find(bovinoId).Brinco;
+
+            if (db.Produtos != null && db.Produtos.Count() != 0)
+            {
+                ViewBag.ProdutoQtd = db.Produtos.FirstOrDefault().Qtd;
+                ViewBag.VlrCusto = db.Produtos.FirstOrDefault().Valor.ToString("C");
+            }
+
             return View();
+        }
+
+        //GET
+        public JsonResult QtdProdutos(int id)
+        {
+            var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
+            var precoProd = db.Produtos.FirstOrDefault(p => p.Id == id).Valor;
+            items = (List<ItemsVendaProduto>)Session["Items"];
+            int qtdLista = 0;
+
+            if (items.Count > 0)
+            {
+                foreach (var item in items)
+                {
+                    if (item.ProdutoId == id)
+                        qtdLista += item.Qtd;
+                }
+            }
+
+            string[] retorno = new string[2];
+            retorno[0] = (qtd - qtdLista).ToString();
+            retorno[1] = precoProd.ToString("C");
+
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+
+        //GET
+        public JsonResult AddItem(int qtd, int selected, int remove)
+        {
+            items = (List<ItemsVendaProduto>)Session["Items"];
+
+            if (remove != -1 && items.Count > 0)
+            {
+                items.RemoveAt(remove);
+                return Json(items, JsonRequestBehavior.AllowGet);
+            }
+
+            Produto prod = db.Produtos.Find(selected);
+
+            ItemsVendaProduto obj = new ItemsVendaProduto();
+            obj.ProdutoId = selected;
+            obj.Produto = prod;
+            obj.Qtd = qtd;
+            obj.ValorUnitario = prod.Valor;
+            obj.ValorTotal = obj.ValorUnitario * qtd;
+
+            //Adiciona objeto na lista
+            items.Add(obj);
+
+            //retorna um objeto JSON
+            return Json(items, JsonRequestBehavior.AllowGet);
         }
 
         //// GET: Confinamento/Details/5

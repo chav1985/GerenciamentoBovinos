@@ -1,47 +1,83 @@
 ﻿@model GerenciamentoBovinos.Models.BaixaProduto
 
 @{
-    ViewBag.Title = "AddProd";
+    ViewBag.Title = "Adicionar Produtos";
 }
 
-<h2>AddProd</h2>
+<h2 class="text-center">Adicionar Produtos</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>BaixaProduto</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.DtUtilizacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DtUtilizacao, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.DtUtilizacao, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(model => model.DtUtilizacao, new { type = "date", @class = "form-control", @readonly = "readonly", id = "dtUtilizacao" })
                 @Html.ValidationMessageFor(model => model.DtUtilizacao, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.BovinoId, "BovinoId", htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @Html.TextBox("BovinoId", null, htmlAttributes: new { @class = "form-control" })
-                @*@Html.ValidationMessageFor(model => model.BovinoId, "", new { @class = "text-danger" })*@
+            <div class="col-md-3">
+                @Html.Label("Brinco", new { @class = "control-label col-md-10" })
+                @Html.TextBox("Brinco", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.Label("Produtos", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.DropDownList("ProdutoId", null, htmlAttributes: new { @class = "form-control", @onchange = "qtdProd($(this).val())" })
+                <label class="text-danger" id="validaProduto"></label>
             </div>
+
+            <div class="col-md-2">
+                @Html.Label("Disponivel", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("ProdutoQtd", null, htmlAttributes: new { @class = "form-control", @readonly = true })
+                <label class="text-danger" id="validaQtd"></label>
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Valor de Custo", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("VlrCusto", null, htmlAttributes: new { @class = "form-control", @readonly = true })
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label col-md-12" })
+                @Html.TextBox("Qtd", null, htmlAttributes: new { @type = "number", @class = "form-control", @min = 0 })
+                <label class="text-danger" id="validaQtdVenda"></label>
+            </div>
+
+            <div class="col-md-2">
+                @Html.Label("Ação", htmlAttributes: new { @class = "control-label col-md-12" })
+                <input type="button" value="Adicionar Items" id="btnAddItem" class="btn btn-success" onclick="addItem();" />
+                <label class="text-danger" id="validaProdAdd"></label>
+            </div>
+        </div>
+
+        <div id="divTable" class="col-md-10 offset-1" style="display:none">
+            <table id="tbProd" class="table table-bordered table-condensed table-hover table-striped">
+                <thead>
+                    <h3 class="text-center mt-5">Lista de Produtos</h3>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Valor Unitário</th>
+                        <th>Valor Total</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+                <input type="submit" value="Efetuar Pedido" class="btn btn-success" onclick="validaDropDown();" />
             </div>
         </div>
     </div>
@@ -54,3 +90,107 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    function validaDropDown() {
+        var produto = $("#ProdutoId").val();
+        var rowCount = $('#tbProd tr').length;
+        if (produto == null) {
+            $("#validaProduto").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (rowCount == 1) {
+            $("#validaProdAdd").text('Adicione Produtos.');
+            setTimeout(clearText, 2000);
+        }
+    }
+
+    function qtdProd(selected) {
+        $.getJSON("QtdProdutos", { id: selected }, function (json) {
+            $("#ProdutoQtd").val(json[0]);
+            $("#VlrCusto").val(json[1]);
+        });
+    }
+
+    function addItem(id = -1) {
+
+        var Selecionado = $("#ProdutoId").val();
+        var Disponivel = parseInt($("#ProdutoQtd").val());
+        var Qtd = parseInt($("#Qtd").val());
+        var IdRemove = id;
+
+        if (IdRemove == -1) {
+            if (Disponivel <= 0) {
+                $("#validaQtd").text('Sem estoque.');
+                setTimeout(clearText, 2000);
+                return;
+            }
+            else if (Disponivel < Qtd) {
+                $("#validaQtdVenda").text('Superior ao estoque.');
+                setTimeout(clearText, 2000);
+                return;
+            }
+            else if (Qtd == 0 && Disponivel > 0) {
+                $("#validaQtdVenda").text('Digite a qtd.');
+                setTimeout(clearText, 2000);
+                return;
+            }
+            else if (Selecionado == null) {
+                $("#validaProduto").text('Campo obrigatório.');
+                setTimeout(clearText, 2000);
+                return;
+            }
+        }
+
+        if (IdRemove != -1 || Qtd != "" && Qtd > 0 && Qtd <= Disponivel) {
+            $('#btnAddItem').prop('disabled', true);
+
+            $('#tbProd tr td').parents('tr').remove();
+
+            //Chama o método AddItem que vai retornar o JSON
+            $.getJSON("AddItem", { qtd: Qtd, selected: Selecionado, remove: IdRemove }, function (json) {
+                var tr;
+                var totalPedido = 0;
+                //Anexa cada linha na tabela HTML
+                for (var i = 0; i < json.length; i++) {
+                    tr = $('<tr/>');
+                    tr.append("<td>" + json[i].Produto.NomeProduto + "</td>");
+                    tr.append("<td>" + json[i].Qtd + "</td>");
+                    tr.append("<td>" + json[i].ValorUnitario + "</td>");
+                    tr.append("<td>" + json[i].ValorTotal + "</td>");
+                    totalPedido += json[i].ValorTotal;
+                    tr.append("<td><input type='button' value='Remover Item' id='btnAddItem' class='btn btn-danger' onclick='addItem(" + i + ")' /></td>")
+                    $('table').append(tr);
+                }
+                tr = $('<tr/>');
+                tr.append("<td colspan='3'><b>Valor total do Pedido</b></td>");
+                tr.append("<td colspan='2'><b>" + totalPedido + "</b></td>");
+                $('table').append(tr);
+
+                //Atualizando os campos disponivel e valor do produto
+                $("#ProdutoId").val('1');
+                qtdProd('1');
+
+                $("#divTable").css("display", "block");
+            });
+
+            setTimeout(enableButton, 3000);
+        }
+    };
+
+    function enableButton() {
+        $('#btnAddItem').prop('disabled', false);
+    }
+
+    function clearText() {
+        $('#validaQtd').text('');
+        $('#validaQtdVenda').text('');
+        $('#validaProduto').text('');
+        $('#validaProdAdd').text('');
+    }
+
+    $("#Qtd").val(0);
+    document.getElementById("dtUtilizacao").valueAsDate = new Date();
+
+</script>

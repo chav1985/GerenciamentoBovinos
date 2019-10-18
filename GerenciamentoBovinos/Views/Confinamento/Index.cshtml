@@ -25,7 +25,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model )
+    @foreach (var item in Model)
     {
         <tr>
             <td>
@@ -41,8 +41,8 @@
                 @Html.DisplayFor(modelItem => item.CustoTotal)
             </td>
             <td>
-                @Html.ActionLink("Produtos", "ListaProd", new { bovinoId = item.BovinoId}) |
-                @Html.ActionLink("Atend. Vet.", "ListaAtendVet", new { bovinoId = item.BovinoId })
+                @Html.ActionLink("Produtos", "ListaProd", new { bovinoId = item.BovinoId }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Atend. Vet.", "ListaAtendVet", new { bovinoId = item.BovinoId }, new { @class = "btn btn-success" })
             </td>
         </tr>
     }
