@@ -26,10 +26,18 @@ namespace GerenciamentoBovinos.Controllers
         //GET
         public ActionResult ListaProd(long bovinoId)
         {
+            ViewBag.BovinoId = bovinoId;
             ViewBag.Brinco = db.Bovinos.Find(bovinoId).Brinco;
             var listaProd = db.BaixaProdutos.Where(x => x.BovinoId == bovinoId).ToList();
 
             return View(listaProd);
+        }
+
+        //GET
+        public ActionResult AddProd(long bovinoId)
+        {
+            ViewBag.BovinoId = db.Bovinos.Find(bovinoId).Brinco;
+            return View();
         }
 
         //// GET: Confinamento/Details/5

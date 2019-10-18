@@ -4,12 +4,13 @@
     ViewBag.Title = "Bovino de Brinco " + ViewBag.Brinco;
 
     var header = "Produtos utilizados pelo brinco: " + ViewBag.Brinco;
+    var idBovino = ViewBag.BovinoId;
 }
 
 <h2 class="text-center">@header</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Adicionar Produto", "AddProd", new { bovinoId = idBovino })
 </p>
 <table class="table">
     <tr>
@@ -42,3 +43,9 @@
     }
 
 </table>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+    </div>
+</div>

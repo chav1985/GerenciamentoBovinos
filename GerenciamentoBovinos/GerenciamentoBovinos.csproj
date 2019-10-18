@@ -346,6 +346,7 @@
     <Content Include="Views\Confinamento\Edit.cshtml" />
     <Content Include="Views\Confinamento\Index.cshtml" />
     <Content Include="Views\Confinamento\ListaProd.cshtml" />
+    <Content Include="Views\Confinamento\AddProd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
