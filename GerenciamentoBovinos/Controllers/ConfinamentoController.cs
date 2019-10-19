@@ -172,6 +172,39 @@ namespace GerenciamentoBovinos.Controllers
             return Json(items, JsonRequestBehavior.AllowGet);
         }
 
+        //GET
+        public ActionResult DeleteBaixaProd(long? id, long bovinoId)
+        {
+            BaixaProduto baixa = db.BaixaProdutos.Find(id);
+            Confinamento confinamento = db.Confinamentos.FirstOrDefault(x => x.BovinoId == bovinoId);
+
+            if (baixa != null)
+            {
+                var listaProd = db.Produtos.ToList();
+
+                //Retornando os produtos ao estoque
+                foreach (var item in baixa.Items)
+                {
+                    foreach (var prod in listaProd)
+                    {
+                        if (item.ProdutoId == prod.Id)
+                        {
+                            prod.Qtd += item.Qtd;
+                        }
+                        db.Entry(prod).State = EntityState.Modified;
+                    }
+                }
+
+                confinamento.CustoTotal -= baixa.ValorTotal;
+                db.Entry(confinamento).State = EntityState.Modified;
+                db.BaixaProdutos.Remove(baixa);
+                db.SaveChanges();
+                return RedirectToAction("ListaProd", new { bovinoId = bovinoId });
+            }
+
+            return new HttpNotFoundResult();
+        }
+
         //// GET: Confinamento/Details/5
         //public ActionResult Details(long? id)
         //{

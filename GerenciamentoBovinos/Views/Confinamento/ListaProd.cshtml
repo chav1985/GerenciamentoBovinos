@@ -1,36 +1,36 @@
 ﻿@model IEnumerable<GerenciamentoBovinos.Models.BaixaProduto>
 
-@{
+    @{
     ViewBag.Title = "Bovino de Brinco " + ViewBag.Brinco;
 
     var header = "Produtos utilizados pelo brinco: " + ViewBag.Brinco;
     var idBovino = ViewBag.BovinoId;
-}
+    }
 
-<h2 class="text-center">@header</h2>
+    <h2 class="text-center">@header</h2>
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
-        @Html.ActionLink("Adicionar Produto", "AddProd", new { bovinoId = idBovino }, new { @class = "btn btn-secondary" })
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Adicionar Produto", "AddProd", new { bovinoId = idBovino }, new { @class = "btn btn-secondary" })
+        </div>
     </div>
-</div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DtUtilizacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ValorTotal)
-        </th>
-        <th>
-            @Html.Raw("Ações")
-        </th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DtUtilizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTotal)
+            </th>
+            <th>
+                @Html.Raw("Ações")
+            </th>
+        </tr>
 
-    @foreach (var item in Model)
-    {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DtUtilizacao)
@@ -39,11 +39,46 @@
                 @Html.DisplayFor(modelItem => item.ValorTotal)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action(" DeleteBaixaProd", "Confinamento" , new { id=@item.Id, bovinoId=idBovino })" title="Excluir">
+                    <i class="fa fa-trash-o fa-2x"></i>
+                </a>
             </td>
         </tr>
-    }
+        }
 
-</table>
+    </table>
+
+    @Scripts.Render("~/bundles/jquery")
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Excluir Pedido</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente excluir o Pedido?
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="button" class="btn btn-primary">Não</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-danger">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    var path_to_delete;
+
+    $(".deleteItem").click(function (e) {
+        path_to_delete = $(this).data('path');
+    });
+
+    $('#btnContinueDelete').click(function () {
+        window.location = path_to_delete;
+    });
+    </script>
