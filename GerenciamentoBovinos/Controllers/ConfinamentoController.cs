@@ -11,7 +11,7 @@ namespace GerenciamentoBovinos.Controllers
     public class ConfinamentoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        private List<ItemsVendaProduto> items = new List<ItemsVendaProduto>();
+        private List<ItemsBaixaProduto> items = new List<ItemsBaixaProduto>();
 
         // GET: Confinamento
         public ActionResult Index()
@@ -60,7 +60,7 @@ namespace GerenciamentoBovinos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddProd([Bind(Include = "Id,DtVenda,PrazoEntrega,BovinoId")] BaixaProduto baixaProduto)
         {
-            items = (List<ItemsVendaProduto>)Session["Items"];
+            items = (List<ItemsBaixaProduto>)Session["Items"];
 
             if (ModelState.IsValid && items.Count > 0 && baixaProduto.BovinoId > 0)
             {
@@ -120,7 +120,7 @@ namespace GerenciamentoBovinos.Controllers
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
             var precoProd = db.Produtos.FirstOrDefault(p => p.Id == id).Valor;
-            items = (List<ItemsVendaProduto>)Session["Items"];
+            items = (List<ItemsBaixaProduto>)Session["Items"];
             int qtdLista = 0;
 
             if (items.Count > 0)
@@ -142,7 +142,7 @@ namespace GerenciamentoBovinos.Controllers
         //GET
         public JsonResult AddItem(int qtd, int selected, int remove)
         {
-            items = (List<ItemsVendaProduto>)Session["Items"];
+            items = (List<ItemsBaixaProduto>)Session["Items"];
 
             if (remove != -1 && items.Count > 0)
             {
@@ -152,7 +152,7 @@ namespace GerenciamentoBovinos.Controllers
 
             Produto prod = db.Produtos.Find(selected);
 
-            ItemsVendaProduto obj = new ItemsVendaProduto();
+            ItemsBaixaProduto obj = new ItemsBaixaProduto();
             obj.ProdutoId = selected;
             obj.Produto = prod;
             obj.Qtd = qtd;
