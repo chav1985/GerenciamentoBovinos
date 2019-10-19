@@ -17,12 +17,6 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Index()
         {
             var confinamentos = db.Confinamentos.Include(c => c.Bovino);
-
-            foreach (var item in confinamentos)
-            {
-                item.CustoTotal += item.Bovino.VlrUnitario;
-            }
-
             return View(confinamentos.ToList());
         }
 
@@ -95,7 +89,15 @@ namespace GerenciamentoBovinos.Controllers
                     baixaProduto.Items = items;
                     baixaProduto.ValorTotal = vlrTotal;
 
-                    //Persistindo os items de venda e dando baixa no estoque de produtos
+                    Confinamento confinamento = db.Confinamentos.FirstOrDefault(i => i.BovinoId == baixaProduto.BovinoId);
+
+                    if (confinamento != null)
+                    {
+                        confinamento.CustoTotal += vlrTotal;
+                        db.Entry(confinamento).State = EntityState.Modified;
+                    }
+
+                    //Persistindo os items e dando baixa no estoque de produtos
                     foreach (var item in listaProd)
                     {
                         db.Entry(item).State = EntityState.Modified;
