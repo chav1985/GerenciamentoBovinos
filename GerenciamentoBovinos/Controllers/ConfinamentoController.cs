@@ -58,7 +58,7 @@ namespace GerenciamentoBovinos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddProd([Bind(Include = "Id,DtVenda,PrazoEntrega,BovinoId")] BaixaProduto baixaProduto)
+        public ActionResult AddProd([Bind(Include = "Id,DtUtilizacao,BovinoId")] BaixaProduto baixaProduto)
         {
             items = (List<ItemsBaixaProduto>)Session["Items"];
 
