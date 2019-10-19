@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace GerenciamentoBovinos.Controllers
@@ -39,6 +40,7 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult AddProd(long bovinoId)
         {
             Session["Items"] = items;
+            ViewBag.BovinoId = bovinoId;
             ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
             ViewBag.Brinco = db.Bovinos.Find(bovinoId).Brinco;
 
@@ -49,6 +51,68 @@ namespace GerenciamentoBovinos.Controllers
             }
 
             return View();
+        }
+
+        // POST: VendaProduto/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddProd([Bind(Include = "Id,DtVenda,PrazoEntrega,BovinoId")] BaixaProduto baixaProduto)
+        {
+            items = (List<ItemsVendaProduto>)Session["Items"];
+
+            if (ModelState.IsValid && items.Count > 0 && baixaProduto.BovinoId > 0)
+            {
+                bool retorno = true;
+                var listaProd = db.Produtos.ToList();
+
+                foreach (var item in items)
+                {
+                    foreach (var prod in listaProd)
+                    {
+                        if (item.ProdutoId == prod.Id)
+                        {
+                            if (item.Qtd > prod.Qtd)
+                            {
+                                retorno = false;
+                            }
+                            prod.Qtd -= item.Qtd;
+                        }
+                    }
+                }
+
+                if (retorno)
+                {
+                    foreach (var item in items)
+                    {
+                        item.Produto = null;
+                    }
+
+                    baixaProduto.Items = items;
+
+                    //Persistindo os items de venda e dando baixa no estoque de produtos
+                    foreach (var item in listaProd)
+                    {
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                    db.BaixaProdutos.Add(baixaProduto);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+
+            Thread.Sleep(2000);
+            ViewBag.ProdutoId = new SelectList(db.Produtos, "Id", "NomeProduto");
+            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", baixaProduto.BovinoId);
+
+            if (db.Produtos != null && db.Produtos.Count() != 0)
+            {
+                ViewBag.ProdutoQtd = db.Produtos.FirstOrDefault().Qtd;
+                ViewBag.VlrCusto = db.Produtos.FirstOrDefault().Valor.ToString("C");
+            }
+
+            return View(baixaProduto);
         }
 
         //GET

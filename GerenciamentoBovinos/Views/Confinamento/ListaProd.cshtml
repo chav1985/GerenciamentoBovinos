@@ -9,9 +9,13 @@
 
 <h2 class="text-center">@header</h2>
 
-<p>
-    @Html.ActionLink("Adicionar Produto", "AddProd", new { bovinoId = idBovino }, new { @class = "btn btn-secondary" })
-</p>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Adicionar Produto", "AddProd", new { bovinoId = idBovino }, new { @class = "btn btn-secondary" })
+    </div>
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -43,9 +47,3 @@
     }
 
 </table>
-
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
-    </div>
-</div>

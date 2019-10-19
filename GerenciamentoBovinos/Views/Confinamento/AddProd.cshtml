@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Adicionar Produtos";
+    var idBovino = ViewBag.BovinoId;
 }
 
 <h2 class="text-center">Adicionar Produtos</h2>
@@ -76,7 +77,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Voltar", "ListaProd", new { bovinoId = idBovino}, new { @class = "btn btn-danger" })
                 <input type="submit" value="Efetuar Pedido" class="btn btn-success" onclick="validaDropDown();" />
             </div>
         </div>
