@@ -66,6 +66,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 bool retorno = true;
                 var listaProd = db.Produtos.ToList();
+                decimal vlrTotal = 0;
 
                 foreach (var item in items)
                 {
@@ -80,6 +81,8 @@ namespace GerenciamentoBovinos.Controllers
                             prod.Qtd -= item.Qtd;
                         }
                     }
+
+                    vlrTotal += item.ValorTotal;
                 }
 
                 if (retorno)
@@ -90,6 +93,7 @@ namespace GerenciamentoBovinos.Controllers
                     }
 
                     baixaProduto.Items = items;
+                    baixaProduto.ValorTotal = vlrTotal;
 
                     //Persistindo os items de venda e dando baixa no estoque de produtos
                     foreach (var item in listaProd)
@@ -98,7 +102,7 @@ namespace GerenciamentoBovinos.Controllers
                     }
                     db.BaixaProdutos.Add(baixaProduto);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ListaProd", new { bovinoId = baixaProduto.BovinoId });
                 }
             }
 
