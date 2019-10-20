@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GerenciamentoBovinos.Models.Consulta>
+
+@{
+    ViewBag.Title = "Bovino de Brinco " + ViewBag.Brinco;
+
+    var header = "Atendimentos para o brinco: " + ViewBag.Brinco;
+    var idBovino = ViewBag.BovinoId;
+}
+
+<h2 class="text-center">@header</h2>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Novo Atendimento", "AddAtend", new { bovinoId = idBovino }, new { @class = "btn btn-secondary" })
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw("Veterinário")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DtServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Veterinario.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtServico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

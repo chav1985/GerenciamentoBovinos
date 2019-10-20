@@ -205,6 +205,16 @@ namespace GerenciamentoBovinos.Controllers
             return new HttpNotFoundResult();
         }
 
+        //GET
+        public ActionResult ListaAtend(long bovinoId)
+        {
+            ViewBag.BovinoId = bovinoId;
+            ViewBag.Brinco = db.Bovinos.Find(bovinoId).Brinco;
+            var listaAtend = db.Consultas.Where(x => x.BovinoId == bovinoId).ToList();
+
+            return View(listaAtend);
+        }
+
         //// GET: Confinamento/Details/5
         //public ActionResult Details(long? id)
         //{
