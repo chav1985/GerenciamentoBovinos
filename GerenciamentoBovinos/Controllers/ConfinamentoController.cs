@@ -225,6 +225,32 @@ namespace GerenciamentoBovinos.Controllers
             return View();
         }
 
+        // POST: Consulta/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAtend([Bind(Include = "Id,BovinoId,VeterinarioId,Descricao,DtServico,Valor")] Consulta consulta)
+        {
+            if (ModelState.IsValid && consulta.BovinoId > 0 && consulta.VeterinarioId > 0)
+            {
+                Confinamento confinamento = db.Confinamentos.FirstOrDefault(i => i.BovinoId == consulta.BovinoId);
+                confinamento.CustoTotal += consulta.Valor;
+
+                db.Entry(confinamento).State = EntityState.Modified;
+
+                db.Consultas.Add(consulta);
+                db.SaveChanges();
+                return RedirectToAction("ListaAtend", new { bovinoId = consulta.BovinoId });
+            }
+
+            Thread.Sleep(2000);
+            ViewBag.BovinoId = consulta.BovinoId;
+            ViewBag.Brinco = consulta.Bovino.Brinco;
+            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "Nome", consulta.VeterinarioId);
+            return View(consulta);
+        }
+
         //// GET: Confinamento/Details/5
         //public ActionResult Details(long? id)
         //{

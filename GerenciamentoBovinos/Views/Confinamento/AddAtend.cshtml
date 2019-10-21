@@ -66,25 +66,14 @@
     document.getElementById("dtServico").valueAsDate = new Date();
 
     function validaDropDown() {
-        var bovino = $("#BovinoId").val();
         var veterinario = $("#VeterinarioId").val();
-        if (bovino == null && veterinario == null) {
-            $("#validaBovino").text('Campo obrigatório.');
-            $("#validaVeterinario").text('Campo obrigatório.');
-            setTimeout(clearText, 2000);
-        }
-        else if (bovino == null) {
-            $("#validaBovino").text('Campo obrigatório.');
-            setTimeout(clearText, 2000);
-        }
-        else if (veterinario == null) {
+        if (veterinario == null) {
             $("#validaVeterinario").text('Campo obrigatório.');
             setTimeout(clearText, 2000);
         }
     }
 
     function clearText() {
-        $('#validaBovino').text('');
         $('#validaVeterinario').text('');
     }
 </script>
