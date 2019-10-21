@@ -39,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.ValorTotal)
             </td>
             <td>
-                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action(" DeleteBaixaProd", "Confinamento" , new { id=@item.Id, bovinoId=idBovino })" title="Excluir">
+                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("DeleteBaixaProd", "Confinamento", new { id = @item.Id, bovinoId = @idBovino })" title="Excluir">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>
             </td>

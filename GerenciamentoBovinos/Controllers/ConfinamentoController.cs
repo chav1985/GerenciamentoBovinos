@@ -215,6 +215,16 @@ namespace GerenciamentoBovinos.Controllers
             return View(listaAtend);
         }
 
+        //GET
+        public ActionResult AddAtend(long bovinoId)
+        {
+            ViewBag.BovinoId = bovinoId;
+            ViewBag.Brinco = db.Bovinos.Find(bovinoId).Brinco;
+            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "Id", "Nome");
+
+            return View();
+        }
+
         //// GET: Confinamento/Details/5
         //public ActionResult Details(long? id)
         //{
