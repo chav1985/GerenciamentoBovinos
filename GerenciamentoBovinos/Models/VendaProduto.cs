@@ -26,6 +26,9 @@ namespace GerenciamentoBovinos.Models
         [ForeignKey("Cliente")]
         public long ClienteId { get; set; }
 
+        [Display(Name = "Total Pedido")]
+        public decimal TotalPedido { get; set; }
+
         public virtual List<ItemsVendaProduto> Items { get; set; }
     }
 }

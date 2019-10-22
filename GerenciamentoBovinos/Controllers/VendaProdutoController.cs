@@ -47,6 +47,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 bool retorno = true;
                 var listaProd = db.Produtos.ToList();
+                decimal valorTotal = 0;
 
                 foreach (var item in items)
                 {
@@ -61,6 +62,8 @@ namespace GerenciamentoBovinos.Controllers
                             prod.Qtd -= item.Qtd;
                         }
                     }
+
+                    valorTotal += item.ValorTotal;
                 }
 
                 if (retorno)
@@ -71,6 +74,7 @@ namespace GerenciamentoBovinos.Controllers
                     }
 
                     vendaProduto.Items = items;
+                    vendaProduto.TotalPedido = valorTotal;
 
                     //Persistindo os items de venda e dando baixa no estoque de produtos
                     foreach (var item in listaProd)
