@@ -251,6 +251,24 @@ namespace GerenciamentoBovinos.Controllers
             return View(consulta);
         }
 
+        //GET
+        public ActionResult DeleteAtend(long? id, long bovinoId)
+        {
+            Consulta consulta = db.Consultas.Find(id);
+            Confinamento confinamento = db.Confinamentos.FirstOrDefault(x => x.BovinoId == bovinoId);
+
+            if (consulta != null)
+            {
+                confinamento.CustoTotal -= consulta.Valor;
+                db.Entry(confinamento).State = EntityState.Modified;
+                db.Consultas.Remove(consulta);
+                db.SaveChanges();
+                return RedirectToAction("ListaAtend", new { bovinoId = bovinoId });
+            }
+
+            return new HttpNotFoundResult();
+        }
+
         //// GET: Confinamento/Details/5
         //public ActionResult Details(long? id)
         //{
