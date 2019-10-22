@@ -59,7 +59,7 @@ namespace GerenciamentoBovinos.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,InscricaoEstadual,Nome,Email,Telefone,Endereco,Cidade,Estado,CPFCNPJ")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "Id,InscricaoEstadual,Nome,Email,Telefone,Rua,Numero,Estado,Cidade,Cep,Complemento,CPFCNPJ")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
