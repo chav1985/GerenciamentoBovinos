@@ -11,7 +11,7 @@ namespace GerenciamentoBovinos.Controllers
     {
         private GerenciamentoContext db = new GerenciamentoContext();
         private List<ItemsVendaProduto> items = new List<ItemsVendaProduto>();
-
+        [Authorize]
         // GET: VendaProduto
         public ActionResult Index()
         {

@@ -12,7 +12,7 @@ namespace GerenciamentoBovinos.Controllers
     {
         private GerenciamentoContext db = new GerenciamentoContext();
         private List<ItemsBaixaProduto> items = new List<ItemsBaixaProduto>();
-
+        [Authorize]
         // GET: Confinamento
         public ActionResult Index()
         {

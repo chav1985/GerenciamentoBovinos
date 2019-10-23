@@ -11,7 +11,7 @@ namespace GerenciamentoBovinos.Controllers
     public class BovinoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-
+        [Authorize]
         // GET: Bovino
         public ActionResult Index()
         {

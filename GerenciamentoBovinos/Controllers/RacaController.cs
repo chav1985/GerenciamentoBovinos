@@ -9,7 +9,7 @@ namespace GerenciamentoBovinos.Controllers
     public class RacaController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-
+        [Authorize]
         // GET: Raca
         public ActionResult Index()
         {

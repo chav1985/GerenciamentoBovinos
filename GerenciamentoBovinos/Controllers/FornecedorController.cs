@@ -9,7 +9,7 @@ namespace GerenciamentoBovinos.Controllers
     public class FornecedorController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-
+        [Authorize]
         // GET: Fornecedor
         public ActionResult Index()
         {
