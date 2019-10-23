@@ -23,6 +23,8 @@ namespace GerenciamentoBovinos.Models
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Data da Consulta")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DtServico { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
