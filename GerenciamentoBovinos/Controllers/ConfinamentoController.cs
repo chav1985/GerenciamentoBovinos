@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Web.Mvc;
 
@@ -267,6 +268,21 @@ namespace GerenciamentoBovinos.Controllers
             }
 
             return new HttpNotFoundResult();
+        }
+
+        //GET
+        public ActionResult EditarPeso(long? bovinoId)
+        {
+            if (bovinoId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Bovino bovino = db.Bovinos.Find(bovinoId);
+            if (bovino == null)
+            {
+                return HttpNotFound();
+            }
+            return View(bovino);
         }
 
         //// GET: Confinamento/Details/5
