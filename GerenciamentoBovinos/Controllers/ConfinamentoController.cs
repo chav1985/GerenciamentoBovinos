@@ -285,6 +285,21 @@ namespace GerenciamentoBovinos.Controllers
             return View(bovino);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarPeso([Bind(Include = "Id,Brinco,RacaId,FornecedorId,Peso,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(bovino).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome", bovino.RacaId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
+            return View(bovino);
+        }
+
         //// GET: Confinamento/Details/5
         //public ActionResult Details(long? id)
         //{
