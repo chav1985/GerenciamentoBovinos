@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Web.Mvc;
 
@@ -16,6 +17,21 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Index()
         {
             return View(db.VendaProdutos.ToList());
+        }
+
+        // GET: VendaProduto/Details/5
+        public ActionResult Details(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendaProduto venda = db.VendaProdutos.Find(id);
+            if (venda == null)
+            {
+                return HttpNotFound();
+            }
+            return View(venda);
         }
 
         // GET: VendaProduto/Create

@@ -1,0 +1,75 @@
+﻿@model GerenciamentoBovinos.Models.BaixaProduto
+
+@{
+    ViewBag.Title = "Detalhes do Pedido";
+}
+
+<h2 class="text-center">Detalhes do Pedido</h2>
+
+<div>
+    <hr />
+    <div class="form-horizontal">
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.DtUtilizacao, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.DtUtilizacao, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Bovino.Brinco, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.Bovino.Brinco, null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.ValorTotal, null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="col-md-10 offset-1">
+            @{
+                <table class="table table-bordered table-condensed table-hover table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Produto")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Quantidade")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Vlr. Unitário")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Vlr. Total")
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Produto.NomeProduto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Qtd)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorUnitario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorTotal)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Voltar", "ListaProd", new { bovinoId = Model.BovinoId }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</div>

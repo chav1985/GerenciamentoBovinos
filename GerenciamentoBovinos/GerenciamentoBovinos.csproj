@@ -337,16 +337,14 @@
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\VendaProduto\Create.cshtml" />
     <Content Include="Views\VendaProduto\Index.cshtml" />
-    <Content Include="Views\Confinamento\Create.cshtml" />
-    <Content Include="Views\Confinamento\Delete.cshtml" />
-    <Content Include="Views\Confinamento\Details.cshtml" />
-    <Content Include="Views\Confinamento\Edit.cshtml" />
     <Content Include="Views\Confinamento\Index.cshtml" />
     <Content Include="Views\Confinamento\ListaProd.cshtml" />
     <Content Include="Views\Confinamento\AddProd.cshtml" />
     <Content Include="Views\Confinamento\ListaAtend.cshtml" />
     <Content Include="Views\Confinamento\AddAtend.cshtml" />
     <Content Include="Views\Confinamento\EditarPeso.cshtml" />
+    <Content Include="Views\VendaProduto\Details.cshtml" />
+    <Content Include="Views\Confinamento\DetalhesBaixaProd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

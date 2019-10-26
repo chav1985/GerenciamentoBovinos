@@ -44,10 +44,6 @@
                 @Html.ActionLink("Produtos", "ListaProd", new { bovinoId = item.BovinoId }, new { @class = "btn btn-primary" }) |
                 @Html.ActionLink("Atend. Vet.", "ListaAtend", new { bovinoId = item.BovinoId }, new { @class = "btn btn-success" }) |
                 @Html.ActionLink("Editar Peso", "EditarPeso", new { bovinoId = item.BovinoId }, new { @class = "btn btn-warning" })
-
-                @*<a href="@Url.Action("EditarPeso", "Confinamento", new { id = item.BovinoId})">
-                    <i class="fa fa-pencil-square-o fa-2x"></i>
-                </a>*@
             </td>
         </tr>
     }
