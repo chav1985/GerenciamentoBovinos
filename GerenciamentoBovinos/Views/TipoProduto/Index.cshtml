@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Lista de Tipo de Produtos";
+    string retornoDelete = ViewBag.Retorno;
 }
 
 <h2 class="text-center">Lista de Tipo de Produtos</h2>
@@ -9,6 +10,9 @@
 <p>
     @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-secondary" })
 </p>
+
+<p class="text-danger" id="retorno">@retornoDelete</p>
+
 <table class="table">
     <tr>
         <th>
@@ -77,4 +81,9 @@
     $('#btnContinueDelete').click(function () {
         window.location = path_to_delete;
     });
+
+    setTimeout(clearText, 3000);
+    function clearText() {
+        $('#retorno').text('');
+    }
 </script>

@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,8 +12,9 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Veterinario
-        public ActionResult Index()
+        public ActionResult Index(string retorno = null)
         {
+            ViewBag.Retorno = retorno;
             return View(db.Veterinarios.ToList());
         }
 
@@ -74,6 +76,14 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Delete(long? id)
         {
             Veterinario veterinario = db.Veterinarios.Find(id);
+
+            List<Consulta> listaAtendimento = db.Consultas.Where(x => x.VeterinarioId == id).ToList();
+
+            if (listaAtendimento != null && listaAtendimento.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Veterinário esta relacionado a algum atendimento cadastrado!" });
+            }
+
             if (veterinario != null)
             {
                 db.Veterinarios.Remove(veterinario);
