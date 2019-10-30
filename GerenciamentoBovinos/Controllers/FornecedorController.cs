@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,8 +12,9 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Fornecedor
-        public ActionResult Index()
+        public ActionResult Index(string retorno = null)
         {
+            ViewBag.Retorno = retorno;
             return View(db.Fornecedores.ToList());
         }
 
@@ -74,6 +76,19 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Delete(long? id)
         {
             Fornecedor fornecedor = db.Fornecedores.Find(id);
+
+            List<Bovino> listaBovinos = db.Bovinos.Where(x => x.FornecedorId == id).ToList();
+            List<Produto> listaProdutos = db.Produtos.Where(x => x.FornecedorId == id).ToList();
+
+            if (listaBovinos != null && listaBovinos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Fornecedor esta relacionado a algum bovino cadastrado!" });
+            }
+            else if (listaProdutos != null && listaProdutos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Fornecedor esta relacionado a algum produto cadastrado!" });
+            }
+
             if (fornecedor != null)
             {
                 db.Fornecedores.Remove(fornecedor);

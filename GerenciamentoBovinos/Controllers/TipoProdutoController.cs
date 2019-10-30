@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,8 +12,9 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: TipoProdutoes
-        public ActionResult Index()
+        public ActionResult Index(string retorno = null)
         {
+            ViewBag.Retorno = retorno;
             return View(db.TipoProdutos.ToList());
         }
 
@@ -74,6 +76,15 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Delete(long? id)
         {
             TipoProduto tipo = db.TipoProdutos.Find(id);
+
+
+            List<Produto> listaProdutos = db.Produtos.Where(x => x.TipoProdutoId == id).ToList();
+
+            if (listaProdutos != null && listaProdutos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Tipo de Produto esta relacionado a algum produto cadastrado!" });
+            }
+
             if (tipo != null)
             {
                 db.TipoProdutos.Remove(tipo);

@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,8 +12,9 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Raca
-        public ActionResult Index()
+        public ActionResult Index(string retorno = null)
         {
+            ViewBag.Retorno = retorno;
             return View(db.Racas.ToList());
         }
 
@@ -74,6 +76,14 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Delete(long? id)
         {
             Raca raca = db.Racas.Find(id);
+
+            List<Bovino> listaBovinos = db.Bovinos.Where(x => x.RacaId == id).ToList();
+
+            if (listaBovinos != null && listaBovinos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Esta Raça esta relacionado a algum bovino cadastrado!" });
+            }
+
             if (raca != null)
             {
                 db.Racas.Remove(raca);
