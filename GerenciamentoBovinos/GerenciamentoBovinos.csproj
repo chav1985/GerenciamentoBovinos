@@ -185,6 +185,7 @@
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\TipoProdutoController.cs" />
+    <Compile Include="Controllers\VendaBovinoController.cs" />
     <Compile Include="Controllers\VendaProdutoController.cs" />
     <Compile Include="Controllers\VeterinarioController.cs" />
     <Compile Include="DecimalModelBinder.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\ItemsBaixaProduto.cs" />
     <Compile Include="Models\ItemsVendaProduto.cs" />
+    <Compile Include="Models\VendaBovino.cs" />
     <Compile Include="Models\VendaProduto.cs" />
     <Compile Include="Models\Confinamento.cs" />
     <Compile Include="Models\Consulta.cs" />
@@ -273,6 +275,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\VendaBovino\Create.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -345,6 +348,7 @@
     <Content Include="Views\Confinamento\EditarPeso.cshtml" />
     <Content Include="Views\VendaProduto\Details.cshtml" />
     <Content Include="Views\Confinamento\DetalhesBaixaProd.cshtml" />
+    <Content Include="Views\VendaBovino\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,54 @@
+﻿@model GerenciamentoBovinos.Models.VendaBovino
+
+@{
+    ViewBag.Title = "Venda de Bovinos";
+}
+
+<h2 class="text-center">Venda de Bovinos</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.DtVenda, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(model => model.DtVenda, new { type = "date", @class = "form-control", id = "dtVenda" })
+                @Html.ValidationMessageFor(model => model.DtVenda, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.PrazoEntrega, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(model => model.PrazoEntrega, new { type = "date", @class = "form-control", id = "pzEntrega" })
+                @Html.ValidationMessageFor(model => model.PrazoEntrega, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.Label("Margem Venda", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBox("MargemVenda", null, new { @class = "form-control", @type = "number", @min = 0, @max = 100 })
+                <label class="text-danger" id="validaMargem"></label>
+            </div>
+
+            <div class="col-md-3">
+                @Html.Label("Cliente", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control" })
+                <label class="text-danger" id="validaCliente"></label>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
