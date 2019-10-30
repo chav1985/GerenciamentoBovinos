@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -36,6 +37,10 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Create()
         {
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
+
+            List<Bovino> listaBovino = db.Confinamentos.Select(x => x.Bovino).ToList();
+
+            ViewBag.BovinoId = new SelectList(listaBovino, "Id", "Brinco");
             return View();
         }
 
