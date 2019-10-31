@@ -38,7 +38,7 @@ namespace GerenciamentoBovinos.Controllers
 
             return View(cliente);
         }
-
+        [Authorize(Users = "mat@gmail.com")]
         // GET: Cliente/Edit/5
         public ActionResult Edit(long? id)
         {
@@ -53,7 +53,7 @@ namespace GerenciamentoBovinos.Controllers
             }
             return View(cliente);
         }
-
+        [Authorize(Users = "mat@gmail.com")]
         // POST: Cliente/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -69,7 +69,7 @@ namespace GerenciamentoBovinos.Controllers
             }
             return View(cliente);
         }
-
+        [Authorize(Users = "mat@gmail.com")]
         // GET: Cliente/Delete/5
         public ActionResult Delete(long? id)
         {
