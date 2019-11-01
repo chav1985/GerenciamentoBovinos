@@ -42,7 +42,7 @@
         <div class="form-group row">
             <div class="col-md-3">
                 @Html.Label("Bovinos", htmlAttributes: new { @class = "control-label col-md-10" })
-                @Html.DropDownList("BovinoId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("BovinoId", null, htmlAttributes: new { @class = "form-control", @onchange = "vlrCusto($(this).val())" })
                 <label class="text-danger" id="validaBovino"></label>
             </div>
 
@@ -53,13 +53,13 @@
 
             <div class="col-md-2">
                 @Html.Label("Ação", htmlAttributes: new { @class = "control-label col-md-10" })
-                <input type="button" value="Adicionar Bovinos" id="btnAddItem" class="btn btn-success" onclick="addItem();" />
+                <input type="button" value="Adicionar Bovinos" id="btnAddBovino" class="btn btn-success" onclick="addBovino();" />
                 <label class="text-danger" id="validaBovAdd"></label>
             </div>
         </div>
 
         <div id="divTable" class="col-md-10 offset-1" style="display:none">
-            <table id="tbProd" class="table table-bordered table-condensed table-hover table-striped">
+            <table id="tbBovino" class="table table-bordered table-condensed table-hover table-striped">
                 <thead>
                     <h3 class="text-center mt-5">Lista de Bovinos</h3>
                     <tr>
@@ -88,8 +88,85 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
-    $("#MargemVenda").val(30);
 
+    function vlrCusto(selected) {
+        $.getJSON("VlrCustoBovino", { id: selected }, function (json) {
+            $("#VlrCusto").val(json);
+        });
+    }
+
+    function addBovino(id = -1) {
+
+        var Margem = $("#MargemVenda").val();
+        var Selecionado = $("#BovinoId").val();
+        var IdRemove = id;
+
+        if (IdRemove == -1) {
+            if (Selecionado == null) {
+                $("#validaProduto").text('Campo obrigatório.');
+                setTimeout(clearText, 2000);
+                return;
+            }
+            else if (Margem == "" || Margem < 0 || Margem > 100) {
+                if (Margem == "") {
+                    $("#validaMargem").text('Campo obrigatório.');
+                    setTimeout(clearText, 2000);
+                    return;
+                }
+                $("#validaMargem").text('Valor entre 0 e 100.');
+                setTimeout(clearText, 2000);
+                return;
+            }
+        }
+
+        if (IdRemove != -1 || Margem != "") {
+            $('#btnAddBovino').prop('disabled', true);
+
+            $('#tbBovino tr td').parents('tr').remove();
+
+            //Chama o método AddBovino que vai retornar o JSON
+            $.getJSON("AddBovino", { selected: Selecionado, margem: Margem, remove: IdRemove }, function (json) {
+                var tr;
+                var totalPedido = 0;
+                //Anexa cada linha na tabela HTML
+                for (var i = 0; i < json.length; i++) {
+                    tr = $('<tr/>');
+                    tr.append("<td>" + json[i].Brinco + "</td>");
+                    tr.append("<td>" + json[i].VlrUnitario + "</td>");
+                    totalPedido += json[i].VlrUnitario;
+                    tr.append("<td><input type='button' value='Remover Bovino' id='btnAddBovino' class='btn btn-danger' onclick='addBovino(" + i + ")' /></td>")
+                    $('table').append(tr);
+                }
+                tr = $('<tr/>');
+                tr.append("<td colspan='3'><b>Valor total do Pedido</b></td>");
+                tr.append("<td colspan='2'><b>" + totalPedido + "</b></td>");
+                $('table').append(tr);
+
+                //Atualizando os campos disponivel e valor do produto
+                $("#ProdutoId").val('1');
+                qtdProd('1');
+
+                $("#divTable").css("display", "block");
+            });
+
+            setTimeout(enableButton, 3000);
+        }
+    };
+
+    function enableButton() {
+        $('#btnAddBovino').prop('disabled', false);
+    }
+
+    function clearText() {
+        //$('#validaQtd').text('');
+        //$('#validaQtdVenda').text('');
+        $('#validaBovino').text('');
+        $('#validaCliente').text('');
+        $('#validaBovAdd').text('');
+        $('#validaMargem').text('');
+    }
+
+    $("#MargemVenda").val(30);
     document.getElementById("dtVenda").valueAsDate = new Date();
     document.getElementById("pzEntrega").valueAsDate = new Date();
 </script>
