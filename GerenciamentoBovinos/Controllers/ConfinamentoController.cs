@@ -17,7 +17,7 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Confinamento
         public ActionResult Index()
         {
-            var confinamentos = db.Confinamentos.Include(c => c.Bovino);
+            var confinamentos = db.Confinamentos.Include(c => c.Bovino).Where(x => x.Vendido == false);
             return View(confinamentos.ToList());
         }
 

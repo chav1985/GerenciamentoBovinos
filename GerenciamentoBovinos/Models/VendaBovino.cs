@@ -29,6 +29,6 @@ namespace GerenciamentoBovinos.Models
         [Display(Name = "Total Pedido")]
         public decimal TotalPedido { get; set; }
 
-        public virtual List<Confinamento> Items { get; set; }
+        public virtual List<ItemsVendaBovino> Items { get; set; }
     }
 }

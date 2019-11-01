@@ -27,6 +27,8 @@ namespace GerenciamentoBovinos.Models
         [Display(Name = "Custo total")]
         public decimal CustoTotal { get; set; }
 
+        public bool Vendido { get; set; }
+
         public List<BaixaProduto> LsBaixaProdutos { get; set; }
 
         public List<Consulta> LsConsultas { get; set; }

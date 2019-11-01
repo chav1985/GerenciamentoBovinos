@@ -41,6 +41,7 @@ namespace GerenciamentoBovinos.Controllers
                 confinamento.BovinoId = bovino.Id;
                 confinamento.DtEntrada = DateTime.Now;
                 confinamento.CustoTotal = bovino.VlrUnitario;
+                confinamento.Vendido = false;
                 db.Confinamentos.Add(confinamento);
 
                 db.Bovinos.Add(bovino);

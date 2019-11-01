@@ -197,6 +197,7 @@
     <Compile Include="Models\Bovino.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\ItemsBaixaProduto.cs" />
+    <Compile Include="Models\ItemsVendaBovino.cs" />
     <Compile Include="Models\ItemsVendaProduto.cs" />
     <Compile Include="Models\VendaBovino.cs" />
     <Compile Include="Models\VendaProduto.cs" />
