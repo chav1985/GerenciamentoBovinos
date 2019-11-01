@@ -10,7 +10,7 @@ namespace GerenciamentoBovinos.Controllers
     public class VendaBovinoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        private List<Bovino> items = new List<Bovino>();
+        private List<ItemsVendaBovino> items = new List<ItemsVendaBovino>();
 
         // GET: VendaBovino
         public ActionResult Index()
@@ -138,7 +138,7 @@ namespace GerenciamentoBovinos.Controllers
         //GET
         public JsonResult AddBovino(int selected, int margem, int remove)
         {
-            items = (List<Bovino>)Session["Items"];
+            items = (List<ItemsVendaBovino>)Session["Items"];
 
             if (remove != -1 && items.Count > 0)
             {
@@ -146,15 +146,16 @@ namespace GerenciamentoBovinos.Controllers
                 return Json(items, JsonRequestBehavior.AllowGet);
             }
 
-            Bovino bovino = new Bovino();
+            ItemsVendaBovino obj = new ItemsVendaBovino();
 
-            Confinamento confinamento = db.Confinamentos.FirstOrDefault(x => x.BovinoId == selected);
+            Confinamento confinamento = db.Confinamentos.Include(b => b.Bovino).FirstOrDefault(x => x.BovinoId == selected);
 
-            bovino.Brinco = confinamento.Bovino.Brinco;
-            bovino.VlrUnitario = confinamento.CustoTotal;
+            obj.BovinoId = selected;
+            obj.Bovino = confinamento.Bovino;
+            obj.ValorUnitario = confinamento.CustoTotal;
 
             //Adiciona objeto na lista
-            items.Add(bovino);
+            items.Add(obj);
 
             //retorna um objeto JSON
             return Json(items, JsonRequestBehavior.AllowGet);

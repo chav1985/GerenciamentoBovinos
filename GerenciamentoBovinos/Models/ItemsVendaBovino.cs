@@ -21,8 +21,5 @@ namespace GerenciamentoBovinos.Models
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         public decimal ValorUnitario { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório.")]
-        public decimal ValorTotal { get; set; }
     }
 }

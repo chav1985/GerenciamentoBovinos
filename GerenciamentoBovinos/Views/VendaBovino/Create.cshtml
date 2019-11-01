@@ -131,20 +131,20 @@
                 //Anexa cada linha na tabela HTML
                 for (var i = 0; i < json.length; i++) {
                     tr = $('<tr/>');
-                    tr.append("<td>" + json[i].Brinco + "</td>");
-                    tr.append("<td>" + json[i].VlrUnitario + "</td>");
-                    totalPedido += json[i].VlrUnitario;
+                    tr.append("<td>" + json[i].Bovino.Brinco + "</td>");
+                    tr.append("<td>" + json[i].ValorUnitario + "</td>");
+                    totalPedido += json[i].ValorUnitario;
                     tr.append("<td><input type='button' value='Remover Bovino' id='btnAddBovino' class='btn btn-danger' onclick='addBovino(" + i + ")' /></td>")
                     $('table').append(tr);
                 }
                 tr = $('<tr/>');
-                tr.append("<td colspan='3'><b>Valor total do Pedido</b></td>");
-                tr.append("<td colspan='2'><b>" + totalPedido + "</b></td>");
+                tr.append("<td colspan='1'><b>Valor total do Pedido</b></td>");
+                tr.append("<td colspan='1'><b>" + totalPedido + "</b></td>");
                 $('table').append(tr);
 
-                //Atualizando os campos disponivel e valor do produto
-                $("#ProdutoId").val('1');
-                qtdProd('1');
+                //Atualizando o campo valor de custo
+                $("#BovinoId").val('1');
+                vlrCusto('1');
 
                 $("#divTable").css("display", "block");
             });
