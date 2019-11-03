@@ -88,6 +88,28 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
+    //function validaDropDown() {
+    //    var cliente = $("#ClienteId").val();
+    //    var bovino = $("#BovinoId").val();
+    //    var rowCount = $('#tbBovino tr').length;
+    //    if (cliente == null && bovino == null) {
+    //        $("#validaCliente").text('Campo obrigatório.');
+    //        $("#validaBovino").text('Campo obrigatório.');
+    //        setTimeout(clearText, 2000);
+    //    }
+    //    else if (cliente == null) {
+    //        $("#validaCliente").text('Campo obrigatório.');
+    //        setTimeout(clearText, 2000);
+    //    }
+    //    else if (bovino == null) {
+    //        $("#validaBovino").text('Campo obrigatório.');
+    //        setTimeout(clearText, 2000);
+    //    }
+    //    else if (rowCount == 1) {
+    //        $("#validaBovAdd").text('Adicione Bovinos.');
+    //        setTimeout(clearText, 2000);
+    //    }
+    //}
 
     function vlrCusto(selected) {
         $.getJSON("VlrCustoBovino", { id: selected }, function (json) {
@@ -103,7 +125,7 @@
 
         if (IdRemove == -1) {
             if (Selecionado == null) {
-                $("#validaProduto").text('Campo obrigatório.');
+                $("#validaBovino").text('Campo obrigatório.');
                 setTimeout(clearText, 2000);
                 return;
             }
@@ -122,18 +144,27 @@
         if (IdRemove != -1 || Margem != "") {
             $('#btnAddBovino').prop('disabled', true);
 
-            $('#tbBovino tr td').parents('tr').remove();
-
             //Chama o método AddBovino que vai retornar o JSON
             $.getJSON("AddBovino", { selected: Selecionado, margem: Margem, remove: IdRemove }, function (json) {
+
+                var texto = json.text;
+                if (texto != '') {
+                    $("#validaBovino").text(texto);
+                    setTimeout(clearText, 2000);
+                    return;
+                }
+
+                $('#tbBovino tr td').parents('tr').remove();
+
                 var tr;
                 var totalPedido = 0;
+                var lista = json.lista;
                 //Anexa cada linha na tabela HTML
-                for (var i = 0; i < json.length; i++) {
+                for (var i = 0; i < lista.length; i++) {
                     tr = $('<tr/>');
-                    tr.append("<td>" + json[i].Bovino.Brinco + "</td>");
-                    tr.append("<td>" + json[i].ValorUnitario + "</td>");
-                    totalPedido += json[i].ValorUnitario;
+                    tr.append("<td>" + lista[i].Bovino.Brinco + "</td>");
+                    tr.append("<td>" + lista[i].ValorUnitario + "</td>");
+                    totalPedido += lista[i].ValorUnitario;
                     tr.append("<td><input type='button' value='Remover Bovino' id='btnAddBovino' class='btn btn-danger' onclick='addBovino(" + i + ")' /></td>")
                     $('table').append(tr);
                 }
@@ -143,8 +174,9 @@
                 $('table').append(tr);
 
                 //Atualizando o campo valor de custo
-                $("#BovinoId").val('1');
-                vlrCusto('1');
+                var Selecionado = $("#BovinoId").val();
+                $("#BovinoId").val(Selecionado);
+                vlrCusto(Selecionado);
 
                 $("#divTable").css("display", "block");
             });
@@ -158,8 +190,6 @@
     }
 
     function clearText() {
-        //$('#validaQtd').text('');
-        //$('#validaQtdVenda').text('');
         $('#validaBovino').text('');
         $('#validaCliente').text('');
         $('#validaBovAdd').text('');

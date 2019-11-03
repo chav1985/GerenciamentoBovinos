@@ -87,14 +87,22 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
-        public JsonResult AddBovino(int selected, int margem, int remove)
+        public ActionResult AddBovino(int selected, int margem, int remove)
         {
             items = (List<ItemsVendaBovino>)Session["Items"];
 
             if (remove != -1 && items.Count > 0)
             {
                 items.RemoveAt(remove);
-                return Json(items, JsonRequestBehavior.AllowGet);
+                var excluir = new { lista = items, text = "" };
+                return Json(excluir, JsonRequestBehavior.AllowGet);
+            }
+
+            ItemsVendaBovino contem = items.FirstOrDefault(x => x.BovinoId == selected);
+            if (contem != null)
+            {
+                var cadastrado = new { lista = items, text = "Bovino já adicionado!" };
+                return Json(cadastrado, JsonRequestBehavior.AllowGet);
             }
 
             ItemsVendaBovino obj = new ItemsVendaBovino();
@@ -103,13 +111,14 @@ namespace GerenciamentoBovinos.Controllers
 
             obj.BovinoId = selected;
             obj.Bovino = confinamento.Bovino;
-            obj.ValorUnitario = confinamento.CustoTotal;
+            obj.ValorUnitario = confinamento.CustoTotal * margem / 100 + confinamento.CustoTotal;
 
             //Adiciona objeto na lista
             items.Add(obj);
 
             //retorna um objeto JSON
-            return Json(items, JsonRequestBehavior.AllowGet);
+            var result = new { lista = items, text = "" };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //// GET: VendaBovino/Edit/5

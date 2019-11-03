@@ -199,8 +199,9 @@
                 $('table').append(tr);
 
                 //Atualizando os campos disponivel e valor do produto
-                $("#ProdutoId").val('1');
-                qtdProd('1');
+                var produto = $("#ProdutoId").val();
+                $("#ProdutoId").val(produto);
+                qtdProd(produto);
 
                 $("#divTable").css("display", "block");
             });
