@@ -43,11 +43,49 @@
                 @Html.DisplayFor(modelItem => item.TotalPedido)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a href="@Url.Action("Details", "VendaBovino", new { id = item.Id})" title="Visualizar">
+                    <i class="fa fa-search fa-2x"></i>
+                </a>
+                <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("Delete", "VendaBovino", new { id = @item.Id })" title="Excluir">
+                    <i class="fa fa-trash-o fa-2x"></i>
+                </a>
             </td>
         </tr>
     }
 
 </table>
+
+@Scripts.Render("~/bundles/jquery")
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Excluir Pedido</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir o Pedido?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-primary">Não</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-danger">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var path_to_delete;
+
+    $(".deleteItem").click(function (e) {
+        path_to_delete = $(this).data('path');
+    });
+
+    $('#btnContinueDelete').click(function () {
+        window.location = path_to_delete;
+    });
+</script>

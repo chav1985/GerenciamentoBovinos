@@ -88,28 +88,28 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
-    //function validaDropDown() {
-    //    var cliente = $("#ClienteId").val();
-    //    var bovino = $("#BovinoId").val();
-    //    var rowCount = $('#tbBovino tr').length;
-    //    if (cliente == null && bovino == null) {
-    //        $("#validaCliente").text('Campo obrigatório.');
-    //        $("#validaBovino").text('Campo obrigatório.');
-    //        setTimeout(clearText, 2000);
-    //    }
-    //    else if (cliente == null) {
-    //        $("#validaCliente").text('Campo obrigatório.');
-    //        setTimeout(clearText, 2000);
-    //    }
-    //    else if (bovino == null) {
-    //        $("#validaBovino").text('Campo obrigatório.');
-    //        setTimeout(clearText, 2000);
-    //    }
-    //    else if (rowCount == 1) {
-    //        $("#validaBovAdd").text('Adicione Bovinos.');
-    //        setTimeout(clearText, 2000);
-    //    }
-    //}
+    function validaDropDown() {
+        var cliente = $("#ClienteId").val();
+        var bovino = $("#BovinoId").val();
+        var rowCount = $('#tbBovino tr').length;
+        if (cliente == null && bovino == null) {
+            $("#validaCliente").text('Campo obrigatório.');
+            $("#validaBovino").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (cliente == null) {
+            $("#validaCliente").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (bovino == null) {
+            $("#validaBovino").text('Campo obrigatório.');
+            setTimeout(clearText, 2000);
+        }
+        else if (rowCount == 1) {
+            $("#validaBovAdd").text('Adicione Bovinos.');
+            setTimeout(clearText, 2000);
+        }
+    }
 
     function vlrCusto(selected) {
         $.getJSON("VlrCustoBovino", { id: selected }, function (json) {

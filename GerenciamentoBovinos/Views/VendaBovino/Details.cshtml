@@ -1,58 +1,68 @@
 ﻿@model GerenciamentoBovinos.Models.VendaBovino
 
 @{
-    Layout = null;
+    ViewBag.Title = "Detalhes do Pedido";
 }
 
-<!DOCTYPE html>
+<h2 class="text-center">Detalhes do Pedido</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>VendaBovino</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Cliente.InscricaoEstadual)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Cliente.InscricaoEstadual)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.DtVenda)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.DtVenda)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PrazoEntrega)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PrazoEntrega)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TotalPedido)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TotalPedido)
-            </dd>
-    
-        </dl>
+<div>
+    <hr />
+    <div class="form-horizontal">
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.DtVenda, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.DtVenda, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.PrazoEntrega, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.PrazoEntrega, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.TotalPedido, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.TotalPedido, null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3 mb-3">
+                @Html.Label("Cliente", new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.Cliente.Nome, null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="col-md-10 offset-1">
+            @{
+                <table class="table table-bordered table-condensed table-hover table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Brinco")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Vlr Unitário")
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Bovino.Brinco)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorUnitario)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+</div>

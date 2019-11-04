@@ -350,6 +350,7 @@
     <Content Include="Views\VendaProduto\Details.cshtml" />
     <Content Include="Views\Confinamento\DetalhesBaixaProd.cshtml" />
     <Content Include="Views\VendaBovino\Index.cshtml" />
+    <Content Include="Views\VendaBovino\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

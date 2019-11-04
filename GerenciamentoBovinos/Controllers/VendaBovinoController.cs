@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace GerenciamentoBovinos.Controllers
@@ -16,6 +18,21 @@ namespace GerenciamentoBovinos.Controllers
         {
             var vendaBovinos = db.VendaBovinos.Include(v => v.Cliente);
             return View(vendaBovinos.ToList());
+        }
+
+        // GET: VendaBovino/Details/5
+        public ActionResult Details(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendaBovino venda = db.VendaBovinos.Find(id);
+            if (venda == null)
+            {
+                return HttpNotFound();
+            }
+            return View(venda);
         }
 
         // GET: VendaBovino/Create
@@ -51,7 +68,7 @@ namespace GerenciamentoBovinos.Controllers
         {
             items = (List<ItemsVendaBovino>)Session["Items"];
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && items.Count > 0 && vendaBovino.ClienteId > 0)
             {
                 List<Confinamento> confinamentos = new List<Confinamento>();
                 decimal totalPedido = 0;
@@ -69,13 +86,59 @@ namespace GerenciamentoBovinos.Controllers
                 }
 
                 vendaBovino.TotalPedido = totalPedido;
+                vendaBovino.Items = items;
                 db.VendaBovinos.Add(vendaBovino);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            Thread.Sleep(2000);
+            List<Confinamento> listaConfinamento = db.Confinamentos.Include(a => a.Bovino).Where(b => b.Vendido == false).ToList();
+            List<Bovino> listaBovino = new List<Bovino>();
+
+            foreach (var item in listaConfinamento)
+            {
+                listaBovino.Add(item.Bovino);
+            }
+
+            if (db.Confinamentos != null && db.Confinamentos.Where(b => b.Vendido == false).Count() != 0)
+            {
+                ViewBag.VlrCusto = db.Confinamentos.Where(x => x.Vendido == false).FirstOrDefault().CustoTotal.ToString("C");
+            }
+
+            ViewBag.BovinoId = new SelectList(listaBovino, "Id", "Brinco");
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", vendaBovino.ClienteId);
+
             return View(vendaBovino);
+        }
+
+        // GET: VendaBovino/Delete/5
+        public ActionResult Delete(long? id)
+        {
+            VendaBovino venda = db.VendaBovinos.Find(id);
+            if (venda != null)
+            {
+                var listaBovinos = db.Confinamentos.Where(x => x.Vendido == true).ToList();
+
+                //Retornando os bovinos ao confinamento
+                foreach (var item in venda.Items)
+                {
+                    foreach (var bovino in listaBovinos)
+                    {
+                        if (item.BovinoId == bovino.BovinoId)
+                        {
+                            bovino.Vendido = false;
+                        }
+                        db.Entry(bovino).State = EntityState.Modified;
+                    }
+                }
+
+                db.VendaBovinos.Remove(venda);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return new HttpNotFoundResult();
         }
 
         //GET
@@ -120,80 +183,6 @@ namespace GerenciamentoBovinos.Controllers
             var result = new { lista = items, text = "" };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        //// GET: VendaBovino/Edit/5
-        //public ActionResult Edit(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VendaBovino vendaBovino = db.VendaBovinos.Find(id);
-        //    if (vendaBovino == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "InscricaoEstadual", vendaBovino.ClienteId);
-        //    return View(vendaBovino);
-        //}
-
-        //// POST: VendaBovino/Edit/5
-        //// Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        //// obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,DtVenda,PrazoEntrega,ClienteId,TotalPedido")] VendaBovino vendaBovino)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(vendaBovino).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "InscricaoEstadual", vendaBovino.ClienteId);
-        //    return View(vendaBovino);
-        //}
-
-        //// GET: VendaBovino/Delete/5
-        //public ActionResult Delete(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VendaBovino vendaBovino = db.VendaBovinos.Find(id);
-        //    if (vendaBovino == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vendaBovino);
-        //}
-
-        //// POST: VendaBovino/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(long id)
-        //{
-        //    VendaBovino vendaBovino = db.VendaBovinos.Find(id);
-        //    db.VendaBovinos.Remove(vendaBovino);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
-        //// GET: VendaBovino/Details/5
-        //public ActionResult Details(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VendaBovino vendaBovino = db.VendaBovinos.Find(id);
-        //    if (vendaBovino == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vendaBovino);
-        //}
 
         protected override void Dispose(bool disposing)
         {
