@@ -1,4 +1,5 @@
 ﻿using GerenciamentoBovinos.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -12,8 +13,9 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Produtoes
-        public ActionResult Index()
+        public ActionResult Index(string retorno = null)
         {
+            ViewBag.Retorno = retorno;
             var produtos = db.Produtos.Include(p => p.TipoProduto);
             return View(produtos.ToList());
         }
@@ -85,6 +87,19 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Delete(long? id)
         {
             Produto produto = db.Produtos.Find(id);
+
+            List<ItemsVendaProduto> listaItemsVendaProdutos = db.ItemsVendaProdutos.Where(x => x.ProdutoId == id).ToList();
+            List<ItemsBaixaProduto> listaItemsBaixaProdutos = db.ItemsBaixaProdutos.Where(x => x.ProdutoId == id).ToList();
+
+            if (listaItemsVendaProdutos != null && listaItemsVendaProdutos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Produto esta relacionado a alguma venda de produto cadastrada!" });
+            }
+            else if (listaItemsBaixaProdutos != null && listaItemsBaixaProdutos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Produto esta relacionado a algum produto consumido em confinamento!" });
+            }
+
             if (produto != null)
             {
                 db.Produtos.Remove(produto);

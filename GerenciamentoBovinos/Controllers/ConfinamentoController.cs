@@ -213,6 +213,8 @@ namespace GerenciamentoBovinos.Controllers
 
                 confinamento.CustoTotal -= baixa.ValorTotal;
                 db.Entry(confinamento).State = EntityState.Modified;
+                List<ItemsBaixaProduto> listaProdutos = db.ItemsBaixaProdutos.Where(x => x.BaixaProdutoId == id).ToList();
+                db.ItemsBaixaProdutos.RemoveRange(listaProdutos);
                 db.BaixaProdutos.Remove(baixa);
                 db.SaveChanges();
                 return RedirectToAction("ListaProd", new { bovinoId = bovinoId });

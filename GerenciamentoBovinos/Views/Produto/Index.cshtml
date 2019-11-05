@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Lista de Produtos";
+    string retornoDelete = ViewBag.Retorno;
 }
 
 <h2 class="text-center">Lista de Produtos</h2>
@@ -9,6 +10,9 @@
 <p>
     @Html.ActionLink("Comprar", "Create", null, new { @class = "btn btn-secondary" })
 </p>
+
+<p class="text-danger" id="retorno">@retornoDelete</p>
+
 <table class="table">
     <tr>
         <th>
