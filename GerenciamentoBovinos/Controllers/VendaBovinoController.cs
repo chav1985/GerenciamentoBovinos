@@ -59,11 +59,6 @@ namespace GerenciamentoBovinos.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Este método precisa de revisão
-        /// </summary>
-        /// <param name="vendaBovino"></param>
-        /// <returns></returns>
         // POST: VendaBovino/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -90,8 +85,13 @@ namespace GerenciamentoBovinos.Controllers
                     db.Entry(item).State = EntityState.Modified;
                 }
 
-                vendaBovino.TotalPedido = totalPedido;
+                foreach (var item in items)
+                {
+                    item.Bovino = null;
+                }
+
                 vendaBovino.Items = items;
+                vendaBovino.TotalPedido = totalPedido;
                 db.VendaBovinos.Add(vendaBovino);
                 db.SaveChanges();
                 return RedirectToAction("Index");
