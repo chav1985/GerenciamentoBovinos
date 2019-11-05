@@ -59,6 +59,11 @@ namespace GerenciamentoBovinos.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Este método precisa de revisão
+        /// </summary>
+        /// <param name="vendaBovino"></param>
+        /// <returns></returns>
         // POST: VendaBovino/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.

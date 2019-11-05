@@ -1,5 +1,6 @@
 ﻿using GerenciamentoBovinos.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -13,8 +14,9 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Bovino
-        public ActionResult Index()
+        public ActionResult Index(string retorno = null)
         {
+            ViewBag.Retorno = retorno;
             var bovinos = db.Bovinos.Include(b => b.Raca);
             return View(bovinos.ToList());
         }
@@ -94,6 +96,24 @@ namespace GerenciamentoBovinos.Controllers
         public ActionResult Delete(long? id)
         {
             Bovino bovino = db.Bovinos.Find(id);
+
+            List<ItemsVendaBovino> listaItemsVendaBovinos = db.ItemsVendaBovinos.Where(x => x.BovinoId == id).ToList();
+            List<BaixaProduto> listaBaixaProdutos = db.BaixaProdutos.Where(x => x.BovinoId == id).ToList();
+            List<Consulta> listaAtendimentos = db.Consultas.Where(x => x.BovinoId == id).ToList();
+
+            if (listaItemsVendaBovinos != null && listaItemsVendaBovinos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Bovino esta relacionado a alguma venda de bovino cadastrada!" });
+            }
+            else if (listaBaixaProdutos != null && listaBaixaProdutos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Bovino esta relacionado a algum produto consumido em confinamento!" });
+            }
+            else if (listaAtendimentos != null && listaAtendimentos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Bovino esta relacionado a algum atendimento cadastrado!" });
+            }
+
             if (bovino != null)
             {
                 db.Bovinos.Remove(bovino);

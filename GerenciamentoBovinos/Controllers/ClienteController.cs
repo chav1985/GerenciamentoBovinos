@@ -78,10 +78,15 @@ namespace GerenciamentoBovinos.Controllers
             Cliente cliente = db.Clientes.Find(id);
 
             List<VendaProduto> listaVendaProdutos = db.VendaProdutos.Where(x => x.ClienteId == id).ToList();
+            List<VendaBovino> listaVendaBovinos = db.VendaBovinos.Where(x => x.ClienteId == id).ToList();
 
             if (listaVendaProdutos != null && listaVendaProdutos.Count > 0)
             {
-                return RedirectToAction("Index", new { retorno = "Este Cliente esta relacionado a alguma venda de produto cadastrado!" });
+                return RedirectToAction("Index", new { retorno = "Este Cliente esta relacionado a alguma venda de produto cadastrada!" });
+            }
+            else if (listaVendaBovinos != null && listaVendaBovinos.Count > 0)
+            {
+                return RedirectToAction("Index", new { retorno = "Este Cliente esta relacionado a alguma venda de bovino cadastrada!" });
             }
 
             if (cliente != null)
