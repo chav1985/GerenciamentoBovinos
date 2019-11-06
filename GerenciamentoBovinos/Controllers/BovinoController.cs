@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -93,7 +94,24 @@ namespace GerenciamentoBovinos.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bovino).State = EntityState.Modified;
+                var confinamento = db.Confinamentos.FirstOrDefault(b => b.BovinoId == bovino.Id);
+                decimal vlrAnterior = db.Bovinos.FirstOrDefault(b => b.Id == bovino.Id).VlrUnitario;
+                decimal vlrAtual = bovino.VlrUnitario;
+                decimal retorno = 0;
+
+                if (vlrAnterior < vlrAtual)
+                {
+                    retorno = vlrAtual - vlrAnterior;
+                    confinamento.CustoTotal += retorno;
+                }
+                else if (vlrAnterior > vlrAtual)
+                {
+                    retorno = vlrAnterior - vlrAtual;
+                    confinamento.CustoTotal -= retorno;
+                }
+                db.Entry(confinamento).State = EntityState.Modified;
+
+                db.Set<Bovino>().AddOrUpdate(bovino);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
