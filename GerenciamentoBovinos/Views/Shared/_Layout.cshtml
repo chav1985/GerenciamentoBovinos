@@ -24,15 +24,15 @@
                             Cadastros
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="../Raca/Index">Raças</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "Raca")">Raças</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../TipoProduto/Index">Tipo de Produto</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "TipoProduto")">Tipo de Produto</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../Fornecedor/Index">Fornecedores</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "Fornecedor")">Fornecedores</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../Cliente/Index">Clientes</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "Cliente")">Clientes</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../Veterinario/Index">Veterinários</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "Veterinario")">Veterinários</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -40,9 +40,9 @@
                             Compras
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="../Bovino/Index">Bovinos</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "Bovino")">Bovinos</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../Produto/Index">Produtos</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "Produto")">Produtos</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -50,9 +50,9 @@
                             Vendas
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="../VendaBovino/Index">Bovinos</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "VendaBovino")">Bovinos</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../VendaProduto/Index">Produtos</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index", "VendaProduto")">Produtos</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">@Html.ActionLink("Confinamento", "Index", "Confinamento", null, htmlAttributes: new { @class = "nav-link" })</li>
