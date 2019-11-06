@@ -11,14 +11,14 @@ namespace GerenciamentoBovinos.Controllers
     public class BovinoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        [Authorize]
+        [Authorize(Roles = "View")]
         // GET: Bovino
         public ActionResult Index()
         {
             var bovinos = db.Bovinos.Include(b => b.Raca);
             return View(bovinos.ToList());
         }
-
+        [Authorize(Roles = "Create")]
         // GET: Bovino/Create
         public ActionResult Create()
         {
@@ -53,7 +53,7 @@ namespace GerenciamentoBovinos.Controllers
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
             return View(bovino);
         }
-
+        [Authorize(Roles = "Edit")]
         // GET: Bovino/Edit/5
         public ActionResult Edit(long? id)
         {
@@ -88,7 +88,7 @@ namespace GerenciamentoBovinos.Controllers
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
             return View(bovino);
         }
-
+        [Authorize(Roles = "Delete")]
         // GET: Bovino/Delete/5
         public ActionResult Delete(long? id)
         {

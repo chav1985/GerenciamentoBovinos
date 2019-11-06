@@ -41,5 +41,7 @@ namespace GerenciamentoBovinos.Models
         public virtual DbSet<BaixaProduto> BaixaProdutos { get; set; }
 
         public virtual DbSet<ItemsBaixaProduto> ItemsBaixaProdutos { get; set; }
+
+
     }
 }

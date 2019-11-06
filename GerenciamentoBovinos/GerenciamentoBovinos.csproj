@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\TipoProdutoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VendaProdutoController.cs" />
     <Compile Include="Controllers\VeterinarioController.cs" />
     <Compile Include="DecimalModelBinder.cs" />
@@ -198,6 +199,8 @@
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\ItemsBaixaProduto.cs" />
     <Compile Include="Models\ItemsVendaProduto.cs" />
+    <Compile Include="Models\RoleView.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\VendaProduto.cs" />
     <Compile Include="Models\Confinamento.cs" />
     <Compile Include="Models\Consulta.cs" />
@@ -350,6 +353,7 @@
     <Content Include="Views\Confinamento\AddProd.cshtml" />
     <Content Include="Views\Confinamento\ListaAtend.cshtml" />
     <Content Include="Views\Confinamento\AddAtend.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

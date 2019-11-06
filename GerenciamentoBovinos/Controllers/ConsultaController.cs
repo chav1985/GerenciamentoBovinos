@@ -10,7 +10,7 @@ namespace GerenciamentoBovinos.Controllers
     public class ConsultaController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        [Authorize]
+       
         // GET: Consulta
         public ActionResult Index()
         {

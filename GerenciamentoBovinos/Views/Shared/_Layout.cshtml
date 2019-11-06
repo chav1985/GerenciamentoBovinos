@@ -62,6 +62,14 @@
                         </ul>
                     </li>
                     <li class="nav-item">@Html.ActionLink("Confinamento", "Index", "Confinamento", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Configurações de Permissões
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../Usuario/Index">Configurações de Permissões</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0">
                     @Html.Partial("_LoginPartial")

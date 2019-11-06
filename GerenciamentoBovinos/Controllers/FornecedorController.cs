@@ -9,13 +9,13 @@ namespace GerenciamentoBovinos.Controllers
     public class FornecedorController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        [Authorize]
+        [Authorize(Roles = "View")]
         // GET: Fornecedor
         public ActionResult Index()
         {
             return View(db.Fornecedores.ToList());
         }
-
+        [Authorize(Roles = "Create")]
         // GET: Fornecedor/Create
         public ActionResult Create()
         {
@@ -38,7 +38,7 @@ namespace GerenciamentoBovinos.Controllers
 
             return View(fornecedor);
         }
-
+        [Authorize(Roles = "Edit")]
         // GET: Fornecedor/Edit/5
         public ActionResult Edit(long? id)
         {
@@ -69,7 +69,7 @@ namespace GerenciamentoBovinos.Controllers
             }
             return View(fornecedor);
         }
-
+        [Authorize(Roles = "Delete")]
         // GET: Fornecedor/Delete/5
         public ActionResult Delete(long? id)
         {

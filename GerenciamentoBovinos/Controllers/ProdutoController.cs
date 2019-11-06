@@ -10,7 +10,7 @@ namespace GerenciamentoBovinos.Controllers
     public class ProdutoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();
-        [Authorize]
+        
         // GET: Produtoes
         public ActionResult Index()
         {
