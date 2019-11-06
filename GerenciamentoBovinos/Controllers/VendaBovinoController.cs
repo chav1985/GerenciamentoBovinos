@@ -138,6 +138,8 @@ namespace GerenciamentoBovinos.Controllers
                     }
                 }
 
+                List<ItemsVendaBovino> listaVendaBovinos = db.ItemsVendaBovinos.Where(x => x.VendaBovinoId == id).ToList();
+                db.ItemsVendaBovinos.RemoveRange(listaVendaBovinos);
                 db.VendaBovinos.Remove(venda);
                 db.SaveChanges();
                 return RedirectToAction("Index");

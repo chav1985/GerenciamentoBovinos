@@ -38,6 +38,16 @@ namespace GerenciamentoBovinos.Controllers
         {
             if (ModelState.IsValid && bovino.RacaId > 0 && bovino.FornecedorId > 0)
             {
+                Bovino validaBrinco = db.Bovinos.FirstOrDefault(x => x.Brinco == bovino.Brinco);
+
+                if (validaBrinco != null)
+                {
+                    ModelState.AddModelError("Brinco", "Brinco já Cadastrado!");
+                    ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome", bovino.RacaId);
+                    ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", bovino.FornecedorId);
+                    return View(bovino);
+                }
+
                 Confinamento confinamento = new Confinamento();
                 confinamento.Bovino = bovino;
                 confinamento.BovinoId = bovino.Id;
