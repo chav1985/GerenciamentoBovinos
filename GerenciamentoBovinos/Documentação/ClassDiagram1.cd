@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GerenciamentoBovinos.Models.Endereco">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAEAAAAAACAAAAAAAAAAAAAAAABAAo=</HashCode>
+      <FileName>Models\Endereco.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Pessoa" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAwCAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Pessoa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Cliente" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.BaixaProduto">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAACIAAAAAAAAAAAACAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Models\BaixaProduto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Bovino">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAABBAQAAEAAAAAAAAAAAAAwAAACCAAAAAAA=</HashCode>
+      <FileName>Models\Bovino.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Confinamento">
+    <Position X="2.5" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQgAAAAAAAAAAAAAAAIAACAAAAAAAAACQAAAAY=</HashCode>
+      <FileName>Models\Confinamento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Fornecedor" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Fornecedor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.ItemsBaixaProduto" Collapsed="true">
+    <Position X="4.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAQIAAAAAAAAAAiAAAAAAAAAAAIAAIAAE=</HashCode>
+      <FileName>Models\ItemsBaixaProduto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.ItemsVendaBovino" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAQAAABAAAAAAAAAAAAEAACAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\ItemsVendaBovino.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.ItemsVendaProduto" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIIAAAAAAAAAgAAAAAQAAAAAIAAIAAE=</HashCode>
+      <FileName>Models\ItemsVendaProduto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Produto" Collapsed="true">
+    <Position X="4.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABBIAAEAAAAAAEgAEAEAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Produto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Raca" Collapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Raca.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.TipoProduto">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\TipoProduto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.VendaBovino" Collapsed="true">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAACAAAABCAAAAAAAAAQAAAIQAAAAAAAAA=</HashCode>
+      <FileName>Models\VendaBovino.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.VendaProduto" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAACAAAABCAAAAAAAAAQAAAIQAAAAAAAAA=</HashCode>
+      <FileName>Models\VendaProduto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GerenciamentoBovinos.Models.Veterinario" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Veterinario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
