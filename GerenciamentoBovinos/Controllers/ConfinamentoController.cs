@@ -233,6 +233,21 @@ namespace GerenciamentoBovinos.Controllers
             return View(listaAtend);
         }
 
+        // GET: VendaProduto/Details/5
+        public ActionResult DetalhesAtend(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Consulta consulta = db.Consultas.Find(id);
+            if (consulta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(consulta);
+        }
+
         //GET
         public ActionResult AddAtend(long bovinoId)
         {

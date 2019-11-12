@@ -352,6 +352,7 @@
     <Content Include="Views\Confinamento\DetalhesBaixaProd.cshtml" />
     <Content Include="Views\VendaBovino\Index.cshtml" />
     <Content Include="Views\VendaBovino\Details.cshtml" />
+    <Content Include="Views\Confinamento\DetalhesAtend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

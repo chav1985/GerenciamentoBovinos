@@ -43,6 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Valor)
             </td>
             <td>
+                <a href="@Url.Action("DetalhesAtend", "Confinamento", new { id = item.Id})" title="Visualizar">
+                    <i class="fa fa-search fa-2x"></i>
+                </a>
                 <a id="deleteItem" class="deleteItem ml-2" href="#" style="color:red" data-target="#myModal" data-toggle="modal" data-path="@Url.Action("DeleteAtend", "Confinamento", new { id = @item.Id, bovinoId = @idBovino })" title="Excluir">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>

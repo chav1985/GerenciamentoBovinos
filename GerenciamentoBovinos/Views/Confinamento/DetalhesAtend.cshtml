@@ -1,0 +1,49 @@
+﻿@model GerenciamentoBovinos.Models.Consulta
+
+@{
+    ViewBag.Title = "Detalhes da Consulta";
+}
+
+<h2 class="text-center">Detalhes da Consulta</h2>
+
+<div>
+    <hr />
+    <div class="form-horizontal">
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.DtServico, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.DtServico, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Bovino.Brinco, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.Bovino.Brinco, null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.VeterinarioId, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.VeterinarioId, null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextBoxFor(Model => Model.Valor, null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.TextAreaFor(model => model.Descricao, new { @class = "col-md-12 form-control", rows = "4" , @readonly = "readonly"})
+                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Voltar", "ListaAtend", new { bovinoId = Model.BovinoId }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</div>

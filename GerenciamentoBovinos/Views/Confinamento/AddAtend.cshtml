@@ -35,7 +35,7 @@
 
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-10" })
-                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" ,@onkeypress = "validate(event)"} })
                 @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
             </div>
         </div>
