@@ -15,6 +15,11 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Bovino
+        /// <summary>
+        /// Retorna a lista de Bovinos cadastrados
+        /// </summary>
+        /// <param name="retorno"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string retorno = null)
         {
             ViewBag.Retorno = retorno;
@@ -23,6 +28,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Bovino/Create
+        /// <summary>
+        /// Gera a view para cadastrar um novo Bovino
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             ViewBag.RacaId = new SelectList(db.Racas, "Id", "Nome");
@@ -33,6 +42,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Bovino/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Cadastra um novo Bovino
+        /// </summary>
+        /// <param name="bovino"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Brinco,RacaId,FornecedorId,Peso,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
@@ -69,6 +83,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Bovino/Edit/5
+        /// <summary>
+        /// Gera a view para editar um Bovino
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -88,6 +107,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Bovino/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edita um Bovino
+        /// </summary>
+        /// <param name="bovino"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Brinco,RacaId,FornecedorId,Peso,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)
@@ -121,6 +145,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Bovino/Delete/5
+        /// <summary>
+        /// Exclui um Bovino
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             Bovino bovino = db.Bovinos.Find(id);
