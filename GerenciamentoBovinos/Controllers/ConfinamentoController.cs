@@ -15,6 +15,10 @@ namespace GerenciamentoBovinos.Controllers
         private List<ItemsBaixaProduto> items = new List<ItemsBaixaProduto>();
 
         // GET: Confinamento
+        /// <summary>
+        /// Retorna a lista e bovinos em confinamento
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Index()
         {
             var confinamentos = db.Confinamentos.Include(c => c.Bovino).Where(x => x.Vendido == false);
@@ -22,6 +26,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Retorna a lista de produtos consumidos pelo animal em confinamento
+        /// </summary>
+        /// <param name="bovinoId"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult ListaProd(long bovinoId)
         {
             ViewBag.BovinoId = bovinoId;
@@ -32,6 +41,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: VendaProduto/Details/5
+        /// <summary>
+        /// View com os detalhes de um consumo de produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult DetalhesBaixaProd(long? id)
         {
             if (id == null)
@@ -47,6 +61,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Gera a view para cadastrar os produtos consumidos pelo animal
+        /// </summary>
+        /// <param name="bovinoId"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult AddProd(long bovinoId)
         {
             Session["Items"] = items;
@@ -66,6 +85,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: VendaProduto/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona os produtos consumidos pelo animal
+        /// </summary>
+        /// <param name="baixaProduto"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddProd([Bind(Include = "Id,DtUtilizacao,BovinoId")] BaixaProduto baixaProduto)
@@ -138,6 +162,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Retorna a quantidade de produtos em estoque de um determinado produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>JsonResult</returns>
         public JsonResult QtdProdutos(int id)
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
@@ -162,6 +191,13 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Adiciona um item a lista de produtos consumidos pelo animal
+        /// </summary>
+        /// <param name="qtd"></param>
+        /// <param name="selected"></param>
+        /// <param name="remove"></param>
+        /// <returns>JsonResult</returns>
         public JsonResult AddItem(int qtd, int selected, int remove)
         {
             items = (List<ItemsBaixaProduto>)Session["Items"];
@@ -189,6 +225,12 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Exclui um consumo de produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bovinoId"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult DeleteBaixaProd(long? id, long bovinoId)
         {
             BaixaProduto baixa = db.BaixaProdutos.Find(id);
@@ -224,6 +266,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Retorna a lista de atendimentos veterinarios para os bovinos em confinamento
+        /// </summary>
+        /// <param name="bovinoId"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult ListaAtend(long bovinoId)
         {
             ViewBag.BovinoId = bovinoId;
@@ -234,6 +281,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: VendaProduto/Details/5
+        /// <summary>
+        /// Retorna os detalhes de determinado animal em confinamento
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult DetalhesAtend(long? id)
         {
             if (id == null)
@@ -249,6 +301,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Gera a view para adicionar um atendimento veterinario ao animal
+        /// </summary>
+        /// <param name="bovinoId"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult AddAtend(long bovinoId)
         {
             ViewBag.BovinoId = bovinoId;
@@ -261,6 +318,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Consulta/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona um atendimento veterianário
+        /// </summary>
+        /// <param name="consulta"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddAtend([Bind(Include = "Id,BovinoId,VeterinarioId,Descricao,DtServico,Valor")] Consulta consulta)
@@ -285,6 +347,12 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Exclui um atendimento
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bovinoId"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult DeleteAtend(long? id, long bovinoId)
         {
             Consulta consulta = db.Consultas.Find(id);
@@ -303,6 +371,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Gera a view para editar o peso do bovino em confinamento
+        /// </summary>
+        /// <param name="bovinoId"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult EditarPeso(long? bovinoId)
         {
             if (bovinoId == null)
@@ -317,6 +390,11 @@ namespace GerenciamentoBovinos.Controllers
             return View(bovino);
         }
 
+        /// <summary>
+        /// Salva o peso editado do bovino
+        /// </summary>
+        /// <param name="bovino"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditarPeso([Bind(Include = "Id,Brinco,RacaId,FornecedorId,Peso,DtNascimento,VlrUnitario,Descricao")] Bovino bovino)

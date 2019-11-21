@@ -14,12 +14,21 @@ namespace GerenciamentoBovinos.Controllers
         private List<ItemsVendaProduto> items = new List<ItemsVendaProduto>();
 
         // GET: VendaProduto
+        /// <summary>
+        /// Retorna a lista de venda de produtos
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Index()
         {
             return View(db.VendaProdutos.ToList());
         }
 
         // GET: VendaProduto/Details/5
+        /// <summary>
+        /// Retorna os detalhes de determinada venda de produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Details(long? id)
         {
             if (id == null)
@@ -35,6 +44,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: VendaProduto/Create
+        /// <summary>
+        /// Gera a view para adicionar uma nova venda de produtos
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             Session["Items"] = items;
@@ -53,6 +66,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: VendaProduto/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona uma venda de produtos
+        /// </summary>
+        /// <param name="vendaProduto"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,ClienteId")] VendaProduto vendaProduto)
@@ -117,6 +135,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: VendaProduto/Delete/5
+        /// <summary>
+        /// Exclui uma venda de produtos
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             VendaProduto venda = db.VendaProdutos.Find(id);
@@ -148,6 +171,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Retorna a quantidade de produto de determinado produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public JsonResult QtdProdutos(int id)
         {
             var qtd = db.Produtos.FirstOrDefault(p => p.Id == id).Qtd;
@@ -172,6 +200,14 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Adiciona um produto a lista de compra
+        /// </summary>
+        /// <param name="qtd"></param>
+        /// <param name="selected"></param>
+        /// <param name="margem"></param>
+        /// <param name="remove"></param>
+        /// <returns>ActionResult</returns>
         public JsonResult AddItem(int qtd, int selected, int margem, int remove)
         {
             items = (List<ItemsVendaProduto>)Session["Items"];

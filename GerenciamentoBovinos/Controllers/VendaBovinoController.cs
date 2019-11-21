@@ -14,6 +14,10 @@ namespace GerenciamentoBovinos.Controllers
         private List<ItemsVendaBovino> items = new List<ItemsVendaBovino>();
 
         // GET: VendaBovino
+        /// <summary>
+        /// Retorna a lista de venda de bovinos
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Index()
         {
             var vendaBovinos = db.VendaBovinos.Include(v => v.Cliente);
@@ -21,6 +25,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: VendaBovino/Details/5
+        /// <summary>
+        /// Retorna os detalhes de um venda de bovino
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ACtionResult</returns>
         public ActionResult Details(long? id)
         {
             if (id == null)
@@ -36,6 +45,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: VendaBovino/Create
+        /// <summary>
+        /// Gera a view para criar um venda de bovinos
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             Session["Items"] = items;
@@ -62,6 +75,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: VendaBovino/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona um venda de bovinos
+        /// </summary>
+        /// <param name="vendaBovino"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DtVenda,PrazoEntrega,ClienteId,TotalPedido")] VendaBovino vendaBovino)
@@ -118,6 +136,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: VendaBovino/Delete/5
+        /// <summary>
+        /// Exclui uma venda de bovinos
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             VendaBovino venda = db.VendaBovinos.Find(id);
@@ -149,6 +172,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Retorna o valor de custo de determinado bovino
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>JsonResult</returns>
         public JsonResult VlrCustoBovino(int id)
         {
             decimal custo = db.Confinamentos.FirstOrDefault(p => p.BovinoId == id).CustoTotal;
@@ -157,6 +185,13 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         //GET
+        /// <summary>
+        /// Adiciona um bovino a lista de compra
+        /// </summary>
+        /// <param name="selected"></param>
+        /// <param name="margem"></param>
+        /// <param name="remove"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult AddBovino(int selected, int margem, int remove)
         {
             items = (List<ItemsVendaBovino>)Session["Items"];

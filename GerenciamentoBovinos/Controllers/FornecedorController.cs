@@ -12,6 +12,11 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Fornecedor
+        /// <summary>
+        /// Retorna a lista de fornecedores cadastrados
+        /// </summary>
+        /// <param name="retorno"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string retorno = null)
         {
             ViewBag.Retorno = retorno;
@@ -19,6 +24,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Fornecedor/Create
+        /// <summary>
+        /// Gera a view para cadastrar um novo fornecedor
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             return View();
@@ -27,6 +36,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Fornecedor/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona um novo fornecedor
+        /// </summary>
+        /// <param name="fornecedor"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,InscricaoEstadual,Nome,Email,Telefone,Rua,Numero,Estado,Cidade,Cep,Complemento,CPFCNPJ")] Fornecedor fornecedor)
@@ -42,6 +56,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Fornecedor/Edit/5
+        /// <summary>
+        /// Gera a view para editar um fornecedor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -59,6 +78,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Fornecedor/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edita um fornecedor
+        /// </summary>
+        /// <param name="fornecedor"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,InscricaoEstadual,Nome,Email,Telefone,Rua,Numero,Estado,Cidade,Cep,Complemento,CPFCNPJ")] Fornecedor fornecedor)
@@ -73,6 +97,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Fornecedor/Delete/5
+        /// <summary>
+        /// Exclui um fornecedor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             Fornecedor fornecedor = db.Fornecedores.Find(id);

@@ -12,6 +12,11 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: TipoProdutoes
+        /// <summary>
+        /// Retorna a lista de tipos de produto cadastrados
+        /// </summary>
+        /// <param name="retorno"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string retorno = null)
         {
             ViewBag.Retorno = retorno;
@@ -19,6 +24,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: TipoProdutoes/Create
+        /// <summary>
+        /// Gera a view para cadastrar um tipo de produto
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             return View();
@@ -27,6 +36,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: TipoProdutoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona um tipo de produto
+        /// </summary>
+        /// <param name="tipoProduto"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Tipo,Descricao")] TipoProduto tipoProduto)
@@ -42,6 +56,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: TipoProdutoes/Edit/5
+        /// <summary>
+        /// Gera a view para editar um tipo de produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -59,6 +78,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: TipoProdutoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edita um tipo de produto
+        /// </summary>
+        /// <param name="tipoProduto"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Tipo,Descricao")] TipoProduto tipoProduto)
@@ -73,6 +97,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: TipoProdutoes/Delete/5
+        /// <summary>
+        /// Exclui um tipo de produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             TipoProduto tipo = db.TipoProdutos.Find(id);
