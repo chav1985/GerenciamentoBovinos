@@ -15,7 +15,7 @@ namespace GerenciamentoBovinos.Models
         [MaxLength(100, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
         public string Email { get; set; }
 
-        [MaxLength(50, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Campo obrigatório.")]
         public string Senha { get; set; }
 
