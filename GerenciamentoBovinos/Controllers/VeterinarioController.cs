@@ -12,6 +12,11 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Veterinario
+        /// <summary>
+        /// Retorna a lista de veterinários cadastrados
+        /// </summary>
+        /// <param name="retorno"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string retorno = null)
         {
             ViewBag.Retorno = retorno;
@@ -19,6 +24,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Veterinario/Create
+        /// <summary>
+        /// Gera a view para cadastrar um veterinário
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             return View();
@@ -27,6 +36,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Veterinario/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona um veterinário
+        /// </summary>
+        /// <param name="veterinario"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,InscricaoEstadual,CRMV,Nome,Email,Telefone,Rua,Numero,Estado,Cidade,Cep,Complemento,CPFCNPJ")] Veterinario veterinario)
@@ -42,6 +56,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Veterinario/Edit/5
+        /// <summary>
+        /// Gera a view para editar um veterinário
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -59,6 +78,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Veterinario/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edita um veterinário
+        /// </summary>
+        /// <param name="veterinario"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,InscricaoEstadual,CRMV,Nome,Email,Telefone,Rua,Numero,Estado,Cidade,Cep,Complemento,CPFCNPJ")] Veterinario veterinario)
@@ -73,6 +97,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Bovino/Delete/5
+        /// <summary>
+        /// Exclui um veterinário
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             Veterinario veterinario = db.Veterinarios.Find(id);

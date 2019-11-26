@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AcessoController.cs" />
     <Compile Include="Controllers\BovinoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ConfinamentoController.cs" />
@@ -193,12 +194,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Acesso.cs" />
     <Compile Include="Models\BaixaProduto.cs" />
     <Compile Include="Models\Bovino.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\ItemsBaixaProduto.cs" />
     <Compile Include="Models\ItemsVendaBovino.cs" />
     <Compile Include="Models\ItemsVendaProduto.cs" />
+    <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\VendaBovino.cs" />
     <Compile Include="Models\VendaProduto.cs" />
     <Compile Include="Models\Confinamento.cs" />
@@ -353,6 +356,11 @@
     <Content Include="Views\VendaBovino\Index.cshtml" />
     <Content Include="Views\VendaBovino\Details.cshtml" />
     <Content Include="Views\Confinamento\DetalhesAtend.cshtml" />
+    <Content Include="Views\Acesso\Create.cshtml" />
+    <Content Include="Views\Acesso\Delete.cshtml" />
+    <Content Include="Views\Acesso\Details.cshtml" />
+    <Content Include="Views\Acesso\Edit.cshtml" />
+    <Content Include="Views\Acesso\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

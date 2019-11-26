@@ -12,6 +12,11 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Raca
+        /// <summary>
+        /// Retorna a lista de Raças cadastradas
+        /// </summary>
+        /// <param name="retorno"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string retorno = null)
         {
             ViewBag.Retorno = retorno;
@@ -19,6 +24,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Raca/Create
+        /// <summary>
+        /// Gera a view para cadastrar raça
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             return View();
@@ -27,6 +36,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Raca/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Cadastra um raça
+        /// </summary>
+        /// <param name="raca"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Nome,Descricao")] Raca raca)
@@ -42,6 +56,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Raca/Edit/5
+        /// <summary>
+        /// Gera a view para editar raça
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -59,6 +78,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Raca/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edita um raça
+        /// </summary>
+        /// <param name="raca"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Nome,Descricao")] Raca raca)
@@ -73,6 +97,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Raca/Delete/5
+        /// <summary>
+        /// Exclui uma raça
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             Raca raca = db.Racas.Find(id);

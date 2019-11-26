@@ -13,6 +13,11 @@ namespace GerenciamentoBovinos.Controllers
         private GerenciamentoContext db = new GerenciamentoContext();
 
         // GET: Produtoes
+        /// <summary>
+        /// Retorna a lista de produtos cadastrados
+        /// </summary>
+        /// <param name="retorno"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string retorno = null)
         {
             ViewBag.Retorno = retorno;
@@ -21,6 +26,10 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Produtoes/Create
+        /// <summary>
+        /// Gera a view para cadastrar um produto
+        /// </summary>
+        /// <returns>ActionResult</returns>
         public ActionResult Create()
         {
             ViewBag.TipoProdutoId = new SelectList(db.TipoProdutos, "Id", "Tipo");
@@ -31,6 +40,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Produtoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Adiciona um produto
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,NomeProduto,TipoProdutoId,FornecedorId,Descricao,Valor,Validade,Qtd")] Produto produto)
@@ -49,6 +63,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Produtoes/Edit/5
+        /// <summary>
+        /// Gera a view para editar um produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -68,6 +87,11 @@ namespace GerenciamentoBovinos.Controllers
         // POST: Produtoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edita um produto
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,NomeProduto,TipoProdutoId,FornecedorId,Descricao,Valor,Validade,Qtd")] Produto produto)
@@ -84,6 +108,11 @@ namespace GerenciamentoBovinos.Controllers
         }
 
         // GET: Produtoes/Delete/5
+        /// <summary>
+        /// Exclui um produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult</returns>
         public ActionResult Delete(long? id)
         {
             Produto produto = db.Produtos.Find(id);
