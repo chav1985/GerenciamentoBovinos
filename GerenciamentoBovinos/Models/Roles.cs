@@ -54,7 +54,7 @@ namespace GerenciamentoBovinos.Models
         {
            GerenciamentoContext db = new GerenciamentoContext();
 
-        string sRoles = db.Acessoes.Where(p => p.Email == username).FirstOrDefault().Perfil;
+        string sRoles = db.Acessos.Where(p => p.Email == username).FirstOrDefault().Perfil;
             string[] retorno = { sRoles };
             return retorno;
 

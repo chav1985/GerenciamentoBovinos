@@ -20,19 +20,15 @@ namespace GerenciamentoBovinos.Models
         public string Senha { get; set; }
 
         [MaxLength(1, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
-        [Required(ErrorMessage = "Campo obrigatório.")]
         public string Ativo { get; set; }
 
         [MaxLength(15, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
-        [Required(ErrorMessage = "Campo obrigatório.")]
         public string Perfil { get; set; }
 
         [MaxLength(30, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
-        [Required(ErrorMessage = "Campo obrigatório.")]
         public string Nome { get; set; }
 
         [MaxLength(30, ErrorMessage = "A {0} deve ter no máximo {1} caracteres")]
-        [Required(ErrorMessage = "Campo obrigatório.")]
         public string Sobrenome { get; set; }
     }
 }

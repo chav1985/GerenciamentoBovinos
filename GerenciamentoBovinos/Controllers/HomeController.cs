@@ -8,6 +8,7 @@ namespace GerenciamentoBovinos.Controllers
         /// Gera a view com a tela inicial
         /// </summary>
         /// <returns></returns>
+
         public ActionResult Index()
         {
             return View();

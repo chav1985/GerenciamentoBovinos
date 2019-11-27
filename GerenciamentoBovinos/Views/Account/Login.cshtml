@@ -1,59 +1,73 @@
-﻿@using GerenciamentoBovinos.Models
-@model LoginViewModel
+﻿@model GerenciamentoBovinos.Models.Acesso
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Login";
 }
 
-<h2 class="text-center">Login</h2>
-<h4 class="text-center">Entre com seus dados</h4>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<h2>Login</h2>
 
-                <div class="form-group rows">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,
+new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        <div class="form-login">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">Login do Sistema</div>
                 </div>
-                <div class="form-group rows">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                <div style="padding-top:30px" class="panel-body">
+                    <div style="display:none" id="result" class="alert
+                    alert-danger col-sm-12">
+
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon
+                        glyphicon-user"></i>
+                        </span>
+                        @Html.EditorFor(model => model.Email, new
+                        {
+                            htmlAttributes =
+                        new
+                             {
+                                 @class = "form-control input-lg",
+                                 placeholder =
+                        "E-mail",
+                                 autofocus = true
+                             }
+                        })
+                        @Html.ValidationMessageFor(model => model.Email, "",
+                        new { @class = "text-danger" })
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon
+                        glyphicon-lock"></i>
+                        </span>
+                        @Html.EditorFor(model => model.Senha, new
+                        {
+                            htmlAttributes
+                        = new { @class = "form-control input-lg", placeholder = "Senha" }
+                        })
+                        @Html.ValidationMessageFor(model => model.Senha, "",
+                        new { @class = "text-danger" })
+                    </div>
+
+                    <div style="margin-top:10px" class="form-group">
+
+                        <div class="col-sm-12 controls">
+                            <input type="submit" value="Acessar"
+                                   class="btn primary btn-lg" />
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Entrar" class="btn btn-success" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Registre-se como um novo usuário", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
+            </div>
+        </div>
     </div>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

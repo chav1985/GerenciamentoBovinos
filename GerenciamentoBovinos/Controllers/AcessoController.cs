@@ -17,7 +17,7 @@ namespace GerenciamentoBovinos.Controllers
         // GET: Acesso
         public ActionResult Index()
         {
-            return View(db.Acessoes.ToList());
+            return View(db.Acessos.ToList());
         }
 
         // GET: Acesso/Details/5
@@ -27,7 +27,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Acesso acesso = db.Acessoes.Find(id);
+            Acesso acesso = db.Acessos.Find(id);
             if (acesso == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace GerenciamentoBovinos.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Acessoes.Add(acesso);
+                db.Acessos.Add(acesso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Acesso acesso = db.Acessoes.Find(id);
+            Acesso acesso = db.Acessos.Find(id);
             if (acesso == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace GerenciamentoBovinos.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Acesso acesso = db.Acessoes.Find(id);
+            Acesso acesso = db.Acessos.Find(id);
             if (acesso == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace GerenciamentoBovinos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Acesso acesso = db.Acessoes.Find(id);
-            db.Acessoes.Remove(acesso);
+            Acesso acesso = db.Acessos.Find(id);
+            db.Acessos.Remove(acesso);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,11 +1,12 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace GerenciamentoBovinos.Models
 {
     public class GerenciamentoContext : DbContext
     {
-        public GerenciamentoContext() : base("name=DbBoi015")
+        public GerenciamentoContext() : base("name=DbBoi018")
         {
 
         }
@@ -46,8 +47,9 @@ namespace GerenciamentoBovinos.Models
 
         public virtual DbSet<ItemsVendaBovino> ItemsVendaBovinos { get; set; }
 
-        public virtual DbSet<Acesso> Acessoes { get; set; }
+        public virtual DbSet<Acesso> Acessos{ get; set; }
 
         public virtual DbSet<Roles> Roles { get; set; }
+        
     }
 }
