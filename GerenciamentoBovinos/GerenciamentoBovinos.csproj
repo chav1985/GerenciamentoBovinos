@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TipoProdutoController.cs" />
     <Compile Include="Controllers\VendaBovinoController.cs" />
     <Compile Include="Controllers\VendaProdutoController.cs" />
@@ -353,6 +354,8 @@
     <Content Include="Views\VendaBovino\Index.cshtml" />
     <Content Include="Views\VendaBovino\Details.cshtml" />
     <Content Include="Views\Confinamento\DetalhesAtend.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
