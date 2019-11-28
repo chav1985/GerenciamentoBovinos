@@ -2,6 +2,7 @@
 
 namespace GerenciamentoBovinos.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         /// <summary>

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace GerenciamentoBovinos.Controllers
 {
+    [Authorize(Roles = "Sistema,Comercial,Administrativo")]
     public class VendaBovinoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();

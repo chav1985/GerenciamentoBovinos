@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace GerenciamentoBovinos.Controllers
 {
+    [Authorize(Roles = "Sistema,Administrativo")]
     public class VeterinarioController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();

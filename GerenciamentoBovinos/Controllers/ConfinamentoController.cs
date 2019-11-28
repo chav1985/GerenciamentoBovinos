@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace GerenciamentoBovinos.Controllers
 {
+    [Authorize(Roles = "Sistema,Operacional")]
     public class ConfinamentoController : Controller
     {
         private GerenciamentoContext db = new GerenciamentoContext();

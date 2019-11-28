@@ -138,7 +138,7 @@ namespace GerenciamentoBovinos.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles ="Sistema")]
         public ActionResult Register()
         {
             ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
